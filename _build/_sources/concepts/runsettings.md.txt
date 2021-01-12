@@ -1,0 +1,104 @@
+# RunSettings
+RunSettings is used to provide configuration for each component when running in the compute. For each component type, there will be different RunSetting parameters to be set.
+
+With RunSettings, you will be able to:
+- Specify compute where the component is scheduled for execution.
+- Configure parallel component runtime settings, such as the number of nodes, process count per node and error threshold.
+- Configure HDInsight component runtime settings, such as driver memory, driver cores and spark configuration.
+
+## Usage
+You can set multiple RunSetting parameters by this way:
+```python
+# Set target, node count and process count per node for parallel component
+component.runsettings.configure(target='aml-compute', node_count=2, process_count_per_node=5)
+```
+Or set them one by one:
+```python
+# Set target, node count and process count per node for parallel component
+component.runsettings.target = 'aml-compute'
+component.runsettings.node_count = 2
+component.runsettings.process_count_per_node = 5
+```
+### Notes
+> If a parameter is not required, it will use the default value if not been set.
+
+> `target` is a required field, but it can be None when parent pipeline has a default compute target. It will use parent pipeline's default compute target as value in this kind of cases, otherwise, you still need to set it in component's runsettings.
+
+## Command component
+
+| Name | Type | Required | Default value | Description |
+|-|-|-|-|-|
+| target | String | Yes | - | The compute target to run the component. |
+
+
+## Parallel component
+
+| Name | Type | Required | Default value | Description |
+|-|-|-|-|-|
+| target | String | Yes | - | The compute target to run the component. |
+| node_count | Int | Yes | - | Number of nodes in the compute target used for running the Parallel Component. |
+| process_count_per_node | Int | No | Number of cores on node | Number of processes executed on each node. |
+| error_threshold | Int | No | -1 | The number of file failures for the input FileDataset that should be ignored during processing. If the error count goes above this value, then the job will be aborted. Error threshold is for the entire input and not for individual mini-batches sent to run() method. The range is [-1, int.max]. -1 indicates ignoring all failures during processing. |
+| mini_batch_size | String | No | 10 | For the FileDataset input, this field is the number of files user script can process in one run() call. Example values are 64, 1024, 65536 and 1048576. |
+| logging_level | String | No | INFO | A string of the logging level name, which is defined in 'logging'. Possible values are 'WARNING', 'INFO', and 'DEBUG'. |
+| run_invocation_timeout | Int | No | 60 | Timeout in seconds for each invocation of the run() method. |
+| run_max_try | Int | No | 3 | The number of maximum tries for a failed or timeout mini batch. A mini batch with dequeue count greater than this won't be processed again and will be deleted directly. |
+| partition_keys | JsonString or Dictionary | No | None | Please refer to  [PRS docs](https://github.com/Azure/PRSPreviewFeatures) for more details. |
+| version | String | No | v1 | Please refer to  [PRS docs](https://github.com/Azure/PRSPreviewFeatures) for more details. |
+
+> For more questions on ParallelComponent, please contact [PRS team](mailto:amlbiteam@microsoft.com).
+
+## HDInsight component
+
+| Name | Type | Required| Description |
+|-|-|-|-|
+| target | String | Yes | Hdi Compute name that is attached to AML. It must be a HDI compute. |
+| queue | String | No | The name of the YARN queue to which submitted. |
+| driver_memory | String | No | Amount of memory to use for the driver process.It's the same format as JVM memory strings. Use lower-case suffixes, e.g. k, m, g, t, and p, for kibi-, mebi-, gibi-, tebi-, and pebibytes, respectively. Example values are 10k, 10m and 10g. |
+| driver_cores | Int | No | Number of cores to use for the driver process. |
+| executor_memory | String | No | Amount of memory to use per executor process. It's the same format as JVM memory strings. Use lower-case suffixes, e.g. k, m, g, t, and p, for kibi-, mebi-, gibi-, tebi-, and pebibytes, respectively. |
+| executor_cores | Int | No | Number of cores to use for each executor. |
+| number_executors | Int | No | Number of executors to launch for this session. |
+| conf | JsonString or Dictionary | No | Spark configuration properties. |
+| name | String | No | The name of this session. |
+
+> Please refer to [spark docs](https://spark.apache.org/docs/latest/configuration.html) for default values of some fields.
+
+
+## Examples
+### Command component
+```python
+component.runsettings.target = 'aml-compute'
+# Or
+component.runsettings.configure(target='aml-compute')
+```
+
+### Parallel component
+```python
+component.runsettings.configure(
+    target='aml-compute',
+    error_threshold=-1,
+    mini_batch_size=10,
+    logging_level="INFO",
+    run_invocation_timeout=60,
+    run_max_try=3)
+```
+
+### HDInsight component
+```python
+component.runsettings.configure(
+    target='hdi-cluster',
+    name="session_name",
+    queue="default",
+    driver_memory="1g",
+    driver_cores=4,
+    executor_memory="4g",
+    executor_cores=4,
+    number_executors=4,
+    conf={
+        "spark.yarn.maxAppAttempts": "1",
+        "spark.yarn.appMasterEnv.PYSPARK_PYTHON": "/usr/bin/anaconda/envs/py35/bin/python3",
+        "spark.yarn.appMasterEnv.PYSPARK_DRIVER_PYTHON": "/usr/bin/anaconda/envs/py35/bin/python3"
+    }
+)
+```

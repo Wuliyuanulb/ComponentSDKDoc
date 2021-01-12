@@ -1,0 +1,15 @@
+azure\.ml package
+=================
+
+.. automodule:: azure.ml
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    azure.ml.component
+

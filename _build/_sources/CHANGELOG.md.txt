@@ -1,0 +1,93 @@
+# Change Log
+
+## [upcomming release]() (target date: 2021.01.15)
+
+Features listed in this secetion are available in preview version: 29211468.
+
+**New Features:**
+- Provide component SDK json schema to help authoring yaml spec, doc: [use-component-spec-schema-in-vscode.md](components/use-component-spec-schema-in-vscode.md)
+
+- Support Any CommandComponent
+    - Sample1: [how-to-use-command-component.ipynb](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-command-component.ipynb)
+    - Sample2: [how-to-use-r-command-component.ipynb](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-r-command-component.ipynb)
+    - This feature is still in preview, has known backend limitations and not recommended for production use case yet.
+    - Command starts with python will work same as previous basic module.
+
+- Support ParallelComponent SDK 1.5 component yaml
+    - Sample: [how-to-use-parallel-component.ipynb](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-parallel-component.ipynb)
+    
+- Support HDInsightComponent SDK 1.5 component yaml
+    - Sample: [how-to-use-hdinsight-component.ipynb](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-hdi-component.ipynb)
+
+- Support `az ml component build`: user can get a local component snapshot and do some processing like code-sign before create.
+    - Doc: [component-build.md](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/docs/component-spec-topics/component-build.md)
+    - Sample: [how-to-use-component-cli.ipynb](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-component-cli.ipynb)
+
+- Components created using new component yaml can shown correctly in Pipeline Draft Module Tree and Modules Management page of workspace portal UX. Add `&flight=cm` in browser url to enable this flight feature.
+
+**Improvements:**
+
+- Improve CLI
+    - Refine CLI help docs, set more meaningful description to each command
+    - Align CLI Error hanlding with other cli subgroups
+
+- Fundamental
+    - Improve [setup-environment doc](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/setup-environment.ipynb) by adding vscode devcontainer option
+    - Test on multiple platforms (windows, Linux, Mac) * Python (3.6, 3.7, 3.8)
+    - Regular CI target multiple platforms for stable & preview sdk/cli version for notebooks on [github doc repro](https://github.com/Azure/DesignerPrivatePreviewFeatures), and add status badge
+
+- Improve Docs
+    - Improved [reference doc site](https://aka.ms/azure-ml-component-reference)
+    - Add [runsettings doc](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/docs/component-runsettings.md)
+    - Add [pipeline parameter doc](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/docs/pipeline-parameter.md)
+
+**Fixed Bugs:**
+
+- HDInsight component runsettings.configure(target='xxx') not taking effect
+- Pipeline parameter not taking effect in some scenarios 
+
+
+## [v0.1.0.27532912](https://pypi.org/project/azure-ml-component/0.1.0.27532912/) (2020.11.30)
+
+- First Release of azure-ml-component package
+- Introduce Component concept & retain only [essential interface](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/docs/interface.md)
+
+- [New component yaml format spec](http://aka.ms/azure-ml-component-specs)
+- [Docs & Samples](https://github.com/Azure/DesignerPrivatePreviewFeatures)
+- [Reference doc](https://aka.ms/azure-ml-component-reference)
+- Previous azureml-pipeline-wrapper pacakge deprecated but still working:
+    - API stays the same in azureml-pipeline-wrapper, Implementation is alias of azure-ml-component
+
+**New Features:**
+
+- Support component output register as dataset
+    - Example:  component.outputs.some_output.register_as(name="dataset_name", create_new_version=True)
+- Support environment.conda.pip_requirements_file in component yaml spec
+
+**Improvements:**
+
+- Improve component create performance
+    - Cache last time snapshot locally
+    - Detect snapshot change: delta update snapshot if changed, reuse last snapshot if not change
+- Improve dsl.pipeline
+    - Improve dsl.pipeline performance for complex graph
+    - Refactor how dsl.pipeline build pipeline component definition
+- Improve CLI
+    - Dynamic loading az ml component subgroup using entrypoint technique
+- Improve Inputs/outputs/runsetting
+    - Allow tabular dataset for HDI module
+    - Validate json schema for PRS module
+    - Allow specify non string enum in SDK
+- Fundamental
+    - Error Handling Logic Improve
+    - Reference doc related improve
+    - Refactor: package structure, each function area code logic
+
+**Fixed Bugs:**
+
+- `Component.load()` fails for builtin components in new workspaces
+    - Auto provision built-in components and types in new workspace
+- `az ml component create` fails in new workspace for port type not exist
+    - Auto provision known port types like: path
+- Fix status aggregation logic for subgraph in notebook visualization
+

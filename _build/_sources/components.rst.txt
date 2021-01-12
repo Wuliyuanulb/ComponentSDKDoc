@@ -1,0 +1,14 @@
+============================================================================
+Components
+============================================================================
+
+.. toctree::
+   :maxdepth: 2
+   :glob:
+
+   components/component-spec-definition.md
+   components/use-component-spec-schema-in-vscode.md
+   components/component-spec-topics.md
+   components/command_component.md
+   components/parallel_component.md
+   components/hdi_component.md

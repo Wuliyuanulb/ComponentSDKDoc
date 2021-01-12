@@ -1,0 +1,7 @@
+azure-ml-component
+==================
+
+.. toctree::
+   :maxdepth: 4
+
+   azure

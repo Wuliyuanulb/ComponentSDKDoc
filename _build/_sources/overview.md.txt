@@ -1,0 +1,7 @@
+# Overview
+
+Azure Machine Learning components allow you to create reusable machine learning workflows that can be used as a
+template for your machine learning scenarios. This package contains the core functionality for working with Azure ML
+components.
+
+

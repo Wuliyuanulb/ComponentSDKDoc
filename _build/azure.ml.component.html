@@ -1,0 +1,1647 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>azure.ml.component package &mdash; Component SDK beta documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'beta',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="azure.ml.component.dsl package" href="azure.ml.component.dsl.html" />
+    <link rel="prev" title="SDK Reference" href="sdk_reference.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Component SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="sdk_reference.html">SDK Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">azure.ml.component package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="azure.ml.component.dsl.html">azure.ml.component.dsl package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-azure.ml.component.component">azure.ml.component.component module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-azure.ml.component.pipeline">azure.ml.component.pipeline module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-azure.ml.component.run">azure.ml.component.run module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-azure.ml.component.run_settings">azure.ml.component.run_settings module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="links.html">Useful Links</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Component SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="sdk_reference.html">SDK Reference</a> &raquo;</li>
+        
+      <li>azure.ml.component package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/azure.ml.component.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-azure.ml.component">
+<span id="azure-ml-component-package"></span><h1>azure.ml.component package<a class="headerlink" href="#module-azure.ml.component" title="Permalink to this headline">¶</a></h1>
+<p>Contains core functionality for Azure Machine Learning components.</p>
+<p>Azure Machine Learning components allow you to create reusable machine learning workflows that can be used as a
+template for your machine learning scenarios. This package contains the core functionality for working with
+Azure ML components.</p>
+<p>A machine learning components can also be constructed by a collection of <a class="reference internal" href="#azure.ml.component.Component" title="azure.ml.component.Component"><code class="xref py py-class docutils literal"><span class="pre">azure.ml.component.Component</span></code></a> object
+that can sequenced and parallelized, or be created with explicit dependencies.</p>
+<p>You can create and work with components in a Jupyter Notebook or any other IDE with the Azure ML SDK installed.</p>
+<dl class="class">
+<dt id="azure.ml.component.Component">
+<em class="property">class </em><code class="descclassname">azure.ml.component.</code><code class="descname">Component</code><span class="sig-paren">(</span><em>definition: azure.ml.component._core._component_definition.CommandComponentDefinition, _init_params: typing.Mapping[str, str], _is_direct_child=True</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.Component" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._util._telemetry.WorkspaceTelemetryMixin</span></code></p>
+<p>An operational unit that can be used to produce a pipeline.</p>
+<p>A pipeline consists of a series of <a class="reference internal" href="#azure.ml.component.Component" title="azure.ml.component.Component"><code class="xref py py-class docutils literal"><span class="pre">azure.ml.component.Component</span></code></a> nodes.</p>
+<p>For more information about components, see:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures">What&#8217;s an azure ml component</a></li>
+<li><a class="reference external" href="https://aka.ms/azureml-component-specs">Define a component using component specs</a></li>
+</ul>
+<dl class="staticmethod">
+<dt id="azure.ml.component.Component.batch_load">
+<em class="property">static </em><code class="descname">batch_load</code><span class="sig-paren">(</span><em>workspace: azureml.core.workspace.Workspace</em>, <em>selectors: typing.List[str] = None</em>, <em>ids: typing.List[str] = None</em><span class="sig-paren">)</span> &#x2192; typing.List[typing.Callable[..., ForwardRef('Component')]]<a class="headerlink" href="#azure.ml.component.Component.batch_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Batch load components by identifier list.</p>
+<p>If there is an exception with any component, the batch load will fail. Partial success is not allowed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>workspace</strong> (<em>azureml.core.Workspace</em>) &#8211; The workspace object this component will belong to.</li>
+<li><strong>selectors</strong> (<em>builtin.list</em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; A list of str formatted as name:version or name&#64;label</li>
+<li><strong>ids</strong> (<em>builtin.list</em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; The component version ids</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A tuple of component functions</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple(function)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Component.created_by">
+<code class="descname">created_by</code><a class="headerlink" href="#azure.ml.component.Component.created_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name who created the corresponding component in the workspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The name who created the component.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Component.created_date">
+<code class="descname">created_date</code><a class="headerlink" href="#azure.ml.component.Component.created_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the created date of the corresponding component in the workspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The created date with the ISO format.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Component.display_name">
+<code class="descname">display_name</code><a class="headerlink" href="#azure.ml.component.Component.display_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the display name of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The display name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="azure.ml.component.Component.from_yaml">
+<em class="property">static </em><code class="descname">from_yaml</code><span class="sig-paren">(</span><em>workspace: azureml.core.workspace.Workspace</em>, <em>yaml_file: str</em><span class="sig-paren">)</span> &#x2192; typing.Callable[..., ForwardRef('Component')]<a class="headerlink" href="#azure.ml.component.Component.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register an anonymous component from yaml file to workspace and return the registered component func.</p>
+<p>Assumes source code is in the same directory with yaml file. Then return the registered component func.</p>
+<p>For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Suppose we have a workspace as &#39;ws&#39;</span>
+<span class="c1"># Register and get an anonymous component from yaml file</span>
+<span class="n">component</span> <span class="o">=</span> <span class="n">from_yaml</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="s2">&quot;custom_component/component_spec.yaml&quot;</span><span class="p">)</span>
+<span class="c1"># Register and get an anonymous component from Github url</span>
+<span class="n">component</span> <span class="o">=</span> <span class="n">from_yaml</span><span class="p">(</span>
+    <span class="n">workspace</span><span class="p">,</span>
+    <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">wangchao1230</span><span class="o">/</span><span class="n">hello</span><span class="o">-</span><span class="n">aml</span><span class="o">-</span><span class="n">modules</span><span class="o">/</span><span class="n">blob</span><span class="o">/</span><span class="n">wanhan</span><span class="o">/</span><span class="n">add_component_sample</span><span class="o">/</span><span class="n">sample_components_do_not_delete</span><span class="o">/</span><span class="n">build_artifact_demo_0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="n">component_spec</span><span class="o">.</span><span class="n">yaml</span><span class="s2">&quot;)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>workspace</strong> (<em>azureml.core.Workspace</em>) &#8211; The workspace object this component will belong to.</li>
+<li><strong>yaml_file</strong> (<em>str</em>) &#8211; The component spec file. The spec file could be located in local or Github.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A function that can be called with parameters to get a <a class="reference internal" href="#azure.ml.component.Component" title="azure.ml.component.Component"><code class="xref py py-class docutils literal"><span class="pre">azure.ml.component.Component</span></code></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">function</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Component.inputs">
+<code class="descname">inputs</code><a class="headerlink" href="#azure.ml.component.Component.inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the inputs of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The dict in which the keys are input names, the values are input instances initialized by datasets.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str, <a class="reference internal" href="#azure.ml.component.component.Input" title="azure.ml.component.component.Input">Input</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Component.k8srunsettings">
+<code class="descname">k8srunsettings</code><a class="headerlink" href="#azure.ml.component.Component.k8srunsettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get compute run settings of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The compute run settings</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">_K8sRunSettings</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="azure.ml.component.Component.load">
+<em class="property">static </em><code class="descname">load</code><span class="sig-paren">(</span><em>workspace: azureml.core.workspace.Workspace</em>, <em>name: str = None</em>, <em>version: str = None</em>, <em>selector: str = None</em>, <em>id: str = None</em><span class="sig-paren">)</span> &#x2192; typing.Callable[..., ForwardRef('Component')]<a class="headerlink" href="#azure.ml.component.Component.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get component function from workspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>workspace</strong> (<em>azureml.core.Workspace</em>) &#8211; The workspace object this component will belong to.</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; The name of component</li>
+<li><strong>version</strong> (<em>str</em>) &#8211; The version</li>
+<li><strong>selector</strong> (<em>str</em>) &#8211; A string formatted as name:version or name&#64;label, when loading component,
+you can choose one between selector and name, version.</li>
+<li><strong>id</strong> (<em>str</em>) &#8211; The component version id of an existing component</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A function that can be called with parameters to get a <a class="reference internal" href="#azure.ml.component.Component" title="azure.ml.component.Component"><code class="xref py py-class docutils literal"><span class="pre">azure.ml.component.Component</span></code></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">function</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Component.name">
+<code class="descname">name</code><a class="headerlink" href="#azure.ml.component.Component.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the name of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Component.outputs">
+<code class="descname">outputs</code><a class="headerlink" href="#azure.ml.component.Component.outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the outputs of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The dict in which the keys are the output names, the values are the output instances.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str, <a class="reference internal" href="#azure.ml.component.component.Output" title="azure.ml.component.component.Output">Output</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Component.regenerate_output">
+<code class="descname">regenerate_output</code><a class="headerlink" href="#azure.ml.component.Component.regenerate_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the flag indicating whether the component should be run again.</p>
+<p>Set to True to force a new run (disallows component/datasource reuse).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the regenerate_output value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.ml.component.Component.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>experiment_name=None</em>, <em>working_dir=None</em>, <em>use_docker=True</em>, <em>track_run_history=True</em>, <em>show_output=True</em>, <em>python_interpreter_path=None</em>, <em>skip_validation=True</em>, <em>raise_on_error=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.Component.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run component in local environment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>experiment_name</strong> (<em>str</em>) &#8211; The experiment_name will show in portal. If not set, will use component name.</li>
+<li><strong>working_dir</strong> (<em>str</em>) &#8211; The output path for component output info</li>
+<li><strong>use_docker</strong> (<em>bool</em>) &#8211; If use_docker=True, will pull image from azure and run component in system-managed
+docker-based environment.
+If use_docker=False and python_interpreter_path is None, will run component in
+system-managed conda-based environment.
+If use_docker=False and python_interpreter_path is not None, will directly run component
+in user-managed environment.</li>
+<li><strong>track_run_history</strong> (<em>bool</em>) &#8211; If track_run_history=True, will create azureml.core.Run and upload component output
+and log file to portal.
+If track_run_history=False, will not create azureml.core.Run to upload outputs
+and log file.</li>
+<li><strong>show_output</strong> (<em>bool</em>) &#8211; Indicates whether to show the component run status on sys.stdout.</li>
+<li><strong>python_interpreter_path</strong> (<em>str</em>) &#8211; When use_docker=False and python_interpreter_path not None, will directly
+run component in user-managed environment.
+When use_docker=False and python_interpreter_path is None, will run component
+in system-managed conda-based environment.</li>
+<li><strong>skip_validation</strong> (<em>bool</em>) &#8211; Indicates whether to skip the validation of the component.</li>
+<li><strong>raise_on_error</strong> (<em>bool</em>) &#8211; Indicates whether to raise an error when the Run is in a failed state</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The run status, such as, Completed and Failed.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Component.runsettings">
+<code class="descname">runsettings</code><a class="headerlink" href="#azure.ml.component.Component.runsettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get run settings of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The run settings.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#azure.ml.component.RunSettings" title="azure.ml.component.RunSettings">azure.ml.component.RunSettings</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.ml.component.Component.set_inputs">
+<code class="descname">set_inputs</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; azure.ml.component.component.Component<a class="headerlink" href="#azure.ml.component.Component.set_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the inputs and parameters of the component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The component itself.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#azure.ml.component.Component" title="azure.ml.component.Component">azure.ml.component.Component</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Component.type">
+<code class="descname">type</code><a class="headerlink" href="#azure.ml.component.Component.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the type of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The type.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Component.version">
+<code class="descname">version</code><a class="headerlink" href="#azure.ml.component.Component.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version of the component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The version.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Component.workspace">
+<code class="descname">workspace</code><a class="headerlink" href="#azure.ml.component.Component.workspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the workspace of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The workspace.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">azureml.core.Workspace</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.ml.component.Pipeline">
+<em class="property">class </em><code class="descclassname">azure.ml.component.</code><code class="descname">Pipeline</code><span class="sig-paren">(</span><em>nodes: typing.List[typing.Union[azure.ml.component.component.Component, ForwardRef('Pipeline')]], outputs: typing.Mapping[str, azure.ml.component.component.Output] = None, workspace=None, name=None, description=None, default_compute_target=None, default_datastore=None, _use_dsl=False, _definition=None, _init_params=None, _is_direct_child=True</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.Pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#azure.ml.component.component.Component" title="azure.ml.component.component.Component"><code class="xref py py-class docutils literal"><span class="pre">azure.ml.component.component.Component</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._visible.Visible</span></code>, <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._util._telemetry.WorkspaceTelemetryMixin</span></code></p>
+<p>A Pipeline aggregates other Components and connects their inputs and outputs to form a pipeline.</p>
+<dl class="attribute">
+<dt id="azure.ml.component.Pipeline.default_datastore">
+<code class="descname">default_datastore</code><a class="headerlink" href="#azure.ml.component.Pipeline.default_datastore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the default datastore of the Pipeline.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the default datastore.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">azureml.core.Datastore</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Pipeline.description">
+<code class="descname">description</code><a class="headerlink" href="#azure.ml.component.Pipeline.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the description of the Pipeline.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The description.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Pipeline.inputs">
+<code class="descname">inputs</code><a class="headerlink" href="#azure.ml.component.Pipeline.inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the inputs of the Pipeline.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">pipeline inputs.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str, <a class="reference internal" href="#azure.ml.component.component.Input" title="azure.ml.component.component.Input">Input</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Pipeline.name">
+<code class="descname">name</code><a class="headerlink" href="#azure.ml.component.Pipeline.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the name of the Pipeline.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Pipeline.outputs">
+<code class="descname">outputs</code><a class="headerlink" href="#azure.ml.component.Pipeline.outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the outputs of the Pipeline.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">pipeline outputs.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str, <a class="reference internal" href="#azure.ml.component.component.Output" title="azure.ml.component.component.Output">Output</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.ml.component.Pipeline.set_inputs">
+<code class="descname">set_inputs</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; azure.ml.component.component.Component<a class="headerlink" href="#azure.ml.component.Pipeline.set_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the inputs and parameters of the pipeline component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The pipeline component itself.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#azure.ml.component.Component" title="azure.ml.component.Component">azure.ml.component.Component</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.ml.component.Pipeline.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><em>experiment_name=None</em>, <em>default_compute_target=None</em>, <em>description=None</em>, <em>pipeline_parameters=None</em>, <em>tags=None</em>, <em>continue_on_step_failure=None</em>, <em>regenerate_outputs=None</em>, <em>skip_validation=False</em><span class="sig-paren">)</span> &#x2192; azure.ml.component.run.Run<a class="headerlink" href="#azure.ml.component.Pipeline.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit current pipeline run to workspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>experiment_name</strong> (<em>str</em>) &#8211; The experiment name, if experiment_name is None will default to pipeline name</li>
+<li><strong>default_compute_target</strong> (<em>str</em>) &#8211; The default compute target used to run pipeline</li>
+<li><strong>description</strong> (<em>str</em>) &#8211; The description of the submitted pipeline run</li>
+<li><strong>pipeline_parameters</strong> (<em>dict</em><em>(</em><em>{str:str}</em><em>)</em><em></em>) &#8211; An optional dictionary of pipeline parameter assignments for the PipelineDraft</li>
+<li><strong>tags</strong> (<em>dict</em>) &#8211; Tags to be added to the submitted run, {&#8220;tag&#8221;: &#8220;value&#8221;}</li>
+<li><strong>continue_on_step_failure</strong> (<em>bool</em>) &#8211; Indicates whether to continue pipeline execution if a step fails.
+If True, only steps that have no dependency on the output of the failed step will continue execution.</li>
+<li><strong>regenerate_outputs</strong> (<em>bool</em>) &#8211; Indicates whether to force regeneration of all step outputs and disallow data
+reuse for this run. If False, this run may reuse results from previous runs and subsequent runs may reuse
+the results of this run.</li>
+<li><strong>skip_validation</strong> (<em>bool</em>) &#8211; Set this parameter True to skip pipeline validation triggered before submit.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The submitted run.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#azure.ml.component.Run" title="azure.ml.component.Run">azure.ml.component.Run</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.ml.component.Pipeline.validate">
+<code class="descname">validate</code><span class="sig-paren">(</span><em>raise_error=False</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.Pipeline.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Graph/component validation and visualization.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>raise_error</strong> (<em>bool</em>) &#8211; Whether directly raises the error or just shows the error list.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of errors</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">builtin.list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Pipeline.workspace">
+<code class="descname">workspace</code><a class="headerlink" href="#azure.ml.component.Pipeline.workspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the workspace of the Pipeline.</p>
+<p>This will check if all nodes in pipeline are from the same workspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The workspace.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">azureml.core.Workspace</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.ml.component.Run">
+<em class="property">class </em><code class="descclassname">azure.ml.component.</code><code class="descname">Run</code><span class="sig-paren">(</span><em>experiment</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.Run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._visible.Visible</span></code>, <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._util._telemetry.WorkspaceTelemetryMixin</span></code></p>
+<p>Represents a run of a <a class="reference internal" href="#azure.ml.component.Component" title="azure.ml.component.Component"><code class="xref py py-class docutils literal"><span class="pre">azure.ml.component.Component</span></code></a>.</p>
+<dl class="method">
+<dt id="azure.ml.component.Run.wait_for_completion">
+<code class="descname">wait_for_completion</code><span class="sig-paren">(</span><em>show_output: bool = None</em>, <em>show_graph: bool = True</em>, <em>timeout_seconds: int = 9223372036854775807</em>, <em>raise_on_error: bool = True</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.Run.wait_for_completion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait for the completion of this run.</p>
+<p>Returns the status after the wait.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>show_output</strong> (<em>bool</em>) &#8211; Indicates whether to show the run status on sys.stdout.</li>
+<li><strong>show_graph</strong> (<em>bool</em>) &#8211; Indicates whether to show the graph with run status on notebook.
+If not in notebook environment, overwrite this value to False. Only works for a PipelineRun for now.</li>
+<li><strong>timeout_seconds</strong> (<em>int</em>) &#8211; The number of seconds to wait before timing out.</li>
+<li><strong>raise_on_error</strong> (<em>bool</em>) &#8211; Indicates whether to raise an error when the run is in a failed state.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The final status.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.Run.workspace">
+<code class="descname">workspace</code><a class="headerlink" href="#azure.ml.component.Run.workspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the workspace containing the experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The workspace object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">azureml.core.Workspace</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.ml.component.RunSettings">
+<em class="property">class </em><code class="descclassname">azure.ml.component.</code><code class="descname">RunSettings</code><span class="sig-paren">(</span><em>definition: azure.ml.component._core._run_settings_definition.RunSettingsDefinition</em>, <em>component_name</em>, <em>workspace</em>, <em>owner</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.RunSettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._util._telemetry.WorkspaceTelemetryMixin</span></code></p>
+<p>A RunSettings aggregates the run settings of a component.</p>
+<dl class="method">
+<dt id="azure.ml.component.RunSettings.configure">
+<code class="descname">configure</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.RunSettings.configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure the runsettings.</p>
+<p>Note that this method will be replaced by a dynamic generated one at runtime with parameters
+that corresponds to the runsettings of the component.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.RunSettings.target">
+<code class="descname">target</code><a class="headerlink" href="#azure.ml.component.RunSettings.target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use name &#8220;target&#8221; to provide a common access for compute parameter.</p>
+<p>Because the name of compute parameter in HDInsight component is &#8220;Compute Name&#8221;, while other components&#8217;
+are &#8220;Target&#8221;.
+:return: The compute target name and type tuple like (&#8216;aml-compute&#8217;, &#8216;AmlCompute&#8217;).
+:rtype: tuple(str, str)</p>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="azure.ml.component.dsl.html">azure.ml.component.dsl package</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-azure.ml.component.component">
+<span id="azure-ml-component-component-module"></span><h2>azure.ml.component.component module<a class="headerlink" href="#module-azure.ml.component.component" title="Permalink to this headline">¶</a></h2>
+<p>Contains classes for creating and managing reusable computational units of an Azure Machine Learning pipeline.</p>
+<p>A component is self-contained set of code that performs one step in the ML workflow (pipeline), such as data
+preprocessing, model training, model scoring and so on. A component is analogous to a function, in that it has a name,
+parameters, expects certain input and returns some value.</p>
+<p>Component is designed to be reused in different jobs and can be evolved to adapt to different specific computation
+logics in different usage cases. Anonymous Component can be used to improve an algorithm in a fast iteration mode,
+and once the goal is achieved, the algorithm can be published as a registered Component which enables reuse.</p>
+<dl class="class">
+<dt id="azure.ml.component.component.Component">
+<em class="property">class </em><code class="descclassname">azure.ml.component.component.</code><code class="descname">Component</code><span class="sig-paren">(</span><em>definition: azure.ml.component._core._component_definition.CommandComponentDefinition, _init_params: typing.Mapping[str, str], _is_direct_child=True</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Component" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._util._telemetry.WorkspaceTelemetryMixin</span></code></p>
+<p>An operational unit that can be used to produce a pipeline.</p>
+<p>A pipeline consists of a series of <a class="reference internal" href="#azure.ml.component.Component" title="azure.ml.component.Component"><code class="xref py py-class docutils literal"><span class="pre">azure.ml.component.Component</span></code></a> nodes.</p>
+<p>For more information about components, see:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures">What&#8217;s an azure ml component</a></li>
+<li><a class="reference external" href="https://aka.ms/azureml-component-specs">Define a component using component specs</a></li>
+</ul>
+<dl class="staticmethod">
+<dt id="azure.ml.component.component.Component.batch_load">
+<em class="property">static </em><code class="descname">batch_load</code><span class="sig-paren">(</span><em>workspace: azureml.core.workspace.Workspace</em>, <em>selectors: typing.List[str] = None</em>, <em>ids: typing.List[str] = None</em><span class="sig-paren">)</span> &#x2192; typing.List[typing.Callable[..., ForwardRef('Component')]]<a class="headerlink" href="#azure.ml.component.component.Component.batch_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Batch load components by identifier list.</p>
+<p>If there is an exception with any component, the batch load will fail. Partial success is not allowed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>workspace</strong> (<em>azureml.core.Workspace</em>) &#8211; The workspace object this component will belong to.</li>
+<li><strong>selectors</strong> (<em>builtin.list</em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; A list of str formatted as name:version or name&#64;label</li>
+<li><strong>ids</strong> (<em>builtin.list</em><em>[</em><em>str</em><em>]</em><em></em>) &#8211; The component version ids</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A tuple of component functions</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple(function)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Component.created_by">
+<code class="descname">created_by</code><a class="headerlink" href="#azure.ml.component.component.Component.created_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name who created the corresponding component in the workspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The name who created the component.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Component.created_date">
+<code class="descname">created_date</code><a class="headerlink" href="#azure.ml.component.component.Component.created_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the created date of the corresponding component in the workspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The created date with the ISO format.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Component.display_name">
+<code class="descname">display_name</code><a class="headerlink" href="#azure.ml.component.component.Component.display_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the display name of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The display name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="azure.ml.component.component.Component.from_yaml">
+<em class="property">static </em><code class="descname">from_yaml</code><span class="sig-paren">(</span><em>workspace: azureml.core.workspace.Workspace</em>, <em>yaml_file: str</em><span class="sig-paren">)</span> &#x2192; typing.Callable[..., ForwardRef('Component')]<a class="headerlink" href="#azure.ml.component.component.Component.from_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register an anonymous component from yaml file to workspace and return the registered component func.</p>
+<p>Assumes source code is in the same directory with yaml file. Then return the registered component func.</p>
+<p>For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Suppose we have a workspace as &#39;ws&#39;</span>
+<span class="c1"># Register and get an anonymous component from yaml file</span>
+<span class="n">component</span> <span class="o">=</span> <span class="n">from_yaml</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="s2">&quot;custom_component/component_spec.yaml&quot;</span><span class="p">)</span>
+<span class="c1"># Register and get an anonymous component from Github url</span>
+<span class="n">component</span> <span class="o">=</span> <span class="n">from_yaml</span><span class="p">(</span>
+    <span class="n">workspace</span><span class="p">,</span>
+    <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">wangchao1230</span><span class="o">/</span><span class="n">hello</span><span class="o">-</span><span class="n">aml</span><span class="o">-</span><span class="n">modules</span><span class="o">/</span><span class="n">blob</span><span class="o">/</span><span class="n">wanhan</span><span class="o">/</span><span class="n">add_component_sample</span><span class="o">/</span><span class="n">sample_components_do_not_delete</span><span class="o">/</span><span class="n">build_artifact_demo_0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="n">component_spec</span><span class="o">.</span><span class="n">yaml</span><span class="s2">&quot;)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>workspace</strong> (<em>azureml.core.Workspace</em>) &#8211; The workspace object this component will belong to.</li>
+<li><strong>yaml_file</strong> (<em>str</em>) &#8211; The component spec file. The spec file could be located in local or Github.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A function that can be called with parameters to get a <a class="reference internal" href="#azure.ml.component.Component" title="azure.ml.component.Component"><code class="xref py py-class docutils literal"><span class="pre">azure.ml.component.Component</span></code></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">function</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Component.inputs">
+<code class="descname">inputs</code><a class="headerlink" href="#azure.ml.component.component.Component.inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the inputs of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The dict in which the keys are input names, the values are input instances initialized by datasets.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str, <a class="reference internal" href="#azure.ml.component.component.Input" title="azure.ml.component.component.Input">Input</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Component.k8srunsettings">
+<code class="descname">k8srunsettings</code><a class="headerlink" href="#azure.ml.component.component.Component.k8srunsettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get compute run settings of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The compute run settings</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">_K8sRunSettings</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="azure.ml.component.component.Component.load">
+<em class="property">static </em><code class="descname">load</code><span class="sig-paren">(</span><em>workspace: azureml.core.workspace.Workspace</em>, <em>name: str = None</em>, <em>version: str = None</em>, <em>selector: str = None</em>, <em>id: str = None</em><span class="sig-paren">)</span> &#x2192; typing.Callable[..., ForwardRef('Component')]<a class="headerlink" href="#azure.ml.component.component.Component.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get component function from workspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>workspace</strong> (<em>azureml.core.Workspace</em>) &#8211; The workspace object this component will belong to.</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; The name of component</li>
+<li><strong>version</strong> (<em>str</em>) &#8211; The version</li>
+<li><strong>selector</strong> (<em>str</em>) &#8211; A string formatted as name:version or name&#64;label, when loading component,
+you can choose one between selector and name, version.</li>
+<li><strong>id</strong> (<em>str</em>) &#8211; The component version id of an existing component</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A function that can be called with parameters to get a <a class="reference internal" href="#azure.ml.component.Component" title="azure.ml.component.Component"><code class="xref py py-class docutils literal"><span class="pre">azure.ml.component.Component</span></code></a></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">function</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Component.name">
+<code class="descname">name</code><a class="headerlink" href="#azure.ml.component.component.Component.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the name of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Component.outputs">
+<code class="descname">outputs</code><a class="headerlink" href="#azure.ml.component.component.Component.outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the outputs of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The dict in which the keys are the output names, the values are the output instances.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str, <a class="reference internal" href="#azure.ml.component.component.Output" title="azure.ml.component.component.Output">Output</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Component.regenerate_output">
+<code class="descname">regenerate_output</code><a class="headerlink" href="#azure.ml.component.component.Component.regenerate_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the flag indicating whether the component should be run again.</p>
+<p>Set to True to force a new run (disallows component/datasource reuse).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the regenerate_output value.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.ml.component.component.Component.run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>experiment_name=None</em>, <em>working_dir=None</em>, <em>use_docker=True</em>, <em>track_run_history=True</em>, <em>show_output=True</em>, <em>python_interpreter_path=None</em>, <em>skip_validation=True</em>, <em>raise_on_error=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Component.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run component in local environment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>experiment_name</strong> (<em>str</em>) &#8211; The experiment_name will show in portal. If not set, will use component name.</li>
+<li><strong>working_dir</strong> (<em>str</em>) &#8211; The output path for component output info</li>
+<li><strong>use_docker</strong> (<em>bool</em>) &#8211; If use_docker=True, will pull image from azure and run component in system-managed
+docker-based environment.
+If use_docker=False and python_interpreter_path is None, will run component in
+system-managed conda-based environment.
+If use_docker=False and python_interpreter_path is not None, will directly run component
+in user-managed environment.</li>
+<li><strong>track_run_history</strong> (<em>bool</em>) &#8211; If track_run_history=True, will create azureml.core.Run and upload component output
+and log file to portal.
+If track_run_history=False, will not create azureml.core.Run to upload outputs
+and log file.</li>
+<li><strong>show_output</strong> (<em>bool</em>) &#8211; Indicates whether to show the component run status on sys.stdout.</li>
+<li><strong>python_interpreter_path</strong> (<em>str</em>) &#8211; When use_docker=False and python_interpreter_path not None, will directly
+run component in user-managed environment.
+When use_docker=False and python_interpreter_path is None, will run component
+in system-managed conda-based environment.</li>
+<li><strong>skip_validation</strong> (<em>bool</em>) &#8211; Indicates whether to skip the validation of the component.</li>
+<li><strong>raise_on_error</strong> (<em>bool</em>) &#8211; Indicates whether to raise an error when the Run is in a failed state</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The run status, such as, Completed and Failed.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Component.runsettings">
+<code class="descname">runsettings</code><a class="headerlink" href="#azure.ml.component.component.Component.runsettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get run settings of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The run settings.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#azure.ml.component.RunSettings" title="azure.ml.component.RunSettings">azure.ml.component.RunSettings</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.ml.component.component.Component.set_inputs">
+<code class="descname">set_inputs</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; azure.ml.component.component.Component<a class="headerlink" href="#azure.ml.component.component.Component.set_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the inputs and parameters of the component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The component itself.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#azure.ml.component.Component" title="azure.ml.component.Component">azure.ml.component.Component</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Component.type">
+<code class="descname">type</code><a class="headerlink" href="#azure.ml.component.component.Component.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the type of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The type.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Component.version">
+<code class="descname">version</code><a class="headerlink" href="#azure.ml.component.component.Component.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the version of the component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The version.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Component.workspace">
+<code class="descname">workspace</code><a class="headerlink" href="#azure.ml.component.component.Component.workspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the workspace of the Component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The workspace.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">azureml.core.Workspace</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.ml.component.component.Input">
+<em class="property">class </em><code class="descclassname">azure.ml.component.component.</code><code class="descname">Input</code><span class="sig-paren">(</span><em>dset</em>, <em>name: str</em>, <em>mode=None</em>, <em>owner=None</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._util._telemetry.TelemetryMixin</span></code></p>
+<p>Define one input of a Component.</p>
+<dl class="method">
+<dt id="azure.ml.component.component.Input.configure">
+<code class="descname">configure</code><span class="sig-paren">(</span><em>mode='mount'</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Input.configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to configure the input.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mode</strong> (<em>str</em>) &#8211; The mode that will be used for this input. Available options are
+&#8216;mount&#8217; and &#8216;download&#8217;. See <a class="reference external" href="https://aka.ms/dataset-mount-vs-download">https://aka.ms/dataset-mount-vs-download</a> for more details.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Input.mode">
+<code class="descname">mode</code><a class="headerlink" href="#azure.ml.component.component.Input.mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the mode that will be used for this input.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The mode.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Input.name">
+<code class="descname">name</code><a class="headerlink" href="#azure.ml.component.component.Input.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the name of the input.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="azure.ml.component.component.Output">
+<em class="property">class </em><code class="descclassname">azure.ml.component.component.</code><code class="descname">Output</code><span class="sig-paren">(</span><em>name: str</em>, <em>datastore=None</em>, <em>output_mode='mount'</em>, <em>port_name=None</em>, <em>owner=None</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._util._telemetry.TelemetryMixin</span></code></p>
+<p>Define one output of a Component.</p>
+<dl class="method">
+<dt id="azure.ml.component.component.Output.configure">
+<code class="descname">configure</code><span class="sig-paren">(</span><em>datastore=None</em>, <em>output_mode='mount'</em>, <em>path_on_compute=None</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Output.configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use this method to configure the output.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>datastore</strong> (<em>azureml.core.datastore.Datastore</em>) &#8211; The datastore that will be used for the output.</li>
+<li><strong>output_mode</strong> (<em>str</em>) &#8211; Specify whether to use &#8220;upload&#8221; or &#8220;mount&#8221; to access the data.</li>
+<li><strong>path_on_compute</strong> (<em>str</em>) &#8211; Specify the local path of the output when using component/pipeline.run.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Output.datastore">
+<code class="descname">datastore</code><a class="headerlink" href="#azure.ml.component.component.Output.datastore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the datastore of this output.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The datastore.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">azureml.core.datastore.Datastore</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Output.output_mode">
+<code class="descname">output_mode</code><a class="headerlink" href="#azure.ml.component.component.Output.output_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the output mode that will be used for the output.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The output mode.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.component.Output.port_name">
+<code class="descname">port_name</code><a class="headerlink" href="#azure.ml.component.component.Output.port_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the output port name displayed to the user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The displayed output port name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.ml.component.component.Output.register_as">
+<code class="descname">register_as</code><span class="sig-paren">(</span><em>name</em>, <em>create_new_version: bool = True</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Output.register_as" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register the output dataset to the workspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> (<em>str</em>) &#8211; The name of the registered dataset once the intermediate data is produced.</li>
+<li><strong>create_new_version</strong> (<em>bool</em>) &#8211; Whether to create a new version of the dataset if the data source changes. Defaults
+to True. By default, all intermediate output will output to a new location when a pipeline runs, so
+it is highly recommended to keep this flag set to True.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The output itself.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#azure.ml.component.component.Output" title="azure.ml.component.component.Output">azure.ml.component.component.Output</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-azure.ml.component.pipeline">
+<span id="azure-ml-component-pipeline-module"></span><h2>azure.ml.component.pipeline module<a class="headerlink" href="#module-azure.ml.component.pipeline" title="Permalink to this headline">¶</a></h2>
+<p>Contains classes for creating and managing reusable computational units of an Azure Machine Learning pipeline.</p>
+<p>An Azure Machine Learning pipeline is an independently executable workflow of a complete machine learning task.
+Azure Machine Learning pipelines help you build, optimize, and manage machine learning workflows with simplicity,
+repeatability and quality assurance.</p>
+<p>A pipeline can be composited by several Components.</p>
+<p>These benefits become significant as soon as your machine learning project moves beyond pure exploration and into
+iteration. Even simple one-step pipelines can be valuable. Machine learning projects are often in a complex state,
+and it can be a relief to make the precise accomplishment of a single workflow a trivial process.</p>
+<dl class="class">
+<dt id="azure.ml.component.pipeline.Pipeline">
+<em class="property">class </em><code class="descclassname">azure.ml.component.pipeline.</code><code class="descname">Pipeline</code><span class="sig-paren">(</span><em>nodes: typing.List[typing.Union[azure.ml.component.component.Component, ForwardRef('Pipeline')]], outputs: typing.Mapping[str, azure.ml.component.component.Output] = None, workspace=None, name=None, description=None, default_compute_target=None, default_datastore=None, _use_dsl=False, _definition=None, _init_params=None, _is_direct_child=True</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.pipeline.Pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#azure.ml.component.component.Component" title="azure.ml.component.component.Component"><code class="xref py py-class docutils literal"><span class="pre">azure.ml.component.component.Component</span></code></a>, <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._visible.Visible</span></code>, <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._util._telemetry.WorkspaceTelemetryMixin</span></code></p>
+<p>A Pipeline aggregates other Components and connects their inputs and outputs to form a pipeline.</p>
+<dl class="attribute">
+<dt id="azure.ml.component.pipeline.Pipeline.default_datastore">
+<code class="descname">default_datastore</code><a class="headerlink" href="#azure.ml.component.pipeline.Pipeline.default_datastore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the default datastore of the Pipeline.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">the default datastore.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">azureml.core.Datastore</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.pipeline.Pipeline.description">
+<code class="descname">description</code><a class="headerlink" href="#azure.ml.component.pipeline.Pipeline.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the description of the Pipeline.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The description.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.pipeline.Pipeline.inputs">
+<code class="descname">inputs</code><a class="headerlink" href="#azure.ml.component.pipeline.Pipeline.inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the inputs of the Pipeline.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">pipeline inputs.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str, <a class="reference internal" href="#azure.ml.component.component.Input" title="azure.ml.component.component.Input">Input</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.pipeline.Pipeline.name">
+<code class="descname">name</code><a class="headerlink" href="#azure.ml.component.pipeline.Pipeline.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set the name of the Pipeline.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The name.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.pipeline.Pipeline.outputs">
+<code class="descname">outputs</code><a class="headerlink" href="#azure.ml.component.pipeline.Pipeline.outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the outputs of the Pipeline.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">pipeline outputs.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict[str, <a class="reference internal" href="#azure.ml.component.component.Output" title="azure.ml.component.component.Output">Output</a>]</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.ml.component.pipeline.Pipeline.set_inputs">
+<code class="descname">set_inputs</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span> &#x2192; azure.ml.component.component.Component<a class="headerlink" href="#azure.ml.component.pipeline.Pipeline.set_inputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the inputs and parameters of the pipeline component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The pipeline component itself.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#azure.ml.component.Component" title="azure.ml.component.Component">azure.ml.component.Component</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.ml.component.pipeline.Pipeline.submit">
+<code class="descname">submit</code><span class="sig-paren">(</span><em>experiment_name=None</em>, <em>default_compute_target=None</em>, <em>description=None</em>, <em>pipeline_parameters=None</em>, <em>tags=None</em>, <em>continue_on_step_failure=None</em>, <em>regenerate_outputs=None</em>, <em>skip_validation=False</em><span class="sig-paren">)</span> &#x2192; azure.ml.component.run.Run<a class="headerlink" href="#azure.ml.component.pipeline.Pipeline.submit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit current pipeline run to workspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>experiment_name</strong> (<em>str</em>) &#8211; The experiment name, if experiment_name is None will default to pipeline name</li>
+<li><strong>default_compute_target</strong> (<em>str</em>) &#8211; The default compute target used to run pipeline</li>
+<li><strong>description</strong> (<em>str</em>) &#8211; The description of the submitted pipeline run</li>
+<li><strong>pipeline_parameters</strong> (<em>dict</em><em>(</em><em>{str:str}</em><em>)</em><em></em>) &#8211; An optional dictionary of pipeline parameter assignments for the PipelineDraft</li>
+<li><strong>tags</strong> (<em>dict</em>) &#8211; Tags to be added to the submitted run, {&#8220;tag&#8221;: &#8220;value&#8221;}</li>
+<li><strong>continue_on_step_failure</strong> (<em>bool</em>) &#8211; Indicates whether to continue pipeline execution if a step fails.
+If True, only steps that have no dependency on the output of the failed step will continue execution.</li>
+<li><strong>regenerate_outputs</strong> (<em>bool</em>) &#8211; Indicates whether to force regeneration of all step outputs and disallow data
+reuse for this run. If False, this run may reuse results from previous runs and subsequent runs may reuse
+the results of this run.</li>
+<li><strong>skip_validation</strong> (<em>bool</em>) &#8211; Set this parameter True to skip pipeline validation triggered before submit.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The submitted run.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#azure.ml.component.Run" title="azure.ml.component.Run">azure.ml.component.Run</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="azure.ml.component.pipeline.Pipeline.validate">
+<code class="descname">validate</code><span class="sig-paren">(</span><em>raise_error=False</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.pipeline.Pipeline.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Graph/component validation and visualization.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>raise_error</strong> (<em>bool</em>) &#8211; Whether directly raises the error or just shows the error list.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of errors</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">builtin.list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.pipeline.Pipeline.workspace">
+<code class="descname">workspace</code><a class="headerlink" href="#azure.ml.component.pipeline.Pipeline.workspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the workspace of the Pipeline.</p>
+<p>This will check if all nodes in pipeline are from the same workspace.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The workspace.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">azureml.core.Workspace</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-azure.ml.component.run">
+<span id="azure-ml-component-run-module"></span><h2>azure.ml.component.run module<a class="headerlink" href="#module-azure.ml.component.run" title="Permalink to this headline">¶</a></h2>
+<p>Defines classes for submitted runs, including classes for checking status and retrieving run details.</p>
+<dl class="class">
+<dt id="azure.ml.component.run.Run">
+<em class="property">class </em><code class="descclassname">azure.ml.component.run.</code><code class="descname">Run</code><span class="sig-paren">(</span><em>experiment</em>, <em>run_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.run.Run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._visible.Visible</span></code>, <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._util._telemetry.WorkspaceTelemetryMixin</span></code></p>
+<p>Represents a run of a <a class="reference internal" href="#azure.ml.component.Component" title="azure.ml.component.Component"><code class="xref py py-class docutils literal"><span class="pre">azure.ml.component.Component</span></code></a>.</p>
+<dl class="method">
+<dt id="azure.ml.component.run.Run.wait_for_completion">
+<code class="descname">wait_for_completion</code><span class="sig-paren">(</span><em>show_output: bool = None</em>, <em>show_graph: bool = True</em>, <em>timeout_seconds: int = 9223372036854775807</em>, <em>raise_on_error: bool = True</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.run.Run.wait_for_completion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait for the completion of this run.</p>
+<p>Returns the status after the wait.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>show_output</strong> (<em>bool</em>) &#8211; Indicates whether to show the run status on sys.stdout.</li>
+<li><strong>show_graph</strong> (<em>bool</em>) &#8211; Indicates whether to show the graph with run status on notebook.
+If not in notebook environment, overwrite this value to False. Only works for a PipelineRun for now.</li>
+<li><strong>timeout_seconds</strong> (<em>int</em>) &#8211; The number of seconds to wait before timing out.</li>
+<li><strong>raise_on_error</strong> (<em>bool</em>) &#8211; Indicates whether to raise an error when the run is in a failed state.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The final status.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.run.Run.workspace">
+<code class="descname">workspace</code><a class="headerlink" href="#azure.ml.component.run.Run.workspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the workspace containing the experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The workspace object.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">azureml.core.Workspace</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-azure.ml.component.run_settings">
+<span id="azure-ml-component-run-settings-module"></span><h2>azure.ml.component.run_settings module<a class="headerlink" href="#module-azure.ml.component.run_settings" title="Permalink to this headline">¶</a></h2>
+<p>Defines classes for run settings.</p>
+<dl class="class">
+<dt id="azure.ml.component.run_settings.RunSettings">
+<em class="property">class </em><code class="descclassname">azure.ml.component.run_settings.</code><code class="descname">RunSettings</code><span class="sig-paren">(</span><em>definition: azure.ml.component._core._run_settings_definition.RunSettingsDefinition</em>, <em>component_name</em>, <em>workspace</em>, <em>owner</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.run_settings.RunSettings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._util._telemetry.WorkspaceTelemetryMixin</span></code></p>
+<p>A RunSettings aggregates the run settings of a component.</p>
+<dl class="method">
+<dt id="azure.ml.component.run_settings.RunSettings.configure">
+<code class="descname">configure</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.run_settings.RunSettings.configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Configure the runsettings.</p>
+<p>Note that this method will be replaced by a dynamic generated one at runtime with parameters
+that corresponds to the runsettings of the component.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="azure.ml.component.run_settings.RunSettings.target">
+<code class="descname">target</code><a class="headerlink" href="#azure.ml.component.run_settings.RunSettings.target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use name &#8220;target&#8221; to provide a common access for compute parameter.</p>
+<p>Because the name of compute parameter in HDInsight component is &#8220;Compute Name&#8221;, while other components&#8217;
+are &#8220;Target&#8221;.
+:return: The compute target name and type tuple like (&#8216;aml-compute&#8217;, &#8216;AmlCompute&#8217;).
+:rtype: tuple(str, str)</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="azure.ml.component.dsl.html" class="btn btn-neutral float-right" title="azure.ml.component.dsl package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sdk_reference.html" class="btn btn-neutral float-left" title="SDK Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, microsoft
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+# How to use component spec schema in vscode
+
+### Prerequisites
+
+- Download vscode.
+
+- Download vscode 'YAML' extension
+
+  ![image-yaml-extension](../images/YAML-extension.png)
+
+### Associate component spec schema to your yaml files
+
+1. Open your settings (File -> Preferences -> Settings or `Ctrl+,`) and find **Yaml:Schemas**  ![image-opensetting](../images/opensetting.png)
+  
+2. In **settings.json**, add below section:
+
+    We provided a [merged schema](https://componentsdk.blob.core.windows.net/jsonschema/ComponentSchema.json ) to validate different kind of components:
+
+    Here we configure to associate the component schema to all files that end with ".yaml".
+
+    ```json
+    {
+        "yaml.schemas": {
+            "https://componentsdk.blob.core.windows.net/jsonschema/ComponentSchema.json": ["**/*.yaml"]
+        }
+    }
+    ```
+
+    You can also change this to build your own association pattern. For example, below pattern will associate all yaml files start with 'aml'. Find more examples [here](https://github.com/redhat-developer/vscode-yaml).
+
+    ```json
+    {
+        "yaml.schemas": {
+            "https://componentsdk.blob.core.windows.net/jsonschema/ComponentSchema.json": ["aml*.yaml"]
+        }
+    }
+    ```
+
+    The merged schema validates yaml specs by checking the `type` field in it.
+    For example, if a schema has `type: ParallelComponent` in it, it will be validated as a parallel component.
+    If `type` not specified in yaml spec, the yaml will be validated as a command component.
+
+    Now you are all set.
+    See below section to learn how to write component spec with the help of the schema.
+
+### Writing component spec
+
+After the configuration, you can follow the steps below to write a yaml.
+
+1. Press `ctrl+space` , a list of templates for different kind of component is shown, select one to get started.
+
+   ![image-20210108232003216](../images/yaml-snippets.png)
+
+2. Fill required fields in the template, use `tab` to switch between "<>" wrapped fields and replace them with your own definition.
+
+   ![image-20210108232123038](../images/yaml-template.png)
+
+   Here is a generated component template:
+
+   ```yaml
+   $schema: http://azureml/sdk-2-0/CommandComponent.json
+   name: < Put your unique component Name here >
+   version: 0.0.1
+   display_name: < Put your component Display name here.>
+   type: CommandComponent
+   is_deterministic: false
+   tags: 
+     from_schema_snippet: true
+   inputs: 
+     < Your 1st Input name >: 
+       type: path # reference https://aka.ms/azure-ml-component-specs#data-types for more details
+       description: < Edit description for your input >  
+     < Your 2nd Input name >: 
+       type: path
+       description: < Edit description for your input >  
+   outputs: 
+     < Your 1st Output name >: 
+       type: path
+       description: < Edit description for your output >  
+   command: < Your command file name >  --< Your 1st Input name > {inputs.< Your 1st Input name >} --< Your 2nd Input name > {inputs.< Your 2nd Input name >}  --< Your 1st Output name > {outputs.< Your 1st Output name >} 
+   environment: 
+     conda: 
+       conda_dependencies: 
+         name: project_environment
+         channels: 
+           - defaults
+         dependencies: 
+           - python=3.7.6
+           - pip=20.0
+           - pip:
+             - azureml-sdk
+             - < Specify your extra dependencies >      
+     os: Linux
+   ```
+
+3. If you need more fields for your spec, use `ctrl+space` to toggle hint about more supported fields.
+
+   ![image-20210108232207086](../images/yaml-hint.png)
+
+4. Hover the mouse on fields to check the definition of the field.
+
+   ![image-20210108232242693](../images/yaml-hover.png)
+
+5. If your yaml violates the schema, warning will be shown.
+
+   ![image-20210108232324757](../images/yaml-warning.png)
+
+   ![sample-component](../images/sample-component.gif)

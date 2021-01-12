@@ -1,0 +1,8 @@
+azure\.ml\.component\.dsl package
+=================================
+
+.. automodule:: azure.ml.component.dsl
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

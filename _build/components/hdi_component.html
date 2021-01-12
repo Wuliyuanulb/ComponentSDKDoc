@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>HDInsight Component &mdash; Component SDK beta documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'beta',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Change Log" href="../CHANGELOG.html" />
+    <link rel="prev" title="Parallel Component" href="parallel_component.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Component SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../components.html">Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="component-spec-definition.html">Definition of component spec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="component-spec-topics.html">Component spec advanced topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_component.html">Command Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel_component.html">Parallel Component</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">HDInsight Component</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overivew">Overivew</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenarios">scenarios</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitation">limitation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-write-hdinsightcomponent-yaml-spec">How to write HDInsightComponent yaml spec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#samples">Samples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#appendix">Appendix</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk_reference.html">SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../links.html">Useful Links</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Component SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../components.html">Components</a> &raquo;</li>
+        
+      <li>HDInsight Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/components/hdi_component.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="hdinsight-component">
+<h1>HDInsight Component<a class="headerlink" href="#hdinsight-component" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overivew">
+<h2>Overivew<a class="headerlink" href="#overivew" title="Permalink to this headline">¶</a></h2>
+<p>A HDInsightComponent is a Component that executes a spark job in a HDInsight cluster.</p>
+<div class="section" id="scenarios">
+<h3>scenarios<a class="headerlink" href="#scenarios" title="Permalink to this headline">¶</a></h3>
+<p>Use Apache Spark to train your model or analysis your data, multiple popular frameworks are supported:</p>
+<ul class="simple">
+<li>PySpark</li>
+<li>.NET for Spark</li>
+<li>JAVA</li>
+</ul>
+</div>
+<div class="section" id="limitation">
+<h3>limitation<a class="headerlink" href="#limitation" title="Permalink to this headline">¶</a></h3>
+<p>Currently only works on compliant HDI cluster created by Office team.</p>
+</div>
+</div>
+<div class="section" id="how-to-write-hdinsightcomponent-yaml-spec">
+<h2>How to write HDInsightComponent yaml spec<a class="headerlink" href="#how-to-write-hdinsightcomponent-yaml-spec" title="Permalink to this headline">¶</a></h2>
+<p>Please refer to <a class="reference external" href="./component-spec-definition.html#hdinsight">HDInsightComponent spec doc</a>.</p>
+<p>Please also see <a class="reference external" href="https://componentsdk.blob.core.windows.net/jsonschema/HDInsightComponent.json">HDInsightComponent schema</a>
+.</p>
+<p>Example yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">$schema</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://azureml/sdk-1-5/HDInsightComponent.json</span>
+<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">microsoft.com.azureml.samples.train-in-spark</span>
+<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.1</span>
+<span class="nt">display_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Train in Spark</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">HDInsightComponent</span>
+<span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Train a Spark ML model using an HDInsight Spark cluster</span>
+
+<span class="nt">inputs</span><span class="p">:</span>
+  <span class="nt">input_path</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">path</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Iris csv file</span>
+    <span class="nt">optional</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="nt">regularization_rate</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Float</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Regularization rate when training with logistic regression</span>
+    <span class="nt">optional</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.01</span>
+<span class="nt">outputs</span><span class="p">:</span>
+  <span class="nt">output_path</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">path</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">The output path to save the trained model to</span>
+
+<span class="nt">hdinsight</span><span class="p">:</span>
+  <span class="nt">file</span><span class="p">:</span> <span class="s">&quot;train-spark.py&quot;</span>
+  <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">&gt;-</span>
+    <span class="no">--input_path {inputs.input_path} [--regularization_rate {inputs.regularization_rate}] --output_path {outputs.output_path}</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/components/hdi-component/component_spec.yaml">more examples in github samples repo</a>.</p>
+</div>
+<div class="section" id="samples">
+<h2>Samples<a class="headerlink" href="#samples" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-hdi-component.ipynb">How to use command component</a> - Demostrates how to use hdi component to train spark ML models.</li>
+</ul>
+</div>
+<div class="section" id="appendix">
+<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h2>
+<p>In legacy module concept, this maps to <code class="docutils literal"><span class="pre">hdinsight</span></code> jobType Module.</p>
+<ul class="simple">
+<li>legacy <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/azureml-pipeline-wrapper/azureml-modules/docs/module-spec-definition.md#hdinsight">module sepc doc</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../CHANGELOG.html" class="btn btn-neutral float-right" title="Change Log" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="parallel_component.html" class="btn btn-neutral float-left" title="Parallel Component" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, microsoft
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

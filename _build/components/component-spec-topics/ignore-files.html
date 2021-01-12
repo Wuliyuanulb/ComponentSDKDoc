@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Ignore files when creating snapshot &mdash; Component SDK beta documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'beta',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Command Component" href="../command_component.html" />
+    <link rel="prev" title="Component build" href="component-build.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Component SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts.html">Concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../components.html">Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../component-spec-definition.html">Definition of component spec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../component-spec-topics.html">Component spec advanced topics</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="inputs-and-outputs.html">Inputs and outputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="running-environment.html">Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="additional-includes.html">Additional includes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code-snapshot.html">Code snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="component-build.html">Component build</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Ignore files when creating snapshot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#shared-amlignore-file">Shared .amlignore file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#set-a-default-shared-amlignore-file">Set a default shared .amlignore file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ignore-files-in-subdirectory">Ignore files in subdirectory</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-component">Sample component</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../command_component.html">Command Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../parallel_component.html">Parallel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hdi_component.html">HDInsight Component</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk_reference.html">SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../links.html">Useful Links</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Component SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../components.html">Components</a> &raquo;</li>
+        
+          <li><a href="../component-spec-topics.html">Component spec advanced topics</a> &raquo;</li>
+        
+      <li>Ignore files when creating snapshot</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/components/component-spec-topics/ignore-files.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ignore-files-when-creating-snapshot">
+<h1>Ignore files when creating snapshot<a class="headerlink" href="#ignore-files-when-creating-snapshot" title="Permalink to this headline">¶</a></h1>
+<p>It is good to exclude some files (e.g.  <code class="docutils literal"><span class="pre">__pycache__</span></code>) when creating the component snapshot. Put an <code class="docutils literal"><span class="pre">.amlignore</span></code> or <code class="docutils literal"><span class="pre">.gitignore</span></code> file to to base folder of the component source folder to ignore the uneeded files. Refer to <a class="reference external" href="https://docs.microsoft.com/en-us/azure/machine-learning/concept-azure-machine-learning-architecture#snapshots">the AzureML doc</a> for detailed introduction of <code class="docutils literal"><span class="pre">.amlignore</span></code>.</p>
+<div class="section" id="shared-amlignore-file">
+<h2>Shared .amlignore file<a class="headerlink" href="#shared-amlignore-file" title="Permalink to this headline">¶</a></h2>
+<p>Besides putting an <code class="docutils literal"><span class="pre">.amlignore</span></code> file in the base folder of each component, it is also supported to create a shared <code class="docutils literal"><span class="pre">.amlignore</span></code> file, and specify the path to the shared <code class="docutils literal"><span class="pre">.amlignore</span></code> file when creating the component.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>az ml component create --file<span class="o">=</span>path/to/component/spec.yaml --amlignore-file<span class="o">=</span>path/to/shared/.amlignore
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-a-default-shared-amlignore-file">
+<h2>Set a default shared .amlignore file<a class="headerlink" href="#set-a-default-shared-amlignore-file" title="Permalink to this headline">¶</a></h2>
+<p>Instead of specifiying the <code class="docutils literal"><span class="pre">--amlignore-file</span></code> to every component create command, it is also possible to set the default <code class="docutils literal"><span class="pre">.amlignore</span></code> file using the following command:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>az configure --defaults <span class="nv">component_amlignore_file</span><span class="o">=</span>/path/to/shared/.amlignore
+</pre></div>
+</div>
+<p>By this setting, the shared <code class="docutils literal"><span class="pre">.amlignore</span></code> will be automatically applied when creating components. The create command could be simplified to:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>az ml component create --file<span class="o">=</span>path/to/component/spec.yaml
+</pre></div>
+</div>
+<blockquote>
+<div><p>NOTE: use the following command to unset the default <code class="docutils literal"><span class="pre">.amlignore</span></code> file:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>az configure --defaults <span class="nv">component_amlignore_file</span><span class="o">=</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="ignore-files-in-subdirectory">
+<h2>Ignore files in subdirectory<a class="headerlink" href="#ignore-files-in-subdirectory" title="Permalink to this headline">¶</a></h2>
+<p>Similar to <a class="reference external" href="https://git-scm.com/docs/gitignore">git ignore logic</a>, ignore file in subdirectory is also supported.
+Component CLI will look from each subdirectories up to code directory for ignore files.</p>
+<p>If we have the following project structure:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">src</span><span class="o">/</span>
+    <span class="o">...</span>
+    <span class="o">.</span><span class="n">amlignore</span>
+<span class="o">.</span><span class="n">amlignore</span>
+</pre></div>
+</div>
+<p>Both <code class="docutils literal"><span class="pre">.amlignore</span></code> and <code class="docutils literal"><span class="pre">src/.amlignore</span></code> works when building the component snapshot.</p>
+</div>
+<div class="section" id="sample-component">
+<h2>Sample component<a class="headerlink" href="#sample-component" title="Permalink to this headline">¶</a></h2>
+<p>Refer to <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/code-snapshot">here</a> to see an example usage of .amlignore file.
+In <code class="docutils literal"><span class="pre">src/component_entry/component_sepc.yaml</span></code> we set <code class="docutils literal"><span class="pre">code</span></code> directory to <code class="docutils literal"><span class="pre">..</span></code>, so <code class="docutils literal"><span class="pre">src/</span></code> will be the project&#8216;s root directory.
+Both <code class="docutils literal"><span class="pre">src/.amlignore</span></code> and <code class="docutils literal"><span class="pre">src/library1/.amlignore</span></code> works, see <code class="docutils literal"><span class="pre">src/.build</span></code> for whole built snapshot.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../command_component.html" class="btn btn-neutral float-right" title="Command Component" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="component-build.html" class="btn btn-neutral float-left" title="Component build" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, microsoft
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

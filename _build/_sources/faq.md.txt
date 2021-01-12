@@ -1,0 +1,85 @@
+# Frequently Asked Questions
+
+## Components vs Pipeline Steps
+
+[Azure Machine Learning pipelines](https://docs.microsoft.com/en-us/azure/machine-learning/concept-ml-pipelines) can help organizations automate machine learning workflows by using the [PipelineStep](https://docs.microsoft.com/en-us/python/api/azureml-pipeline-core/azureml.pipeline.core.builder.pipelinestep?view=azure-ml-py) class. Components are similar, but break down pipelines further to make individual sections of code testable components instead of an entire pipeline.
+
+| | Pipeline steps | Components |
+|---| --- | --- |
+| CI/CD process support | Create components from local files only | Create components from GitHub public repo, Azure DevOps artifacs, or local files |
+| Reuse across pipelines | Not supported | Supported |
+| Version management | Not supported | Supported - manage with [Azure Command Line Interface (CLI)](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-component-cli.ipynb) |
+| Supported workflows | SDK only | SDK **- and -** [designer](https://docs.microsoft.com/azure/machine-learning/concept-designer)|
+
+## Components vs Designer Execute Python Script component
+[Azure Machine Learning Designer execute python script components](https://docs.microsoft.com/en-us/azure/machine-learning/algorithm-module-reference/execute-python-script) is a great way to customize Designer with your own code. It only spans across Designer and has certain limitations in the input and output formats. Components are more programmatic friendly and can be versioned
+
+| | Designer Execute Python | Components |
+|---| --- | --- |
+| Domain scope | Designer only | All across AzureML including Designer, SDK pipelines, CLI etc |
+| Reuse across pipelines and workspaces | Not supported | Supported |
+| Version management | Not supported | Supported - manage with [Azure Command Line Interface (CLI)](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-component-cli.ipynb) |
+| Programatic provisioning | No, created from designer only  | Yes (SDK and CLI) |
+| Extensibility with libraries | Yes, with pip | Yes, with AzureML environments |
+
+## Setup environment common issues
+
+### ImportError: cannot import name xxx from azureml.xx
+Take the following exception as an example:
+```python
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "C:\Users\wanhan\Anaconda3\envs\temp\lib\site-packages\azure\ml\component\__init__.py", line 17, in <module>
+    from .component import Component
+  File "C:\Users\wanhan\Anaconda3\envs\temp\lib\site-packages\azure\ml\component\component.py", line 28, in <module>
+    from azure.ml.component._api._api import _dto_2_definition
+  File "C:\Users\wanhan\Anaconda3\envs\temp\lib\site-packages\azure\ml\component\_api\_api.py", line 12, in <module>
+    from azure.ml.component._api._snapshots_client import SnapshotsClient
+  File "C:\Users\wanhan\Anaconda3\envs\temp\lib\site-packages\azure\ml\component\_api\_snapshots_client.py", line 9, in <module>
+    from azureml._restclient.constants import SNAPSHOT_MAX_FILES, SNAPSHOT_BATCH_SIZE
+ImportError: cannot import name 'SNAPSHOT_MAX_FILES'
+```
+That's because we rely on newer version of `azureml-core`, run the following command to fix the error.
+
+```
+pip install azureml-core>1.17
+```
+
+### CommandNotFoundError: 'component/module' is misspelled or not recognized by the system
+That's because you are using an older version of azure CLI.
+Run `az upgrade` to update it.
+
+If "upgrade" is not found in "az" command group, you may need to [reinstall](https://aka.ms/azure-cli) it.
+
+### Run.wait_for_completion visualization does not update run status
+
+In browser F12 window, there is `Couldn't process kernel message` error in Console log. WrappedError message will be like:
+```
+Error: Class jupyter.widget not found in registry at http://xxx
+```
+
+This is because ipywidgets not correctly enabled in jupyter extension when using pip to install. Reinstall using conda will solve this issue. See [more details here](https://ipywidgets.readthedocs.io/en/latest/user_install.html).
+```
+conda install -c conda-forge ipywidgets
+```
+
+### NotImplementedError: Unsupported Linux distribution ubuntu 20.04
+Take the following exception as an example:
+```python
+  File "/home/miniconda3/envs/scpilot000rc7/lib/python3.7/site-packages/azureml/dataprep/api/_datastore_helper.py", line 143, in _set_auth_type
+    get_engine_api().set_aml_auth(SetAmlAuthMessageArgument(AuthType.DERIVED, json.dumps(auth)))
+  File "/home/miniconda3/envs/scpilot000rc7/lib/python3.7/site-packages/azureml/dataprep/api/engineapi/api.py", line 19, in get_engine_api
+    _engine_api = EngineAPI()
+  File "/home/miniconda3/envs/scpilot000rc7/lib/python3.7/site-packages/azureml/dataprep/api/engineapi/api.py", line 65, in __init__
+    self._message_channel = launch_engine()
+  File "/home/miniconda3/envs/scpilot000rc7/lib/python3.7/site-packages/azureml/dataprep/api/engineapi/engine.py", line 337, in launch_engine
+    dependencies_path = runtime.ensure_dependencies()
+  File "/home/miniconda3/envs/scpilot000rc7/lib/python3.7/site-packages/dotnetcore2/runtime.py", line 276, in ensure_dependencies
+    if not attempt_get_deps():
+  File "/home/miniconda3/envs/scpilot000rc7/lib/python3.7/site-packages/dotnetcore2/runtime.py", line 270, in attempt_get_deps
+    raise NotImplementedError(err_msg)
+NotImplementedError: Unsupported Linux distribution ubuntu 20.04
+```
+
+If raising a NotImplementedError contains unsupported ubuntu 20.04, when execute some operations of azure-ml-component in Ubuntu 20.04. It means cannot find required dependencies for .NET Core in current environment.
+You need to follow the [guide](https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2004-) to install .NET Cores dependencies for Ubuntu 20.04.

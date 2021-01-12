@@ -1,0 +1,66 @@
+# Getting Started
+
+## Install Component SDK/CLI
+
+### Find the lastest version
+
+Currently component SDK & CLI are under active development. We will release a `stable version` to [the stable pypi index](https://pypi.org/project/azure-ml-component/#history) regularly (current about monthly cadence). Between two stable version, we might release several `preview versions` which contains new features and bugfix. You can find the latest preview version in [the preview pypi index](https://azuremlsdktestpypi.azureedge.net/modulesdkpreview/azure-ml-component). For CLI, we only provide preview version. We recommend customer to use same version of CLI & SDK to achieve consistent behavior.
+
+[SDK Changelog](https://componentsdk.z22.web.core.windows.net/CHANGELOG.html) contains the history of stable releases. Feature set of upcomming release will also be in this page. You can also find the preview version number of critical bugfix in this page.
+
+### Install component CLI
+
+Install the latest version of the component CLI AML extension, which includes the `az ml component` command group.
+
+```shell
+# Login
+az login -o none 
+
+# Uninstall any previously installed azure-cli-ml (the `az ml` commands)
+az extension remove -n azure-cli-ml 
+
+# Install remote version of azure-cli-ml (which includes `az ml component` commands)
+az extension add --source https://azuremlsdktestpypi.blob.core.windows.net/wheels/modulesdkpreview/azure_cli_ml-0.1.0.29211468-py3-none-any.whl --pip-extra-index-urls https://azuremlsdktestpypi.azureedge.net/modulesdkpreview --yes --verbose
+
+# Verify the version of the azure-cli-ml extension
+az extension list -o table
+```
+
+### Install component SDK
+
+Install the latest version of the Azure ML SDK including the APIs to work with _components_ and _pipelines_.
+
+We recommend first install dataset runtime to enable dataset registration in sample notebooks
+```powershell
+pip install azureml-dataset-runtime[fuse] --upgrade
+```
+
+As for component SDK, we have 3 choices to install: install the latest stable version, the latest preview version, or a specific version.
+
+```shell
+# Install the latest preview version: which has the latest bugfix
+pip install azure-ml-component[notebooks] --extra-index-url https://azuremlsdktestpypi.azureedge.net/modulesdkpreview --upgrade
+
+# Install the latest stable version
+# pip install azure-ml-component[notebooks] --upgrade
+
+# Install a specific version
+# pip install azure-ml-component[notebooks]==0.1.0.<SDK VERSION> --extra-index-url https://azuremlsdktestpypi.azureedge.net/modulesdkpreview
+
+```
+
+If you failed to setup CLI or SDK envionment, check our [FAQ](faq.html#setup-environment-common-issues) to get help.
+
+## Getting Started Samples
+
+Below are some samples to help you get started:
+
+* [Get started](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/get-started.ipynb) - This tutorial goes through how to create pipeline using the component SDK.
+* [Create azureml pipelines with sub pipelines](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/create-pipeline-with-subpipeline.ipynb) - Demonstrates how to constructruct azureml pipelines using sub pipelines.
+* [How to use component CLI](https://aka.ms/component-cli-walk-through)  - A quick walk through to the azure cli extension that manipulates the component.
+
+### Samples Repo
+
+There are more samples hosted in [DesignerPrivatePreviewFeatures](https://github.com/Azure/DesignerPrivatePreviewFeatures) github repo, which also covers preview features.
+
+Contact us if you have issue accessing these samples.

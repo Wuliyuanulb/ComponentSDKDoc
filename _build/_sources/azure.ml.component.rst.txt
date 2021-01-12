@@ -1,0 +1,51 @@
+azure\.ml\.component package
+============================
+
+.. automodule:: azure.ml.component
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    azure.ml.component.dsl
+
+Submodules
+----------
+
+azure\.ml\.component\.component module
+--------------------------------------
+
+.. automodule:: azure.ml.component.component
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+azure\.ml\.component\.pipeline module
+-------------------------------------
+
+.. automodule:: azure.ml.component.pipeline
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+azure\.ml\.component\.run module
+--------------------------------
+
+.. automodule:: azure.ml.component.run
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+azure\.ml\.component\.run\_settings module
+------------------------------------------
+
+.. automodule:: azure.ml.component.run_settings
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+

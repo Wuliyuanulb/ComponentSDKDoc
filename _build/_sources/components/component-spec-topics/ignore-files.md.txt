@@ -1,0 +1,52 @@
+# Ignore files when creating snapshot
+
+It is good to exclude some files (e.g.  `__pycache__`) when creating the component snapshot. Put an `.amlignore` or `.gitignore` file to to base folder of the component source folder to ignore the uneeded files. Refer to [the AzureML doc](https://docs.microsoft.com/en-us/azure/machine-learning/concept-azure-machine-learning-architecture#snapshots) for detailed introduction of `.amlignore`.
+
+## Shared .amlignore file
+
+Besides putting an `.amlignore` file in the base folder of each component, it is also supported to create a shared `.amlignore` file, and specify the path to the shared `.amlignore` file when creating the component.
+
+```bash
+az ml component create --file=path/to/component/spec.yaml --amlignore-file=path/to/shared/.amlignore
+```
+
+## Set a default shared .amlignore file
+
+Instead of specifiying the `--amlignore-file` to every component create command, it is also possible to set the default `.amlignore` file using the following command:
+
+```bash
+az configure --defaults component_amlignore_file=/path/to/shared/.amlignore
+```
+
+By this setting, the shared `.amlignore` will be automatically applied when creating components. The create command could be simplified to:
+
+```bash
+az ml component create --file=path/to/component/spec.yaml
+```
+
+> NOTE: use the following command to unset the default `.amlignore` file:
+>
+> ```bash
+> az configure --defaults component_amlignore_file=
+> ```
+
+## Ignore files in subdirectory
+
+Similar to [git ignore logic](https://git-scm.com/docs/gitignore), ignore file in subdirectory is also supported.
+Component CLI will look from each subdirectories up to code directory for ignore files.
+
+If we have the following project structure:
+```
+...
+src/
+    ...
+    .amlignore
+.amlignore
+```
+Both `.amlignore` and `src/.amlignore` works when building the component snapshot.
+
+## Sample component
+
+Refer to [here](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/code-snapshot) to see an example usage of .amlignore file.
+In `src/component_entry/component_sepc.yaml` we set `code` directory to `..`, so `src/` will be the project's root directory.
+Both `src/.amlignore` and `src/library1/.amlignore` works, see `src/.build` for whole built snapshot.

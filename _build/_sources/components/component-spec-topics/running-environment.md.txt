@@ -1,0 +1,18 @@
+# Environment
+
+There are several ways to set running environment of a component.
+
+The following sample components demonstrate the component running environment definition using:
+
+## Using conda
+
+* [Separate conda environment file](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-conda-file)
+* [Inlined conda environment definition](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-conda-inline)
+* [Inlined conda environemnt definition, with gpu support](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-conda-inline-gpu)
+
+## Using docker
+
+> NOTE: sample docker files could be found [here](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-sample-dockerfiles).
+
+* [Docker image](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-docker-cpu)
+* [Docker image, with gpu support](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-conda-inline-gpu)

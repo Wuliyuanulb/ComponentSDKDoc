@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Frequently Asked Questions &mdash; Component SDK beta documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'beta',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="SDK Reference" href="sdk_reference.html" />
+    <link rel="prev" title="Change Log" href="CHANGELOG.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Component SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#components-vs-pipeline-steps">Components vs Pipeline Steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#components-vs-designer-execute-python-script-component">Components vs Designer Execute Python Script component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setup-environment-common-issues">Setup environment common issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#importerror-cannot-import-name-xxx-from-azureml-xx">ImportError: cannot import name xxx from azureml.xx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commandnotfounderror-component-module-is-misspelled-or-not-recognized-by-the-system">CommandNotFoundError: &#8216;component/module&#8216; is misspelled or not recognized by the system</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-wait-for-completion-visualization-does-not-update-run-status">Run.wait_for_completion visualization does not update run status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#notimplementederror-unsupported-linux-distribution-ubuntu-20-04">NotImplementedError: Unsupported Linux distribution ubuntu 20.04</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sdk_reference.html">SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="links.html">Useful Links</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Component SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Frequently Asked Questions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/faq.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="frequently-asked-questions">
+<h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="components-vs-pipeline-steps">
+<h2>Components vs Pipeline Steps<a class="headerlink" href="#components-vs-pipeline-steps" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://docs.microsoft.com/en-us/azure/machine-learning/concept-ml-pipelines">Azure Machine Learning pipelines</a> can help organizations automate machine learning workflows by using the <a class="reference external" href="https://docs.microsoft.com/en-us/python/api/azureml-pipeline-core/azureml.pipeline.core.builder.pipelinestep?view=azure-ml-py">PipelineStep</a> class. Components are similar, but break down pipelines further to make individual sections of code testable components instead of an entire pipeline.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th></th>
+<th>Pipeline steps</th>
+<th>Components</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CI/CD process support</td>
+<td>Create components from local files only</td>
+<td>Create components from GitHub public repo, Azure DevOps artifacs, or local files</td>
+</tr>
+<tr>
+<td>Reuse across pipelines</td>
+<td>Not supported</td>
+<td>Supported</td>
+</tr>
+<tr>
+<td>Version management</td>
+<td>Not supported</td>
+<td>Supported - manage with <a href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-component-cli.ipynb">Azure Command Line Interface (CLI)</a></td>
+</tr>
+<tr>
+<td>Supported workflows</td>
+<td>SDK only</td>
+<td>SDK <strong>- and -</strong> <a href="https://docs.microsoft.com/azure/machine-learning/concept-designer">designer</a></td>
+</tr>
+</tbody>
+</table></div>
+<div class="section" id="components-vs-designer-execute-python-script-component">
+<h2>Components vs Designer Execute Python Script component<a class="headerlink" href="#components-vs-designer-execute-python-script-component" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://docs.microsoft.com/en-us/azure/machine-learning/algorithm-module-reference/execute-python-script">Azure Machine Learning Designer execute python script components</a> is a great way to customize Designer with your own code. It only spans across Designer and has certain limitations in the input and output formats. Components are more programmatic friendly and can be versioned</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th></th>
+<th>Designer Execute Python</th>
+<th>Components</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Domain scope</td>
+<td>Designer only</td>
+<td>All across AzureML including Designer, SDK pipelines, CLI etc</td>
+</tr>
+<tr>
+<td>Reuse across pipelines and workspaces</td>
+<td>Not supported</td>
+<td>Supported</td>
+</tr>
+<tr>
+<td>Version management</td>
+<td>Not supported</td>
+<td>Supported - manage with <a href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-component-cli.ipynb">Azure Command Line Interface (CLI)</a></td>
+</tr>
+<tr>
+<td>Programatic provisioning</td>
+<td>No, created from designer only</td>
+<td>Yes (SDK and CLI)</td>
+</tr>
+<tr>
+<td>Extensibility with libraries</td>
+<td>Yes, with pip</td>
+<td>Yes, with AzureML environments</td>
+</tr>
+</tbody>
+</table></div>
+<div class="section" id="setup-environment-common-issues">
+<h2>Setup environment common issues<a class="headerlink" href="#setup-environment-common-issues" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="importerror-cannot-import-name-xxx-from-azureml-xx">
+<h3>ImportError: cannot import name xxx from azureml.xx<a class="headerlink" href="#importerror-cannot-import-name-xxx-from-azureml-xx" title="Permalink to this headline">¶</a></h3>
+<p>Take the following exception as an example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;stdin&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+  <span class="n">File</span> <span class="s2">&quot;C:\Users\wanhan\Anaconda3\envs</span><span class="se">\t</span><span class="s2">emp\lib\site-packages</span><span class="se">\a</span><span class="s2">zure\ml\component\__init__.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">17</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="kn">from</span> <span class="nn">.component</span> <span class="kn">import</span> <span class="n">Component</span>
+  <span class="n">File</span> <span class="s2">&quot;C:\Users\wanhan\Anaconda3\envs</span><span class="se">\t</span><span class="s2">emp\lib\site-packages</span><span class="se">\a</span><span class="s2">zure\ml\component\component.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">28</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="kn">from</span> <span class="nn">azure.ml.component._api._api</span> <span class="kn">import</span> <span class="n">_dto_2_definition</span>
+  <span class="n">File</span> <span class="s2">&quot;C:\Users\wanhan\Anaconda3\envs</span><span class="se">\t</span><span class="s2">emp\lib\site-packages</span><span class="se">\a</span><span class="s2">zure\ml\component\_api\_api.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">12</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="kn">from</span> <span class="nn">azure.ml.component._api._snapshots_client</span> <span class="kn">import</span> <span class="n">SnapshotsClient</span>
+  <span class="n">File</span> <span class="s2">&quot;C:\Users\wanhan\Anaconda3\envs</span><span class="se">\t</span><span class="s2">emp\lib\site-packages</span><span class="se">\a</span><span class="s2">zure\ml\component\_api\_snapshots_client.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">9</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="kn">from</span> <span class="nn">azureml._restclient.constants</span> <span class="kn">import</span> <span class="n">SNAPSHOT_MAX_FILES</span><span class="p">,</span> <span class="n">SNAPSHOT_BATCH_SIZE</span>
+<span class="ne">ImportError</span><span class="p">:</span> <span class="n">cannot</span> <span class="kn">import</span> <span class="nn">name</span> <span class="s1">&#39;SNAPSHOT_MAX_FILES&#39;</span>
+</pre></div>
+</div>
+<p>That&#8216;s because we rely on newer version of <code class="docutils literal"><span class="pre">azureml-core</span></code>, run the following command to fix the error.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">azureml</span><span class="o">-</span><span class="n">core</span><span class="o">&gt;</span><span class="mf">1.17</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="commandnotfounderror-component-module-is-misspelled-or-not-recognized-by-the-system">
+<h3>CommandNotFoundError: &#8216;component/module&#8216; is misspelled or not recognized by the system<a class="headerlink" href="#commandnotfounderror-component-module-is-misspelled-or-not-recognized-by-the-system" title="Permalink to this headline">¶</a></h3>
+<p>That&#8216;s because you are using an older version of azure CLI.
+Run <code class="docutils literal"><span class="pre">az</span> <span class="pre">upgrade</span></code> to update it.</p>
+<p>If &#8220;upgrade&#8220; is not found in &#8220;az&#8220; command group, you may need to <a class="reference external" href="https://aka.ms/azure-cli">reinstall</a> it.</p>
+</div>
+<div class="section" id="run-wait-for-completion-visualization-does-not-update-run-status">
+<h3>Run.wait_for_completion visualization does not update run status<a class="headerlink" href="#run-wait-for-completion-visualization-does-not-update-run-status" title="Permalink to this headline">¶</a></h3>
+<p>In browser F12 window, there is <code class="docutils literal"><span class="pre">Couldn't</span> <span class="pre">process</span> <span class="pre">kernel</span> <span class="pre">message</span></code> error in Console log. WrappedError message will be like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Error</span><span class="p">:</span> <span class="n">Class</span> <span class="n">jupyter</span><span class="o">.</span><span class="n">widget</span> <span class="ow">not</span> <span class="n">found</span> <span class="ow">in</span> <span class="n">registry</span> <span class="n">at</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">xxx</span>
+</pre></div>
+</div>
+<p>This is because ipywidgets not correctly enabled in jupyter extension when using pip to install. Reinstall using conda will solve this issue. See <a class="reference external" href="https://ipywidgets.readthedocs.io/en/latest/user_install.html">more details here</a>.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">ipywidgets</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="notimplementederror-unsupported-linux-distribution-ubuntu-20-04">
+<h3>NotImplementedError: Unsupported Linux distribution ubuntu 20.04<a class="headerlink" href="#notimplementederror-unsupported-linux-distribution-ubuntu-20-04" title="Permalink to this headline">¶</a></h3>
+<p>Take the following exception as an example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>  <span class="n">File</span> <span class="s2">&quot;/home/miniconda3/envs/scpilot000rc7/lib/python3.7/site-packages/azureml/dataprep/api/_datastore_helper.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">143</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_set_auth_type</span>
+    <span class="n">get_engine_api</span><span class="p">()</span><span class="o">.</span><span class="n">set_aml_auth</span><span class="p">(</span><span class="n">SetAmlAuthMessageArgument</span><span class="p">(</span><span class="n">AuthType</span><span class="o">.</span><span class="n">DERIVED</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">auth</span><span class="p">)))</span>
+  <span class="n">File</span> <span class="s2">&quot;/home/miniconda3/envs/scpilot000rc7/lib/python3.7/site-packages/azureml/dataprep/api/engineapi/api.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">19</span><span class="p">,</span> <span class="ow">in</span> <span class="n">get_engine_api</span>
+    <span class="n">_engine_api</span> <span class="o">=</span> <span class="n">EngineAPI</span><span class="p">()</span>
+  <span class="n">File</span> <span class="s2">&quot;/home/miniconda3/envs/scpilot000rc7/lib/python3.7/site-packages/azureml/dataprep/api/engineapi/api.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">65</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__init__</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_message_channel</span> <span class="o">=</span> <span class="n">launch_engine</span><span class="p">()</span>
+  <span class="n">File</span> <span class="s2">&quot;/home/miniconda3/envs/scpilot000rc7/lib/python3.7/site-packages/azureml/dataprep/api/engineapi/engine.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">337</span><span class="p">,</span> <span class="ow">in</span> <span class="n">launch_engine</span>
+    <span class="n">dependencies_path</span> <span class="o">=</span> <span class="n">runtime</span><span class="o">.</span><span class="n">ensure_dependencies</span><span class="p">()</span>
+  <span class="n">File</span> <span class="s2">&quot;/home/miniconda3/envs/scpilot000rc7/lib/python3.7/site-packages/dotnetcore2/runtime.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">276</span><span class="p">,</span> <span class="ow">in</span> <span class="n">ensure_dependencies</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">attempt_get_deps</span><span class="p">():</span>
+  <span class="n">File</span> <span class="s2">&quot;/home/miniconda3/envs/scpilot000rc7/lib/python3.7/site-packages/dotnetcore2/runtime.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">270</span><span class="p">,</span> <span class="ow">in</span> <span class="n">attempt_get_deps</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">err_msg</span><span class="p">)</span>
+<span class="ne">NotImplementedError</span><span class="p">:</span> <span class="n">Unsupported</span> <span class="n">Linux</span> <span class="n">distribution</span> <span class="n">ubuntu</span> <span class="mf">20.04</span>
+</pre></div>
+</div>
+<p>If raising a NotImplementedError contains unsupported ubuntu 20.04, when execute some operations of azure-ml-component in Ubuntu 20.04. It means cannot find required dependencies for .NET Core in current environment.
+You need to follow the <a class="reference external" href="https://docs.microsoft.com/en-us/dotnet/core/install/linux-ubuntu#2004-">guide</a> to install .NET Cores dependencies for Ubuntu 20.04.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sdk_reference.html" class="btn btn-neutral float-right" title="SDK Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="CHANGELOG.html" class="btn btn-neutral float-left" title="Change Log" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, microsoft
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

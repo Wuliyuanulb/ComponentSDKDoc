@@ -1,0 +1,284 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Component &mdash; Component SDK beta documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'beta',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pipeline" href="pipeline.html" />
+    <link rel="prev" title="Concepts" href="../concepts.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Component SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../concepts.html">Concepts</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Component</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#component-specification">Component specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-s-the-benefit-of-component">What&#8216;s the benefit of component?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#next-steps">Next steps</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#consume-existing-components">Consume existing components</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline_parameter.html">PipelineParameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="runsettings.html">RunSettings</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk_reference.html">SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../links.html">Useful Links</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Component SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../concepts.html">Concepts</a> &raquo;</li>
+        
+      <li>Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/concepts/component.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="component">
+<h1>Component<a class="headerlink" href="#component" title="Permalink to this headline">¶</a></h1>
+<p>A component is self-contained set of code that performs one step in the ML workflow (pipeline), such as data preprocessing, model training, model scoring and so on. A component is analogous to a function, in that it has a name, parameters, expects certain input and returns some value.</p>
+<p>Data scientists or developers can wrap their arbitrary code as Azure Machine Learning component by following the component specification .</p>
+<div class="section" id="component-specification">
+<h2>Component specification<a class="headerlink" href="#component-specification" title="Permalink to this headline">¶</a></h2>
+<p>A component specification in YAML format describes the component in the Azure Machine Learning system. A component definition captures the following information:</p>
+<ul class="simple">
+<li><strong>Metadata:</strong> name, display_name, version, type, etc.</li>
+<li><strong>Interface:</strong>: input/output specifications (name, type, description, default value, etc).</li>
+<li><strong>Command, Code &amp; Envrionment:</strong>: command, code and environment required to run the component.</li>
+</ul>
+<p>Refer to <a class="reference internal" href="../components/component-spec-definition.html"><span class="doc">component spec definition</span></a> for more details.</p>
+</div>
+<div class="section" id="what-s-the-benefit-of-component">
+<h2>What&#8216;s the benefit of component?<a class="headerlink" href="#what-s-the-benefit-of-component" title="Permalink to this headline">¶</a></h2>
+<p>Currently Azure Machine Learning offers PipelineStep as the basic building block of machine learning pipeline. PipelineStep is one-off wrap of code that cannot be reused across different pipelines. Compare to PipelineStep, component greatly simplifies the ML pipeline develpoment lifecycle, enables reproducibility and accelerates the collaboration for all-skill data scientists in a team:</p>
+<ul class="simple">
+<li><strong>Composability:</strong> This is the native benefit of component. It hides the complicated logic, and only exposes simple interface. So component consumers don&#8216;t need to worry about underlying implementation. They can easily use components built by themselves or by others. In the meanwhile the ground truth (component specification) of a component is visible, making secondary development easy.</li>
+<li><strong>Reusability:</strong> Component can be easily reused across different ML pipelines, different ML workspaces, even different organizations.</li>
+<li><strong>Easy development, testing &amp; debug:</strong> Rich SDK and CLI features to make component development, testing and debug much easier.</li>
+<li><strong>Easy pipeline authoring:</strong> Once a component is createed in the workspace, it can be easily consumed in both Python Python SDK and drag-and-drop Designer UI.</li>
+<li><strong>Reproducibility:</strong> By capturing all information in component specification, AML Component can be easily reproduced in different environments. Components can be managed in versions so it&#8216;s easy to trace back if a data scientist wants to reproduce a specific experiment result.</li>
+<li><strong>Sharing &amp; collaboration:</strong> Data scientists who prefer low-code/no-code can use Designer UI to quickly prototype and export the pipeline to Python code for code-first data scientists for further tuning or check in. The exported Python notebook can also be submitted to different workspaces for sharing &amp; collaboration.</li>
+</ul>
+</div>
+<div class="section" id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getting-started">
+<h3>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h3>
+<p>Follow <a class="reference internal" href="../getting_started.html"><span class="doc">getting started tutorial</span></a> to learn how to build a pipeline with existing components.</p>
+</div>
+<div class="section" id="consume-existing-components">
+<h3>Consume existing components<a class="headerlink" href="#consume-existing-components" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://github.com/Azure/AzureMachineLearningGallery">Component gallery</a> is an open community for data scientists to contribute, share, and find machine learning pipelines as well as custom-built components to be used in Azure Machine Learning. It has more that 50 components for common machine learning tasks. Source code of all components can be found in the gallery.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pipeline.html" class="btn btn-neutral float-right" title="Pipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../concepts.html" class="btn btn-neutral float-left" title="Concepts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, microsoft
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

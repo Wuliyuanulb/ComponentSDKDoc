@@ -1,0 +1,83 @@
+# Parallel Component
+
+## Overivew
+ParallelComponent is a kind of component to run [ParallelRunStep](https://docs.microsoft.com/en-us/python/api/azureml-pipeline-steps/azureml.pipeline.steps.parallelrunstep?view=azure-ml-py#constructor)
+
+### scenarios
+TODO: Describe what's the target scenarios for this Component.
+
+### limitation
+TODO: Describe what's the limitation.
+
+## How to write ParallelComponent yaml spec
+
+Please refer to [ParallelComponent spec doc](./component-spec-definition.html#parallel).
+
+Please refer to [ParallelComponent Schema](https://componentsdk.blob.core.windows.net/jsonschema/ParallelComponent.json).
+
+Example yaml:
+```yaml
+$schema: http://azureml/sdk-1-5/ParallelComponent.json
+name: microsoft.com.azureml.samples.parallel_score_image
+version: 0.0.1
+display_name: Parallel Score Image Classification Model
+type: ParallelComponent
+description: Score images with trained image classification model.
+
+inputs:
+  trained_model:
+    type: path
+    description: Trained image classification model.
+    optional: false
+  images_to_score:
+    type: path
+    description: Images to score.
+    optional: false
+outputs:
+  scored_dataset:
+    type: path
+    description: Scored dataframes stored in parquet files.
+
+environment:
+  docker:
+    image: mcr.microsoft.com/azureml/base-gpu:openmpi3.1.2-cuda10.0-cudnn7-ubuntu18.04
+  conda:
+    conda_dependencies:
+      name: project_environment
+      channels:
+      - defaults
+      dependencies:
+      - psutil
+      - python=3.6.8
+      - pip:
+        - torch
+        - torchvision
+        # The following dependencies are used for parallel run driver.
+        - azureml-defaults
+        - azureml-dataprep>=1.6
+  os: Linux
+
+parallel:
+  input_data: inputs.images_to_score
+  output_data: outputs.scored_dataset
+  entry: mnist/score_parallel.py
+  args: >-
+    --model-input {inputs.trained_model} --data-output {outputs.scored_dataset}
+```
+
+See [more examples in github samples repo](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/components/mnist-mpi-train-parallel-score/parallel_score.yaml).
+
+## Samples
+
+* [How to use parallel component](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-parallel-component.ipynb) - Demostrates how to use parallel component for batch inference.
+
+## Appendix
+
+In legacy module concept, this maps to `basic` jobType Module.
+
+- legacy [module sepc doc](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/azureml-pipeline-wrapper/azureml-modules/docs/module-spec-definition.md#parallel)
+
+- legacy [example module yaml](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/azureml-pipeline-wrapper/azureml-modules/samples/modules/parallel-score-mnist/module_spec.yaml)
+ 
+
+

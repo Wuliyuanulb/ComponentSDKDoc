@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Inputs and outputs &mdash; Component SDK beta documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'beta',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Environment" href="running-environment.html" />
+    <link rel="prev" title="Component spec advanced topics" href="../component-spec-topics.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Component SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts.html">Concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../components.html">Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../component-spec-definition.html">Definition of component spec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../component-spec-topics.html">Component spec advanced topics</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Inputs and outputs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#optional-inputs-and-parameters">Optional Inputs and Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-component">Sample component</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="running-environment.html">Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="additional-includes.html">Additional includes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="code-snapshot.html">Code snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="component-build.html">Component build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ignore-files.html">Ignore files when creating snapshot</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../command_component.html">Command Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../parallel_component.html">Parallel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hdi_component.html">HDInsight Component</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk_reference.html">SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../links.html">Useful Links</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Component SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../components.html">Components</a> &raquo;</li>
+        
+          <li><a href="../component-spec-topics.html">Component spec advanced topics</a> &raquo;</li>
+        
+      <li>Inputs and outputs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/components/component-spec-topics/inputs-and-outputs.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="inputs-and-outputs">
+<h1>Inputs and outputs<a class="headerlink" href="#inputs-and-outputs" title="Permalink to this headline">¶</a></h1>
+<p>The component could have inputs and outputs.</p>
+<p>An input could either be an <em>Input Port</em> or a <em>Parameter</em>. Output could only be an <em>Output Port</em>.</p>
+<p>Input ports and output ports typically refers to a path. In Designer, they will be displayed as a <em>port</em> on the component. They could be have arbitrary type names such as <code class="docutils literal"><span class="pre">CsvFile</span></code>, <code class="docutils literal"><span class="pre">ImageFolder</span></code> to describe the underlying data. A component&#8216;s output port could be connected to another component&#8216;s input port, given they have the same type name.</p>
+<p>Parameters are input values passed to the component while executing. In Designer, they are displayed on the right panel of the component. Parameter could only have scalar values such as <code class="docutils literal"><span class="pre">Integer</span></code>, <code class="docutils literal"><span class="pre">String</span></code>, <code class="docutils literal"><span class="pre">Boolean</span></code>, <code class="docutils literal"><span class="pre">Enum</span></code>. Each parameter could have additional attributes such as <code class="docutils literal"><span class="pre">default</span></code>, <code class="docutils literal"><span class="pre">min</span></code>, <code class="docutils literal"><span class="pre">max</span></code>, etc.</p>
+<p>Refer to <a class="reference internal" href="../component-spec-definition.html"><span class="doc">the component spec</span></a> for full description.</p>
+<p>To define component inputs and outputs:</p>
+<ul class="simple">
+<li>Add <code class="docutils literal"><span class="pre">inputs</span></code> and <code class="docutils literal"><span class="pre">outputs</span></code> section to the component spec to specify the component interface.</li>
+<li>Add reference to the inputs and outputs in <code class="docutils literal"><span class="pre">command</span></code> section. A reference looks like <code class="docutils literal"><span class="pre">{inputs.name_of_parameter}</span></code>, which will be replaced by the value of the parameter when invoking the component.</li>
+</ul>
+<div class="section" id="optional-inputs-and-parameters">
+<h2>Optional Inputs and Parameters<a class="headerlink" href="#optional-inputs-and-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Use <code class="docutils literal"><span class="pre">optional</span></code> to make an input port or a parameter optional.
+In the snippet bellow, two input ports and the parameter &#8220;Optional string parameter&#8220; are optional.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">inputs</span><span class="p">:</span>
+  <span class="nt">input_path</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">path</span>
+    <span class="nt">optional</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">optional_input_path</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">path</span>
+    <span class="nt">optional</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+  <span class="nt">string_parameter</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">String</span>
+    <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">string value</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">A parameter accepts a string value.</span>
+  <span class="nt">optional_string_parameter</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">String</span>
+    <span class="nt">optional</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">A optional parameter accepts a string value.</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal"><span class="pre">command</span></code> part, put optional parameter into []:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">command</span><span class="p">:</span> <span class="p p-Indicator">&gt;-</span>
+  <span class="no">python optional_input.py</span>
+    <span class="no">--input-path  {inputs.input_path},</span>
+    <span class="no">[--optional-input-path, {inputs.optional_input_path}],</span>
+    <span class="no">--string-param, {inputs.string_parameter},</span>
+    <span class="no">[--optional-string-param, {inputs.optional_string_parameter}]</span>
+</pre></div>
+</div>
+<p>When invoking the component, the command line will look like:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># When the optional input is linked, and the optional parameter is set.</span>
+python optional_input.py --input-path /aaa/bbb --optional-input-path /xxx/yyy --string-param abc --optional-string-param def
+
+<span class="c1"># When the optional input is linked, and the optional parameter is not set.</span>
+python optional_input.py --input-path /aaa/bbb --optional-input-path /xxx/yyy --string-param abc
+
+<span class="c1"># When the optional input is not linked, and the optional parameter is set.</span>
+python optional_input.py --input-path /aaa/bbb --string-param abc --optional-string-param def
+
+<span class="c1"># When the optional input is not linked, and the optional parameter is not set.</span>
+python optional_input.py --input-path /aaa/bbb --string-param abc
+</pre></div>
+</div>
+</div>
+<div class="section" id="sample-component">
+<h2>Sample component<a class="headerlink" href="#sample-component" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/inputs-and-outputs">A component with optional inputs and parameters</a></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="running-environment.html" class="btn btn-neutral float-right" title="Environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../component-spec-topics.html" class="btn btn-neutral float-left" title="Component spec advanced topics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, microsoft
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

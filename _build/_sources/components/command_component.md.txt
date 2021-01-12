@@ -1,0 +1,77 @@
+# Command Component
+
+## Overivew
+A CommandComponent is a Component that executes a command in a docker container.
+
+### scenarios
+TODO: Describe what's the target scenarios for this Component.
+
+### limitation
+TODO: Describe what's the limitation.
+
+## How to write CommandComponent yaml spec
+
+Please refer to [CommandComponent spec doc](./component-spec-definition.html#command).
+
+Please refer to [CommandComponent Schema](https://componentsdk.blob.core.windows.net/jsonschema/CommandComponent.json).
+
+Example yaml:
+```yaml
+$schema: http://azureml/sdk-2-0/CommandComponent.json
+name: microsoft.com.azureml.samples.train
+version: 0.0.4
+display_name: Train
+type: CommandComponent
+description: A dummy training module
+tags: {category: Component Tutorial, contact: amldesigner@microsoft.com}
+inputs:
+  training_data:
+    type: path
+    description: Training data organized in the torchvision format/structure
+    optional: false
+  max_epochs:
+    type: Integer
+    description: Maximum number of epochs for the training
+    optional: false
+  learning_rate:
+    type: Float
+    description: Learning rate, default is 0.01
+    default: 0.01
+    optional: false
+outputs:
+  model_output:
+    type: path
+    description: The output model
+command: >-
+  python train.py --training_data {inputs.training_data} --max_epochs {inputs.max_epochs}
+  --learning_rate {inputs.learning_rate} --model_output {outputs.model_output}
+environment:
+  conda:
+    conda_dependencies:
+      name: project_environment
+      channels:
+      - defaults
+      dependencies:
+      - python=3.6.8
+      - pip=20.0
+      - pip:
+        - azureml-defaults
+        - azureml-dataprep>=1.6
+  os: Linux
+```
+
+See [more examples in github samples repo](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/components/get-started-train/train.yaml).
+
+## Samples
+
+* [How to use command component](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-command-component.ipynb) - Demostrates how to create pipeline with command components in windows/linux platform.
+* [How to use r command component](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-r-command-component.ipynb) - Demostrates how to create pipeline with your own R code and built-in components.
+
+## Appendix
+
+In legacy module concept, this maps to `basic` jobType Module.
+
+- legacy [module sepc doc](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/azureml-pipeline-wrapper/azureml-modules/docs/module-spec-definition.md#container)
+
+- legacy [example module yaml](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/azureml-pipeline-wrapper/azureml-modules/samples/modules/get-started-train/train.yaml)
+

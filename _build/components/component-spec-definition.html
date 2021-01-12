@@ -1,0 +1,919 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Definition of component spec &mdash; Component SDK beta documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'beta',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How to use component spec schema in vscode" href="use-component-spec-schema-in-vscode.html" />
+    <link rel="prev" title="Components" href="../components.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Component SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../components.html">Components</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Definition of component spec</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#component-definition">Component Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#name">Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code">Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tags">Tags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#input">Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parameter">Parameter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output">Output</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#command">Command</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#yaml-string-format">Yaml String Format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cli-argument-place-holders">CLI Argument Place Holders</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notice">Notice</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#environment">Environment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dockersection">DockerSection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#condasection">CondaSection</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hdinsight-internal-only-for-now">HDInsight [internal only for now]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parallel">Parallel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data-types">Data Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#data-types-for-inputs-outputs">Data Types for Inputs/Outputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-types-for-parameters">Data Types for Parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="component-spec-topics.html">Component spec advanced topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_component.html">Command Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel_component.html">Parallel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hdi_component.html">HDInsight Component</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk_reference.html">SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../links.html">Useful Links</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Component SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../components.html">Components</a> &raquo;</li>
+        
+      <li>Definition of component spec</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/components/component-spec-definition.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="definition-of-component-spec">
+<h1>Definition of component spec<a class="headerlink" href="#definition-of-component-spec" title="Permalink to this headline">¶</a></h1>
+<p>This document describes the specification to define an AzureML component. The spec should be in YAML file format.</p>
+<div class="section" id="component-definition">
+<h2>Component Definition<a class="headerlink" href="#component-definition" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$schema</td>
+<td>String</td>
+<td>Yes</td>
+<td>Specify the version of the schema of spec. Example: http://azureml/sdk-2-0/CommandComponent.json</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Name of the component. Name will be unique identifier of the component.</td>
+</tr>
+<tr>
+<td>version</td>
+<td>String</td>
+<td>Yes</td>
+<td>Version of the component. Could be arbitrary text, but it is recommended to follow the <a href="https://semver.org/">Semantic Versioning</a> specification.</td>
+</tr>
+<tr>
+<td>display_name</td>
+<td>String</td>
+<td>No</td>
+<td>Display name of the component. Defaults to same as name.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>No</td>
+<td>Defines type of the Component. Could be <code>CommandComponent</code>, <code>ParallelComponent</code>, etc.. Defaults to <code>CommandComponent</code> if not specified.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>No</td>
+<td>Detailed description of the Component.</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>Dictionary<String></td>
+<td>No</td>
+<td>A list of key-value pairs to describe the different perspectives of the component. Each tag's key and value should be one word or a short phrase, e.g. <code>Product:Office</code>, <code>Domain:NLP</code>, <code>Scenario:Image Classification</code>.</td>
+</tr>
+<tr>
+<td>is_deterministic</td>
+<td>Boolean</td>
+<td>No</td>
+<td>Specify whether the component will always generate the same result when given the same input data. Defaults to <code>True</code> if not specified. Typically for components which will load data from external resources, e.g. Import data from a given url, should set to <code>False</code> since the data to where the url points to may be updated.</td>
+</tr>
+<tr>
+<td>inputs</td>
+<td>Dictionary &lt; String, <a href="#input">Input</a> or <a href="#parameter">Parameter</a> &gt;</td>
+<td>No</td>
+<td>Defines input ports and parameters of the component. The string key is the name of Input/Parameter, which should be a valid python variable name.</td>
+</tr>
+<tr>
+<td>outputs</td>
+<td>Dictionary &lt; String, <a href="#output">Output</a> &gt;</td>
+<td>No</td>
+<td>Defines output ports of the component. The string key is the name of Output, which should be a valid python variable name.</td>
+</tr>
+<tr>
+<td>code</td>
+<td>String</td>
+<td>No</td>
+<td>Location of the <a href="#code">Code</a> snapshot.</td>
+</tr>
+<tr>
+<td>environment</td>
+<td><a href="#environment">Environment</a></td>
+<td>No</td>
+<td>An Environment defines the runtime environment for the component to run. Refer to <a href="component-spec-topics/running-environment.md">here</a> for details.</td>
+</tr>
+<tr>
+<td>command</td>
+<td>String</td>
+<td>No</td>
+<td>Specify the command to start to run the component code.</td>
+</tr>
+<tr>
+<td>parallel</td>
+<td><a href="#parallel">Parallel</a></td>
+<td>No</td>
+<td>Settings for <code>ParallelComponent</code> only. Refer to <a href="#parallel">here</a> for details.</td>
+</tr>
+<tr>
+<td>hdinsight</td>
+<td><a href="#hdinsight-internal-only-for-now">HDInsight</a></td>
+<td>No</td>
+<td>Settings for <code>HDInsightComponent</code> only. Refer to <a href="#hdinsight-internal-only-for-now">here</a> for details.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="section" id="name">
+<h2>Name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h2>
+<p>Our recommendation to the component name will be something like <code class="docutils literal"><span class="pre">company</span></code>.<code class="docutils literal"><span class="pre">team</span></code>.<code class="docutils literal"><span class="pre">name-of-component</span></code>.
+Current constraint for name: only accept letters, numbers and -._</p>
+<p>Sample names:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">microsoft</span><span class="o">.</span><span class="n">office</span><span class="o">.</span><span class="n">smart</span><span class="o">-</span><span class="n">compose</span>
+<span class="n">my</span><span class="o">-</span><span class="n">awesome</span><span class="o">-</span><span class="n">components</span><span class="o">.</span><span class="n">ner</span><span class="o">-</span><span class="n">bert</span>
+</pre></div>
+</div>
+<p>Builtin component name will be prefixed with <code class="docutils literal"><span class="pre">azureml://</span></code>.</p>
+<p>Sample names:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">azureml</span><span class="p">:</span><span class="o">//</span><span class="n">Select</span> <span class="n">Columns</span> <span class="ow">in</span> <span class="n">Dataset</span>
+</pre></div>
+</div>
+<p>Note:
+If you have a legacy module, you can load it using Component.load(name=&#8220;{namespace}://{name}).</p>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>
+<p>Please note if you write markdown in description, our portal UX will display a nicely formatted description.
+For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">description</span><span class="p">:</span> <span class="o">|</span>
+  <span class="c1"># A dummy training module</span>
+  <span class="o">-</span> <span class="nb">list</span> <span class="mi">1</span>
+  <span class="o">-</span> <span class="nb">list</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>The above example use <em><strong>literal</strong></em> style with the indicator <code class="docutils literal"><span class="pre">|</span></code> to write multil-line in yaml.</p>
+<p>See <a class="reference external" href="https://yaml-multiline.info/">reference</a> for more details of the yaml multi-line format.</p>
+</div>
+<div class="section" id="code">
+<h2>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<p>A code snapshot can be expressed as one of 3 things:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>  <span class="mf">1.</span> <span class="n">a</span> <span class="n">local</span> <span class="n">file</span> <span class="n">path</span> <span class="n">relative</span> <span class="n">to</span> <span class="n">the</span> <span class="n">file</span> <span class="n">where</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">referenced</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="s1">&#39;../&#39;</span><span class="o">.</span> <span class="n">Register</span> <span class="n">Only</span> <span class="n">support</span> <span class="n">this</span> <span class="n">form</span> <span class="n">now</span><span class="o">.</span>
+  <span class="mf">2.</span> <span class="n">an</span> <span class="n">http</span> <span class="n">url</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="s1">&#39;http://github.com/foo/bar/dir#239870234080&#39;</span> <span class="p">[</span><span class="ow">not</span> <span class="n">ready</span> <span class="k">for</span> <span class="n">use</span><span class="p">]</span>
+  <span class="mf">3.</span> <span class="n">a</span> <span class="n">snapshot</span> <span class="nb">id</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">:</span> <span class="n">aml</span><span class="p">:</span><span class="o">//</span><span class="mi">6560575</span><span class="n">d</span><span class="o">-</span><span class="n">fa06</span><span class="o">-</span><span class="mf">4e7</span><span class="n">d</span><span class="o">-</span><span class="mi">95</span><span class="n">fb</span><span class="o">-</span><span class="n">f962e74efd7a</span><span class="o">/</span><span class="n">azml</span><span class="o">-</span><span class="n">rg</span><span class="o">/</span><span class="n">sandbox</span><span class="o">-</span><span class="n">ws</span><span class="o">/</span><span class="n">snapshots</span><span class="o">/</span><span class="mi">293</span><span class="n">lkw0j23fw8cv</span><span class="o">.</span> <span class="p">[</span><span class="ow">not</span> <span class="n">ready</span> <span class="k">for</span> <span class="n">use</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="component-spec-topics/code-snapshot.html"><span class="doc">reference</span></a> for more details of code snapshot.</p>
+</div>
+<div class="section" id="tags">
+<h2>Tags<a class="headerlink" href="#tags" title="Permalink to this headline">¶</a></h2>
+<p>Some convention tags used by azure-ml-component package. Refer to <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/components/get-started-train/train.yaml">get-started-train</a>
+and <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/components/get-started-score/score.yaml">get-started-score</a> for more details.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>codegenBy</td>
+<td>String</td>
+<td>No</td>
+<td>The component spec might be generated by some automation tool. Set the tool name into this field. e.g. <code>dsl.component</code></td>
+</tr>
+<tr>
+<td>contact</td>
+<td>String</td>
+<td>No</td>
+<td>The contact info of the component's author. Typically contains user or organization's name and email. e.g. <code>AzureML Studio Team &lt;stcamlstudiosg@microsoft.com&gt;</code>.</td>
+</tr>
+<tr>
+<td>helpDocument</td>
+<td>String</td>
+<td>No</td>
+<td>The url of the component's documentation. The url is shown as a link on AzureML Designer's page.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="section" id="input">
+<h2>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h2>
+<p>Defines an input port of the component. Refer to <a class="reference internal" href="component-spec-topics/inputs-and-outputs.html"><span class="doc">here</span></a> for details.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>String or  List<String></td>
+<td>Yes</td>
+<td>Defines the data type(s) of this input port. Refer to <a href="#data-types-for-inputs/outputs">Data Types for Inputs/Outputs</a> for details.</td>
+</tr>
+<tr>
+<td>display_name</td>
+<td>String</td>
+<td>No</td>
+<td>Display name of the input port.</td>
+</tr>
+<tr>
+<td>optional</td>
+<td>Boolean</td>
+<td>No</td>
+<td>Indicates whether this input is an optional port. Defaults to <code>False</code> if not specified.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>No</td>
+<td>Detailed description to the input port.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="section" id="parameter">
+<h2>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h2>
+<p>Defines a parameter of the component. Refer to <a class="reference internal" href="component-spec-topics/inputs-and-outputs.html"><span class="doc">here</span></a> for details.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Yes</td>
+<td>Defines the type of this data. Refer to <a href="#data-types-for-parameters">Data Types for Parameters</a> for details.</td>
+</tr>
+<tr>
+<td>display_name</td>
+<td>String</td>
+<td>No</td>
+<td>Display name of the parameter.</td>
+</tr>
+<tr>
+<td>optional</td>
+<td>Boolean</td>
+<td>No</td>
+<td>Indicates whether this input is optional. Default value is <code>False</code>.</td>
+</tr>
+<tr>
+<td>default</td>
+<td>Dynamic</td>
+<td>No</td>
+<td>The default value for this parameter. The type of this value is dynamic. e.g. If <code>type</code> field in Input is <code>Integer</code>, this value should be <code>Inteter</code>. If <code>type</code> is <code>String</code>, this value should also be <code>String</code>. This field is optional, defaults to <code>null</code> or <code>None</code> if not specified.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>No</td>
+<td>Detailed description to the parameter.</td>
+</tr>
+<tr>
+<td>min</td>
+<td>Numeric</td>
+<td>No</td>
+<td>The minimum value that can be accepted. This field only takes effect when <code>type</code> is <code>Integer</code> or <code>Float</code>. Specify <code>Integer</code> or <code>Float</code> values accordingly.</td>
+</tr>
+<tr>
+<td>max</td>
+<td>Numeric</td>
+<td>No</td>
+<td>The maximum value that can be accepted. Similar to <code>min</code>.</td>
+</tr>
+<tr>
+<td>enum</td>
+<td>List</td>
+<td>No</td>
+<td>The acceptable values for the parameter. This field only takes effect when <code>type</code> is <code>Enum</code>.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="section" id="output">
+<h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h2>
+<p>Defines an output port of the component. Refer to <a class="reference internal" href="component-spec-topics/inputs-and-outputs.html"><span class="doc">here</span></a> for details.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Name of the output port. This field is used for program logic and cannot be duplicated with other inputs of the component.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Yes</td>
+<td>Defines the data type(s) of this output port. Refer to <a href="#data-types-for-inputs/outputs">Data Types for Inputs/Outputs</a> for details.</td>
+</tr>
+<tr>
+<td>display_name</td>
+<td>String</td>
+<td>No</td>
+<td>Display name of the parameter.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>No</td>
+<td>Detailed description to the output port.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="section" id="command">
+<h2>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
+<p>Command is a string which specify the command line to run the component.
+It is expected to be a <em><strong>one-line string</strong></em> in which the arguments are separated by spaces.
+The string will be split to a command list according to the shell split rule with the python built-in function <a class="reference external" href="https://docs.python.org/3/library/shlex.html">shlex.split</a>.</p>
+<p>Example:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">command</span><span class="p">:</span> <span class="p p-Indicator">&gt;-</span>
+  <span class="no">python basic_component.py</span>
+  <span class="no">--input_dir {inputs.input_dir}</span>
+  <span class="no">--str_param {inputs.str_param}</span>
+  <span class="no">--enum_param {inputs.enum_param}</span>
+  <span class="no">--output-eval-dir {outputs.output_dir}</span>
+</pre></div>
+</div>
+<div class="section" id="yaml-string-format">
+<h3>Yaml String Format<a class="headerlink" href="#yaml-string-format" title="Permalink to this headline">¶</a></h3>
+<p>In the yaml file, it is recommended to use the <em><strong>folded</strong></em> style with the indicator <code class="docutils literal"><span class="pre">&gt;-</span></code> to write a one-line string as multiple lines.</p>
+<p>If the <em><strong>literal</strong></em> style with the indicator <code class="docutils literal"><span class="pre">|</span></code> is used, the command will contain <code class="docutils literal"><span class="pre">\n</span></code>, which could be handled, but is not recommended.</p>
+<p>Unlike programming languages, yaml doesn&#8216;t use <code class="docutils literal"><span class="pre">\</span></code> to indicate an unfinished line but treats it as a normal character. A <code class="docutils literal"><span class="pre">\</span></code> at the end of one line is not recommended since it could not be recognized as an unfinished line in a yaml string.</p>
+<p>See <a class="reference external" href="https://yaml-multiline.info/">reference</a> for more details of the yaml multi-line format.</p>
+</div>
+<div class="section" id="cli-argument-place-holders">
+<h3>CLI Argument Place Holders<a class="headerlink" href="#cli-argument-place-holders" title="Permalink to this headline">¶</a></h3>
+<p>When invoking from a CLI interface, the arguments are specified with placeholders like <code class="docutils literal"><span class="pre">{inputs.input_dir}</span></code>. The placeholders will be replaced with the actual value when running.</p>
+<p>For example, when we set <code class="docutils literal"><span class="pre">input_dir='./input'</span></code>, the command <code class="docutils literal"><span class="pre">--input_dir</span> <span class="pre">{inputs.input_dir}</span></code> will be replaced as <code class="docutils literal"><span class="pre">--input_dir</span> <span class="pre">./input</span></code>.</p>
+<p>Placeholders are with this format: <code class="docutils literal"><span class="pre">inputs.input_name</span></code>/<code class="docutils literal"><span class="pre">outputs.output_name</span></code>.</p>
+</div>
+<div class="section" id="notice">
+<h3>Notice<a class="headerlink" href="#notice" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Currently there must be spaces on both sides of each placeholder, patterns like <code class="docutils literal"><span class="pre">{inputs.input_dir}/output.txt</span></code>, <code class="docutils literal"><span class="pre">&quot;{inputs.input_dir}&quot;</span></code> are not supported;</li>
+<li>The command should follow the command line constraint on the corresponding OS, in a linux compute, it should follow <a class="reference external" href="https://pubs.opengroup.org/onlinepubs/009604499/utilities/xcu_chap02.html">Shell Command Language</a>, in a windows compute, it should follow <a class="reference external" href="https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc754340(v=ws.11)">Command-Line Reference</a>;</li>
+<li>Even the command doesn&#8216;t use python, the image or the conda must contain the dependency &#8220;azureml-defaults&#8220; to run the command;</li>
+</ul>
+</div>
+</div>
+<div class="section" id="environment">
+<h2>Environment<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h2>
+<p>An Environment defines the runtime environment for the component to run, it is equivalent with the definition of the <a class="reference external" href="https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.core.environment%28class%29?view=azure-ml-py">Environment class in python SDK</a>.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>docker</td>
+<td>DockerSection</td>
+<td>No</td>
+<td>This section configures settings related to the final Docker image built to the specifications of the environment and whether to use Docker containers to build the environment.</td>
+</tr>
+<tr>
+<td>conda</td>
+<td>CondaSection</td>
+<td>No</td>
+<td>This section specifies which Python environment and interpreter to use on the target compute.</td>
+</tr>
+<tr>
+<td>os</td>
+<td>String</td>
+<td>No</td>
+<td>Defines the operating system the component running on. Could be <code>windows</code> or <code>linux</code>. Defaults to <code>linux</code> if not specified.</td>
+</tr>
+</tbody>
+</table><div class="section" id="dockersection">
+<h3>DockerSection<a class="headerlink" href="#dockersection" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>image</td>
+<td>String</td>
+<td>No</td>
+<td>The base image used for Docker-based runs. Example value: "ubuntu:latest". If not specified, will use <code>mcr.microsoft.com/azureml/intelmpi2018.3-ubuntu16.04</code> by default.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="section" id="condasection">
+<h3>CondaSection<a class="headerlink" href="#condasection" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>conda_dependencies_file</td>
+<td>String</td>
+<td>No</td>
+<td>The path to the conda dependencies file to use for this run. If a project contains multiple programs with different sets of dependencies, it may be convenient to manage those environments with separate files. The default is None.</td>
+</tr>
+<tr>
+<td>conda_dependencies</td>
+<td>CondaDependencies</td>
+<td>No</td>
+<td>Same as <code>conda_dependencies_file</code>, but it is specifies the conda dependencies using an inline dictionary rather than a separated file.</td>
+</tr>
+<tr>
+<td>pip_requirements_file</td>
+<td>String</td>
+<td>No</td>
+<td>The path to the pip requirements file.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="section" id="hdinsight-internal-only-for-now">
+<h2>HDInsight [internal only for now]<a class="headerlink" href="#hdinsight-internal-only-for-now" title="Permalink to this headline">¶</a></h2>
+<p>This section is used only for HDInsight components.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>file</td>
+<td>String</td>
+<td>Yes</td>
+<td>File containing the application to execute, can be a python script or a jar file. It's the entry file of component. Specify a relative path to the code folder.</td>
+</tr>
+<tr>
+<td>files</td>
+<td>List<String></td>
+<td>No</td>
+<td>Files to be placed in the working directory of each HDI executor. Support local files (relative paths to the code folder), HDFS compatible file system URIs (like <code>wasbs://file</code>) and public URIs (like https://file).</td>
+</tr>
+<tr>
+<td>class_name</td>
+<td>String</td>
+<td>No</td>
+<td>Main class name when main file is a jar.</td>
+</tr>
+<tr>
+<td>jars</td>
+<td>List<String></td>
+<td>No</td>
+<td>Jar files to be included on the HDI driver and executor classpaths. Support local files (relative paths to the code folder), HDFS compatible file system URIs (like <code>wasbs://file</code>) and public URIs (like https://file).</td>
+</tr>
+<tr>
+<td>py_files</td>
+<td>List<String></td>
+<td>No</td>
+<td>List of .zip, .egg, or .py files to be placed on the PYTHONPATH for Python apps. Support local files (relative paths to the code folder), HDFS compatible file system URIs (like <code>wasbs://file</code>) and public URIs (like https://file).</td>
+</tr>
+<tr>
+<td>archives</td>
+<td>List<String></td>
+<td>No</td>
+<td>Archives to be extracted into the working directory of each HDI executor. Support local files (relative paths to the code folder), HDFS compatible file system URIs (like <code>wasbs://file</code>) and public URIs (like https://file).</td>
+</tr>
+<tr>
+<td>args</td>
+<td>String</td>
+<td>No</td>
+<td>Specify the arguments used along with <code>file</code>. This list may consist place holders of Inputs and Outputs. See <a href="#cli-argument-place-holders">CLI Argument Place Holders</a> for details.</td>
+</tr>
+</tbody>
+</table><blockquote>
+<div><p><strong>Note</strong></p>
+<p>HDInsight components only work on internal compliant HDI cluster created by Office team for now.</p>
+</div></blockquote>
+</div>
+<div class="section" id="parallel">
+<h2>Parallel<a class="headerlink" href="#parallel" title="Permalink to this headline">¶</a></h2>
+<p>This section is used only for parallel components.
+Parallel component is a kind of component to run <a class="reference external" href="https://docs.microsoft.com/en-us/python/api/azureml-pipeline-steps/azureml.pipeline.steps.parallelrunstep?view=azure-ml-py#constructor">ParallelRunStep</a>.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>input_data</td>
+<td>String or List<String></td>
+<td>Yes</td>
+<td>The input(s) provide the data to be split into mini_batches for parallel execution. Specify the name(s) of the corresponding input(s) here, note that the input(s) not in input_data are 'side_input' in ParallelRunStep concept.</td>
+</tr>
+<tr>
+<td>output_data</td>
+<td>String</td>
+<td>Yes</td>
+<td>The output for the summarized result that generated by the user script. Specify the name of the corresponding output here.</td>
+</tr>
+<tr>
+<td>entry</td>
+<td>String</td>
+<td>Yes</td>
+<td>The user script to process mini_batches.</td>
+</tr>
+<tr>
+<td>args</td>
+<td>String</td>
+<td>No</td>
+<td>Specify the arguments used along with <code>entry</code>. This list may consist place holders of Inputs and Outputs. See <a href="#cli-argument-place-holders">CLI Argument Place Holders</a> for details.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="section" id="data-types">
+<h2>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
+<p>Data Type is a short word or phrase that describes the data type of the Input or Output.</p>
+<div class="section" id="data-types-for-inputs-outputs">
+<h3>Data Types for Inputs/Outputs<a class="headerlink" href="#data-types-for-inputs-outputs" title="Permalink to this headline">¶</a></h3>
+<p>Designer allows its user to connect an Output to another component&#8216;s Input that with the same data type.</p>
+<p>Data type for a Input/Output could be an arbitrary string (except <code class="docutils literal"><span class="pre">&lt;</span></code> and <code class="docutils literal"><span class="pre">&gt;</span></code>).</p>
+<p>Below are list of data types that will be auto registered and can be directly used by user out-of-box.
+For other data type names, please create the DataTypes first following guide from https://aka.ms/azureml-sdk-create-data-type.</p>
+<p><strong>Data Types</strong></p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td>A path contains arbitray data.</td>
+</tr>
+<tr>
+<td>AzureMLDataset</td>
+<td>Represents a dataset, passed directly as id in command line.</td>
+</tr>
+</tbody>
+</table><p><strong>Data Types used by built-in components</strong></p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AnyDirectory</td>
+<td>Generic directory which stores arbitray data</td>
+</tr>
+<tr>
+<td>DataFrameDirectory</td>
+<td>Represents tabular data, saved in parquet format by default.</td>
+</tr>
+<tr>
+<td>ModelDirectory</td>
+<td>Represents a trained model. can be in any format or flavor, will have its own spec file to describe the detailed information.</td>
+</tr>
+<tr>
+<td>ImageDirectory</td>
+<td>Store images and related meta data in the directory.</td>
+</tr>
+<tr>
+<td>UntrainedModelDirectory</td>
+<td>Represents an untrained model.</td>
+</tr>
+<tr>
+<td>TransformationDirectory</td>
+<td>Represents a transform, only for backward compatibility.</td>
+</tr>
+<tr>
+<td>AnyFile</td>
+<td>Generic text/binary file.</td>
+</tr>
+<tr>
+<td>ZipFile</td>
+<td>A Zipped File.</td>
+</tr>
+<tr>
+<td>CsvFile</td>
+<td>A CSV or TSV format, with or without header, zipped (of a single file) or unzipped.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="section" id="data-types-for-parameters">
+<h3>Data Types for Parameters<a class="headerlink" href="#data-types-for-parameters" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String</td>
+<td>Indicates that the input value is a string.</td>
+</tr>
+<tr>
+<td>Integer</td>
+<td>Indicates that the input value is an integer.</td>
+</tr>
+<tr>
+<td>Float</td>
+<td>Indicates that the input value is a float.</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>Indicates that the input value is a boolean value.</td>
+</tr>
+<tr>
+<td>Enum</td>
+<td>Indicates that the input value is a enumerated (limited list of) String values.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="use-component-spec-schema-in-vscode.html" class="btn btn-neutral float-right" title="How to use component spec schema in vscode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../components.html" class="btn btn-neutral float-left" title="Components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, microsoft
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

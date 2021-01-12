@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>azure.ml.component.dsl package &mdash; Component SDK beta documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'./',
+              VERSION:'beta',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Useful Links" href="links.html" />
+    <link rel="prev" title="azure.ml.component package" href="azure.ml.component.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Component SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="sdk_reference.html">SDK Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="azure.ml.component.html">azure.ml.component package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="azure.ml.component.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">azure.ml.component.dsl package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="azure.ml.component.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="azure.ml.component.html#module-azure.ml.component.component">azure.ml.component.component module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="azure.ml.component.html#module-azure.ml.component.pipeline">azure.ml.component.pipeline module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="azure.ml.component.html#module-azure.ml.component.run">azure.ml.component.run module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="azure.ml.component.html#module-azure.ml.component.run_settings">azure.ml.component.run_settings module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="links.html">Useful Links</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Component SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="sdk_reference.html">SDK Reference</a> &raquo;</li>
+        
+          <li><a href="azure.ml.component.html">azure.ml.component package</a> &raquo;</li>
+        
+      <li>azure.ml.component.dsl package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/azure.ml.component.dsl.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-azure.ml.component.dsl">
+<span id="azure-ml-component-dsl-package"></span><h1>azure.ml.component.dsl package<a class="headerlink" href="#module-azure.ml.component.dsl" title="Permalink to this headline">¶</a></h1>
+<p>The package dsl (domain-specific language) is a set of decorators for component manipulations.</p>
+<p>You can utilize this package to build <a class="reference internal" href="azure.ml.component.html#azure.ml.component.Component" title="azure.ml.component.Component"><code class="xref py py-class docutils literal"><span class="pre">azure.ml.component.Component</span></code></a> and
+<a class="reference internal" href="azure.ml.component.html#azure.ml.component.Pipeline" title="azure.ml.component.Pipeline"><code class="xref py py-class docutils literal"><span class="pre">azure.ml.component.Pipeline</span></code></a>.</p>
+<dl class="function">
+<dt id="azure.ml.component.dsl.pipeline">
+<code class="descclassname">azure.ml.component.dsl.</code><code class="descname">pipeline</code><span class="sig-paren">(</span><em>name=None</em>, <em>description=None</em>, <em>default_compute_target=None</em>, <em>default_datastore=None</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.dsl.pipeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build a pipeline which contains all nodes and sub-pipelines defined in this function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>name</strong> &#8211; the name of the built pipeline</li>
+<li><strong>description</strong> &#8211; the description of the built pipeline</li>
+<li><strong>default_compute_target</strong> &#8211; The compute target of the built pipeline.
+Could be a compute target object or the string name of a compute target in the workspace.
+The priority of the compute target assignment: the component&#8217;s runsettings &gt; the sub pipeline&#8217;s default compute
+target &gt; the parent pipeline&#8217;s default compute target.
+Optionally, if the compute target is not available at pipeline creation time, you may specify a tuple of
+(&#8216;compute target name&#8217;, &#8216;compute target type&#8217;) to avoid fetching the compute target object (AmlCompute
+type is &#8216;AmlCompute&#8217; and RemoteCompute type is &#8216;VirtualMachine&#8217;).</li>
+<li><strong>default_datastore</strong> (<em>str</em><em> or </em><em>azureml.core.Datastore</em>) &#8211; The default datastore of pipeline.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body"><p class="first">str</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><p class="first">str</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body"><p class="first last">default_compute_target: azureml.core.compute.DsvmCompute
+or azureml.core.compute.AmlCompute
+or azureml.core.compute.RemoteCompute
+or azureml.core.compute.HDInsightCompute
+or str
+or tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="links.html" class="btn btn-neutral float-right" title="Useful Links" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="azure.ml.component.html" class="btn btn-neutral float-left" title="azure.ml.component package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, microsoft
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

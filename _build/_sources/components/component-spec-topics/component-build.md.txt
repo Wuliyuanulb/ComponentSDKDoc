@@ -1,0 +1,247 @@
+# Component build
+
+## Overview
+
+When developing custom components, data scientists may need to get a "fully resolved" snapshot of a component and do some processing before creating it(e.g. may need to sent the component snapshot to code signing before creating it).
+
+In this case, use `az ml component build` to build a local snapshot of the component based on the component yaml. 
+The built snapshot is the same as the one created to workspaces which has resolved source directory, [aml ignores](./ignore-files.md) and [additional includes](./additional-includes.md).
+
+Goal:
+
+- if "code" is specified in spec file, the built snapshot should follow it
+
+- additional include files should be included
+- files inside amlignore file should be excluded
+
+Non-Goal:
+
+- Build from remote(Github/Devops) yaml is not supported
+
+## Use scenarios
+
+### Local test
+
+User would like verify the snapshot content before create it as component in workspace with the following steps.
+
+1. build the snapshot to a local folder
+2. check if the local folder contains expected files
+3. use the built snapshot to create component in workspace
+
+### CI/CD
+
+In CI/CD pipelines, one user would like build snapshot, do some modification like code signing, then create it as component in workspace with the following step.
+
+In **build** pipeline
+
+1. build a component snapshot
+2. update the snapshot(e.g. code signing)
+3. publish the modified component snapshot as artifact
+
+In **release** pipeline
+
+1. create the signed component snapshot to a workspace in release pipeline
+
+## Examples
+
+Example component project structure.
+
+```
+src/
+  python/
+    library1/
+      hello.py
+    library2/
+      en_US/
+        messages.json
+      zh_CN/
+        messages.json
+      greetings.py
+assets/
+  LICENSE
+module_entry/
+  module_spec.yaml
+  file
+  run.py
+```
+
+In `module_entry/module_spec.yaml`, "code" folder is specified as `..`, which sets the base folder of the snapshot to parent folder of `module_entry`.
+
+```
+...
+code: ..
+...
+```
+
+### Example: build snapshot in default folder
+
+A folder `.build/` in the component code folder will be built.
+
+The component project folder of example is folder `module_entry`, run 
+
+```bash
+  az ml component build --file module_entry/module_spec.yaml
+```
+
+will get the following project structure
+
+```
+src/
+  ...
+assets/
+  ...
+module_entry/
+  ...
+.build/
+  src/
+  	...
+  assets/
+  	...
+  module_entry/
+  	...
+```
+
+> Note:
+>
+> 1. When building snapshot, directory `.build/` will be ignored. Otherwise, when building same component twice, the former `.build/` folder will be included into snapshot when building the second time.
+> 2. When creating a component, `.build/` will not be ignored.
+> 3. When creating a component, `.build/` won't be created. That's because we can not distinguish if a folder is component project or a component snapshot. When creating a built snapshot, additional `.build/` folder should not appear in snapshot folder.
+
+
+### Example: build snapshot to specific directory with parameter `--target` 
+
+In some cases, user might need to build snapshot to specific directory(e.g. in build pipeline, build all component's snapshot into one artifact folder, then publish the artifact folder).
+
+Run 
+
+```bash
+az ml component build --file module_entry/module_spec.yaml --target snapshot
+```
+
+will get generate the snapshot to snapshot folder.
+
+```
+src/
+  ...
+assets/
+  ...
+module_entry/
+  ...
+snapshot/
+  src/
+  	...
+  assets/
+  	...
+  module_entry/
+  	...
+```
+
+> Note:
+>
+> 1. If `--target` is inside of project folder, it will be ignored like we did with `.build`.
+> 2. However, specify `--target` the same as project folder is not allowed. Because we always expect a new folder to be created when calling build.
+
+
+### Example: build snapshot with additional aml ignore files
+
+Besides putting an `.amlignore` file in the base folder of each component, some components may share same `.amlignore` file(e.g. all python component need to ignore `__pycache__/` folder).
+
+We supported create a shared `.amlignore` file, and specify the path to the shared `.amlignore` file when building the component.
+
+Suppose we have an additional aml ignore file `/shared/.amlignore` with the following content.
+
+```
+file
+```
+
+Run `az ml component build --file module_entry/module_spec.yaml --amlignore-file /shared/.amlignore` will get the following project structure.
+
+```
+src/
+  ...
+assets/
+  ...
+module_entry/
+  ...
+.build/
+  src/
+  	...
+  assets/
+  	...
+  module_entry/
+  	...
+```
+
+> Discussion:
+>
+> Above scenario can be replaced with the following commands.
+>
+> 1. `az configure --defaults component_amlignore_file=/shared/.amlignore`
+> 2. `az ml component build --file module_entry/module_spec.yaml`
+>
+
+**Reference**
+[Ignore files doc](./ignore-files.md).
+
+### Example: CI/CD code signing workflow
+
+This example show how `component build` works with code signing.
+
+In **build** pipeline:
+
+1. Run `az ml component build --file module_entry/module_spec.yaml` to get the snapshot.
+   ```
+    src/
+      ...
+    assets/
+      ...
+    module_entry/
+      ...
+   .build/
+     src/
+     	...
+     assets/
+     	...
+     module_entry/
+     	...
+   ```
+2. Modify the snapshot, generate a manifest file `catalog.json` for code signing.
+   ```
+    src/
+      ...
+    assets/
+      ...
+    module_entry/
+      ...
+   .build/
+     src/
+     	...
+     assets/
+     	...
+     module_entry/
+     	...
+     catalog.json # This is a manifest file with all files in snapshot and SHA hash.
+   ```
+3. Code signing on `catalog.json`
+      ```
+    src/
+      ...
+    assets/
+      ...
+    module_entry/
+      ...
+    .build/
+      src/
+      	...
+      assets/
+      	...
+      module_entry/
+      	...
+      catalog.json # This is a manifest file with all files in snapshot and SHA hash.
+     catalog.json.sig # Signed manifest file
+   ```
+4. publish the signed component snapshot as artifact
+
+In **release** pipeline
+
+1. Run `az ml component create --file .build/module_entry/module_spec.yaml` to create the signed component snapshot to workspace in release pipeline

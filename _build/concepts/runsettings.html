@@ -1,0 +1,506 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>RunSettings &mdash; Component SDK beta documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'beta',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Components" href="../components.html" />
+    <link rel="prev" title="PipelineParameter" href="pipeline_parameter.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Component SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../concepts.html">Concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="component.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline_parameter.html">PipelineParameter</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">RunSettings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#command-component">Command component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parallel-component">Parallel component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hdinsight-component">HDInsight component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Command component</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Parallel component</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">HDInsight component</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk_reference.html">SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../links.html">Useful Links</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Component SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../concepts.html">Concepts</a> &raquo;</li>
+        
+      <li>RunSettings</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/concepts/runsettings.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="runsettings">
+<h1>RunSettings<a class="headerlink" href="#runsettings" title="Permalink to this headline">¶</a></h1>
+<p>RunSettings is used to provide configuration for each component when running in the compute. For each component type, there will be different RunSetting parameters to be set.</p>
+<p>With RunSettings, you will be able to:</p>
+<ul class="simple">
+<li>Specify compute where the component is scheduled for execution.</li>
+<li>Configure parallel component runtime settings, such as the number of nodes, process count per node and error threshold.</li>
+<li>Configure HDInsight component runtime settings, such as driver memory, driver cores and spark configuration.</li>
+</ul>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>You can set multiple RunSetting parameters by this way:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Set target, node count and process count per node for parallel component</span>
+<span class="n">component</span><span class="o">.</span><span class="n">runsettings</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="s1">&#39;aml-compute&#39;</span><span class="p">,</span> <span class="n">node_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">process_count_per_node</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or set them one by one:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Set target, node count and process count per node for parallel component</span>
+<span class="n">component</span><span class="o">.</span><span class="n">runsettings</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;aml-compute&#39;</span>
+<span class="n">component</span><span class="o">.</span><span class="n">runsettings</span><span class="o">.</span><span class="n">node_count</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">component</span><span class="o">.</span><span class="n">runsettings</span><span class="o">.</span><span class="n">process_count_per_node</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>If a parameter is not required, it will use the default value if not been set.</div></blockquote>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">target</span></code> is a required field, but it can be None when parent pipeline has a default compute target. It will use parent pipeline&#8216;s default compute target as value in this kind of cases, otherwise, you still need to set it in component&#8216;s runsettings.</div></blockquote>
+</div>
+</div>
+<div class="section" id="command-component">
+<h2>Command component<a class="headerlink" href="#command-component" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Yes</td>
+<td>-</td>
+<td>The compute target to run the component.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="section" id="parallel-component">
+<h2>Parallel component<a class="headerlink" href="#parallel-component" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Yes</td>
+<td>-</td>
+<td>The compute target to run the component.</td>
+</tr>
+<tr>
+<td>node_count</td>
+<td>Int</td>
+<td>Yes</td>
+<td>-</td>
+<td>Number of nodes in the compute target used for running the Parallel Component.</td>
+</tr>
+<tr>
+<td>process_count_per_node</td>
+<td>Int</td>
+<td>No</td>
+<td>Number of cores on node</td>
+<td>Number of processes executed on each node.</td>
+</tr>
+<tr>
+<td>error_threshold</td>
+<td>Int</td>
+<td>No</td>
+<td>-1</td>
+<td>The number of file failures for the input FileDataset that should be ignored during processing. If the error count goes above this value, then the job will be aborted. Error threshold is for the entire input and not for individual mini-batches sent to run() method. The range is [-1, int.max]. -1 indicates ignoring all failures during processing.</td>
+</tr>
+<tr>
+<td>mini_batch_size</td>
+<td>String</td>
+<td>No</td>
+<td>10</td>
+<td>For the FileDataset input, this field is the number of files user script can process in one run() call. Example values are 64, 1024, 65536 and 1048576.</td>
+</tr>
+<tr>
+<td>logging_level</td>
+<td>String</td>
+<td>No</td>
+<td>INFO</td>
+<td>A string of the logging level name, which is defined in 'logging'. Possible values are 'WARNING', 'INFO', and 'DEBUG'.</td>
+</tr>
+<tr>
+<td>run_invocation_timeout</td>
+<td>Int</td>
+<td>No</td>
+<td>60</td>
+<td>Timeout in seconds for each invocation of the run() method.</td>
+</tr>
+<tr>
+<td>run_max_try</td>
+<td>Int</td>
+<td>No</td>
+<td>3</td>
+<td>The number of maximum tries for a failed or timeout mini batch. A mini batch with dequeue count greater than this won't be processed again and will be deleted directly.</td>
+</tr>
+<tr>
+<td>partition_keys</td>
+<td>JsonString or Dictionary</td>
+<td>No</td>
+<td>None</td>
+<td>Please refer to  <a href="https://github.com/Azure/PRSPreviewFeatures">PRS docs</a> for more details.</td>
+</tr>
+<tr>
+<td>version</td>
+<td>String</td>
+<td>No</td>
+<td>v1</td>
+<td>Please refer to  <a href="https://github.com/Azure/PRSPreviewFeatures">PRS docs</a> for more details.</td>
+</tr>
+</tbody>
+</table><blockquote>
+<div>For more questions on ParallelComponent, please contact <a class="reference external" href="mailto:amlbiteam&#37;&#52;&#48;microsoft&#46;com">PRS team</a>.</div></blockquote>
+</div>
+<div class="section" id="hdinsight-component">
+<h2>HDInsight component<a class="headerlink" href="#hdinsight-component" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>Yes</td>
+<td>Hdi Compute name that is attached to AML. It must be a HDI compute.</td>
+</tr>
+<tr>
+<td>queue</td>
+<td>String</td>
+<td>No</td>
+<td>The name of the YARN queue to which submitted.</td>
+</tr>
+<tr>
+<td>driver_memory</td>
+<td>String</td>
+<td>No</td>
+<td>Amount of memory to use for the driver process.It's the same format as JVM memory strings. Use lower-case suffixes, e.g. k, m, g, t, and p, for kibi-, mebi-, gibi-, tebi-, and pebibytes, respectively. Example values are 10k, 10m and 10g.</td>
+</tr>
+<tr>
+<td>driver_cores</td>
+<td>Int</td>
+<td>No</td>
+<td>Number of cores to use for the driver process.</td>
+</tr>
+<tr>
+<td>executor_memory</td>
+<td>String</td>
+<td>No</td>
+<td>Amount of memory to use per executor process. It's the same format as JVM memory strings. Use lower-case suffixes, e.g. k, m, g, t, and p, for kibi-, mebi-, gibi-, tebi-, and pebibytes, respectively.</td>
+</tr>
+<tr>
+<td>executor_cores</td>
+<td>Int</td>
+<td>No</td>
+<td>Number of cores to use for each executor.</td>
+</tr>
+<tr>
+<td>number_executors</td>
+<td>Int</td>
+<td>No</td>
+<td>Number of executors to launch for this session.</td>
+</tr>
+<tr>
+<td>conf</td>
+<td>JsonString or Dictionary</td>
+<td>No</td>
+<td>Spark configuration properties.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>No</td>
+<td>The name of this session.</td>
+</tr>
+</tbody>
+</table><blockquote>
+<div>Please refer to <a class="reference external" href="https://spark.apache.org/docs/latest/configuration.html">spark docs</a> for default values of some fields.</div></blockquote>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Command component<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">component</span><span class="o">.</span><span class="n">runsettings</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;aml-compute&#39;</span>
+<span class="c1"># Or</span>
+<span class="n">component</span><span class="o">.</span><span class="n">runsettings</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="s1">&#39;aml-compute&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Parallel component<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">component</span><span class="o">.</span><span class="n">runsettings</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+    <span class="n">target</span><span class="o">=</span><span class="s1">&#39;aml-compute&#39;</span><span class="p">,</span>
+    <span class="n">error_threshold</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">mini_batch_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">logging_level</span><span class="o">=</span><span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+    <span class="n">run_invocation_timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+    <span class="n">run_max_try</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>HDInsight component<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">component</span><span class="o">.</span><span class="n">runsettings</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+    <span class="n">target</span><span class="o">=</span><span class="s1">&#39;hdi-cluster&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;session_name&quot;</span><span class="p">,</span>
+    <span class="n">queue</span><span class="o">=</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="n">driver_memory</span><span class="o">=</span><span class="s2">&quot;1g&quot;</span><span class="p">,</span>
+    <span class="n">driver_cores</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">executor_memory</span><span class="o">=</span><span class="s2">&quot;4g&quot;</span><span class="p">,</span>
+    <span class="n">executor_cores</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">number_executors</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">conf</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;spark.yarn.maxAppAttempts&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;spark.yarn.appMasterEnv.PYSPARK_PYTHON&quot;</span><span class="p">:</span> <span class="s2">&quot;/usr/bin/anaconda/envs/py35/bin/python3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;spark.yarn.appMasterEnv.PYSPARK_DRIVER_PYTHON&quot;</span><span class="p">:</span> <span class="s2">&quot;/usr/bin/anaconda/envs/py35/bin/python3&quot;</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../components.html" class="btn btn-neutral float-right" title="Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="pipeline_parameter.html" class="btn btn-neutral float-left" title="PipelineParameter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, microsoft
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

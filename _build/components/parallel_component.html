@@ -1,0 +1,333 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Parallel Component &mdash; Component SDK beta documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'beta',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="HDInsight Component" href="hdi_component.html" />
+    <link rel="prev" title="Command Component" href="command_component.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Component SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../components.html">Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="component-spec-definition.html">Definition of component spec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="component-spec-topics.html">Component spec advanced topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="command_component.html">Command Component</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Parallel Component</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overivew">Overivew</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenarios">scenarios</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitation">limitation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-write-parallelcomponent-yaml-spec">How to write ParallelComponent yaml spec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#samples">Samples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#appendix">Appendix</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="hdi_component.html">HDInsight Component</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk_reference.html">SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../links.html">Useful Links</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Component SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../components.html">Components</a> &raquo;</li>
+        
+      <li>Parallel Component</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/components/parallel_component.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="parallel-component">
+<h1>Parallel Component<a class="headerlink" href="#parallel-component" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overivew">
+<h2>Overivew<a class="headerlink" href="#overivew" title="Permalink to this headline">¶</a></h2>
+<p>ParallelComponent is a kind of component to run <a class="reference external" href="https://docs.microsoft.com/en-us/python/api/azureml-pipeline-steps/azureml.pipeline.steps.parallelrunstep?view=azure-ml-py#constructor">ParallelRunStep</a></p>
+<div class="section" id="scenarios">
+<h3>scenarios<a class="headerlink" href="#scenarios" title="Permalink to this headline">¶</a></h3>
+<p>TODO: Describe what&#8216;s the target scenarios for this Component.</p>
+</div>
+<div class="section" id="limitation">
+<h3>limitation<a class="headerlink" href="#limitation" title="Permalink to this headline">¶</a></h3>
+<p>TODO: Describe what&#8216;s the limitation.</p>
+</div>
+</div>
+<div class="section" id="how-to-write-parallelcomponent-yaml-spec">
+<h2>How to write ParallelComponent yaml spec<a class="headerlink" href="#how-to-write-parallelcomponent-yaml-spec" title="Permalink to this headline">¶</a></h2>
+<p>Please refer to <a class="reference external" href="./component-spec-definition.html#parallel">ParallelComponent spec doc</a>.</p>
+<p>Please refer to <a class="reference external" href="https://componentsdk.blob.core.windows.net/jsonschema/ParallelComponent.json">ParallelComponent Schema</a>.</p>
+<p>Example yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">$schema</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://azureml/sdk-1-5/ParallelComponent.json</span>
+<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">microsoft.com.azureml.samples.parallel_score_image</span>
+<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.1</span>
+<span class="nt">display_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Parallel Score Image Classification Model</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ParallelComponent</span>
+<span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Score images with trained image classification model.</span>
+
+<span class="nt">inputs</span><span class="p">:</span>
+  <span class="nt">trained_model</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">path</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Trained image classification model.</span>
+    <span class="nt">optional</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+  <span class="nt">images_to_score</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">path</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Images to score.</span>
+    <span class="nt">optional</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">outputs</span><span class="p">:</span>
+  <span class="nt">scored_dataset</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">path</span>
+    <span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Scored dataframes stored in parquet files.</span>
+
+<span class="nt">environment</span><span class="p">:</span>
+  <span class="nt">docker</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mcr.microsoft.com/azureml/base-gpu:openmpi3.1.2-cuda10.0-cudnn7-ubuntu18.04</span>
+  <span class="nt">conda</span><span class="p">:</span>
+    <span class="nt">conda_dependencies</span><span class="p">:</span>
+      <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">project_environment</span>
+      <span class="nt">channels</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">defaults</span>
+      <span class="nt">dependencies</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">psutil</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python=3.6.8</span>
+      <span class="p p-Indicator">-</span> <span class="nt">pip</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">torch</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">torchvision</span>
+        <span class="c1"># The following dependencies are used for parallel run driver.</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">azureml-defaults</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">azureml-dataprep&gt;=1.6</span>
+  <span class="nt">os</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Linux</span>
+
+<span class="nt">parallel</span><span class="p">:</span>
+  <span class="nt">input_data</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">inputs.images_to_score</span>
+  <span class="nt">output_data</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">outputs.scored_dataset</span>
+  <span class="nt">entry</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mnist/score_parallel.py</span>
+  <span class="nt">args</span><span class="p">:</span> <span class="p p-Indicator">&gt;-</span>
+    <span class="no">--model-input {inputs.trained_model} --data-output {outputs.scored_dataset}</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/components/mnist-mpi-train-parallel-score/parallel_score.yaml">more examples in github samples repo</a>.</p>
+</div>
+<div class="section" id="samples">
+<h2>Samples<a class="headerlink" href="#samples" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-parallel-component.ipynb">How to use parallel component</a> - Demostrates how to use parallel component for batch inference.</li>
+</ul>
+</div>
+<div class="section" id="appendix">
+<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h2>
+<p>In legacy module concept, this maps to <code class="docutils literal"><span class="pre">basic</span></code> jobType Module.</p>
+<ul class="simple">
+<li>legacy <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/azureml-pipeline-wrapper/azureml-modules/docs/module-spec-definition.md#parallel">module sepc doc</a></li>
+<li>legacy <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/azureml-pipeline-wrapper/azureml-modules/samples/modules/parallel-score-mnist/module_spec.yaml">example module yaml</a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="hdi_component.html" class="btn btn-neutral float-right" title="HDInsight Component" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="command_component.html" class="btn btn-neutral float-left" title="Command Component" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, microsoft
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
