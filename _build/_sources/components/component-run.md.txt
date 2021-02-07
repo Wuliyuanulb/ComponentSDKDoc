@@ -1,0 +1,168 @@
+# Component run
+
+### **Overview**
+
+Azure-ml-component supports running component in host, conda or docker container. This document describes how to use this feature.
+
+Using component run, you could execute component in local machine. It will help you to prepare required environment for component execution, download remote dataset and snapshot. You can also decide whether to upload run results and logs to run history and view it in workspace portal.
+
+Component run supports three run modes, docker, conda and host. Their main difference is execution environment. Docker mode uses the same image as remote component execution, including base image and conda environment, could be used to simulate component run in remote. Conda mode will build conda environment by component conda config. And host mode directly uses current environment to execute component, usually used to develop component for component author.
+
+#### Scenarios
+
+Component run covers the following scenarios:
+
+- Quickly verify component with small dataset.
+- Unittest on component.
+- Run component in CI pipeline.
+
+#### Limitation
+
+1. Currently support [FileDataset](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.data.filedataset?view=azure-ml-py) and local path as input dataset. Not support [TabularDataset](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.data.tabulardataset?view=azure-ml-py).
+2. Currently support CommandComponent, ParallelComponent and DistributedComponent. Not support HDInsightComponent.
+3. Component.run only supports execute in single node. For ParallelComponent, runsettings will be ignored. And for DistributedComponent, only process_count_per_node in runsetting is supported.
+4. If component command contains special character, such as "\n", it may cause component command execution failed.
+5. Component run outputs not support register as dataset to the workspace.
+6. Component run outputs will ignore parameters of Output.config, including datastore, output_mode, path_on_datastore. And support path_on_compute to specify output path on host.
+
+### How to use Component run
+
+#### Prerequisites
+
+- Install component SDK following the [instructions here](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/setup-environment.ipynb).
+- Install [Docker](https://aka.ms/AA37qtj) or [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/) on your machine and add it to the system path.
+
+#### **Component run parameters**
+
+| Name              | Type | Default | Description                                                  |
+| ----------------- | ---- | ------- | ------------------------------------------------------------ |
+| experiment_name   | str  | None    | The experiment_name will show in portal. If not set, will use component name. |
+| working_dir       | str  | None    | The output path for component output info                    |
+| mode              | str  | docker  | Currently, we support three component run modes.<br />docker: Start a container with the component's image and run component in it.<br />conda: Build a conda environment in the host with the component's conda definition and run component in it.<br />host: Directly run component in host environment. |
+| track_run_history | bool | True    | Indicates whether run history tracks Component.run and view it in workspace portal. If track_run_history=True, run history will track run status. Outputs and log file will be  uploaded to it. |
+| show_output       | bool | True    | Indicates whether to show the component run status on terminal. |
+| raise_on_error    | bool | True    | Indicates whether to raise an error when the Run is in a failed state |
+| skip_validation   | bool | False   | Indicates whether to skip the validation of the component    |
+
+#### Sample
+
+##### Component run with local/remote dataset
+
+```python
+from azureml.core import Dataset
+# Suppose we have a workspace as 'ws'
+component_func = Component.load(ws, name=<Your component name>)
+
+# Set remote dataset to component inputs.
+remote_data = Dataset.get_by_name(ws, name=<Your remote dataset name>)
+component = component_func(input_name=remote_data)
+component.run()
+
+# Set local dataset path to component inputs.
+component = component_func(input_name=<Your local dataset path>)
+component.run()
+```
+
+##### Component run in docker-based environment
+
+```python
+component.run(mode='docker') 
+```
+
+##### Component run in conda-based environment
+
+```python
+component.run(mode='conda') 
+```
+
+>NOTE
+>
+>Before run component in conda-based environment, please make sure enable conda in your shell. You can execute 'conda init --all' to enable conda.
+
+##### Component run in user managed environment
+
+```python
+component.run(mode='host') 
+```
+
+##### Specific component run output path
+
+```python
+# Suppose one output port of component named output_dir.
+# Set local path to path_on_compute
+component.outputs.output_dir.configure(path_on_compute=<Your output path>)
+component.run()
+```
+
+>NOTE
+>
+>path_on_datastore which is parameter of Output.config will be ignored.
+
+#### Component run working directory structure
+
+Component run working directory structure likes below:
+
+```bash
+working_dir
+|   excutionlogs.txt
+├───conda_logs (optional)
+│       <Conda env name>.txt
+├───image_logs (optional)
+│       pull_image_log.txt
+│       build_image_log.txt
+├───<Remote dataset name>
+├───outputs
+│   └───<Output port name>
+└───scripts
+```
+
+excutionlogs.txt records component run and component script execution log. The execution results are stored in the output folder according to output port name. And the snapshot of component will be downloaded to the scripts folder. If component inputs contain remote datasets, they will be downloaded in working_dir. When component execution environment not exist, it will build conda or image environment and record log in conda_logs or image_logs.
+
+### How to handle component run failed
+
+#### Diagnostic failure reason
+
+##### Build component environment failed
+
+For conda environment build failed, it will raise following error. You could find the error message through the build_log_path.
+
+```
+"error": {
+    "code": "UserError",
+    "message": "Build conda environment in host failed, please find failure reason from <build_log_path>"
+}
+```
+
+In order to shorten the time to build the image, Component.run will perform operations, build image in local and pull remote image, at the same time. For docker image build failed, it will raise following error. You could find the error message through the build_log_path.
+
+```
+"error": {
+    "code": "UserError",
+    "message": "Failed to get component image, diagnostic failure reason by logs <build_log_path>"
+}
+```
+
+##### Component command execution failed
+
+If raise_on_error=True, it will raise an error likes below when the Run is in a failed state. You could find the error message through execution_log_path.
+
+```
+"error": {
+    "code": "UserError",
+    "message": "Executing script failed with a non-zero exit code; see the <execution_log_path>"
+}
+```
+
+If raise_on_error=False, execution_log_path will be printed in terminal. You could find the error message through it.
+
+#### Debug failed component run
+
+Currently, it only support python script. If component run in docker-based-environment and failed, it will generate config files to debug in vscode. Debug parameters and environment are same as Component.run.
+
+You can debug component in vscode by steps:
+
+1. Pressing F1, click "Remote-Containers: Reopen in Container".
+2. In Status Bar, selecting python interpreter path showed in Component.run terminal output.
+3. Pressing F5 to start debugging.
+
+For more information about component debug, see [Component debug](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/33d85b68b95ad61cbd72aa0aa936e25341a94d3b/azure-ml-components/docs/component-debug.md#start-debugging-in-vs-code)

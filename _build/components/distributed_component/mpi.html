@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>MPI &mdash; Component SDK  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Horovod" href="horovod.html" />
+    <link rel="prev" title="Process Group and Communication Backend" href="launcher.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Component SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts.html">Concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../components.html">Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../command_component.html">Command Component</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../distributed_component.html">Distributed Component</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../distributed_component.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../distributed_component.html#launcher">Launcher</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../distributed_component.html#supported-launchers">Supported Launchers</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">MPI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="horovod.html">Horovod</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../parallel_component.html">Parallel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hdi_component.html">HDInsight Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../component-spec-definition.html">Definition of component spec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../component-spec-topics.html">Component spec advanced topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk_reference.html">SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../links.html">Useful Links</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Component SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../components.html">Components</a> &raquo;</li>
+        
+          <li><a href="../distributed_component.html">Distributed Component</a> &raquo;</li>
+        
+      <li>MPI</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/components/distributed_component/mpi.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mpi">
+<h1>MPI<a class="headerlink" href="#mpi" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>MPI Launcher type means leveraging <a class="reference external" href="https://www.open-mpi.org/doc/v4.0/man1/mpirun.1.php">mpirun</a> to launch a given number of processes in each node.</p>
+<p>In this model, there is a cluster consistes of a number of processes (workers) run on the nodes (number of processes = number of nodes * process count per node) &#8211; each process will be assigned a global rank (and a local rank). All processes are equal, and after the cluster has been formed, mpi will execute the same command in each of them. The executing application will then decide based on the rank what work the process should do. Rank 0 is often given a special task (like accumulating results and writing them out, e.g. write out the model, logs, metrics, etc.).</p>
+<blockquote>
+<div><p><strong>Tip</strong>:</p>
+<p>It is a common confusion of the concept of mpirun and mpi as communication backend and users might think AzureML mpirun won&#8216;t be able to run distributed jobs with <code class="docutils literal"><span class="pre">nccl</span></code> or <code class="docutils literal"><span class="pre">gloo</span></code> backend. Unfortunately the difference is not well explained in official AzureML documentation. AzureML uses mpirun as launcher utility to launch processes for user&#8216;s training script in distributed nodes and sets up all necessary environment variables which user can use to init the process group. The real communication backend is what user set in their training script.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Note</strong>:</p>
+<p>This document is mainly based on PyTorch concepts.</p>
+</div></blockquote>
+<div class="section" id="how-to-author-and-consume">
+<h3>How to author and consume<a class="headerlink" href="#how-to-author-and-consume" title="Permalink to this headline">¶</a></h3>
+<p>User can adopt this approach to run distributed training using either per-process-launcher or per-node-launcher, depending on whether user sets <code class="docutils literal"><span class="pre">process_count_per_node</span></code> to be only 1 for per-node-launcher, or equal to the number of devices/GPUs for per-process-launcher. Currently AzureML does not expose cluster hostfiles for user to launch a head-node-launcher like DeepSpeed launcher. It runs <code class="docutils literal"><span class="pre">mpirun</span></code> behind the scene.</p>
+<p>No matter which launch style user choose, users can follow these steps:</p>
+<ol class="simple">
+<li>Use an AzureML environment with the preferred deep learning framework and MPI. AzureML provides <a class="reference external" href="https://docs.microsoft.com/en-us/azure/machine-learning/resource-curated-environments">curated environment</a> for popular frameworks.</li>
+<li>Prepare the user script. See <a class="reference external" href="#how-to-use-mpi-in-user-script">detailed instruction</a> and <a class="reference external" href="#samples">examples</a>.</li>
+<li>Define a distributed component with the mpi launcher.</li>
+<li>Submit the component in a pipeline with correct runsetting: <code class="docutils literal"><span class="pre">node_count</span></code>, <code class="docutils literal"><span class="pre">process_count_per_node</span></code>.</li>
+</ol>
+<blockquote>
+<div><p><strong>Caution</strong>:</p>
+<p>To use AzureML mpirun, the base docker image used by the run needs to have Open MPI. They are included in <a class="reference external" href="https://github.com/Azure/AzureML-Containers">all AzureML default GPU base images</a>. User is responsible to
+install one of these when using custom base image. AzureML also provides <a class="reference external" href="https://docs.microsoft.com/en-us/azure/machine-learning/resource-curated-environments">curated environment</a> for popular frameworks.</p>
+</div></blockquote>
+</div>
+<div class="section" id="how-to-define-mpi-distributedcomponent-yaml-spec">
+<h3>How to define mpi DistributedComponent yaml spec<a class="headerlink" href="#how-to-define-mpi-distributedcomponent-yaml-spec" title="Permalink to this headline">¶</a></h3>
+<p>The only different part of DistributedComponent yaml from a CommandComponent, is the launcher section. Below is an example yaml for mpi launch type:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">launcher</span><span class="p">:</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mpi</span>
+  <span class="nt">additional_arguments</span><span class="p">:</span> <span class="p p-Indicator">&gt;-</span>
+    <span class="no">python mpi_train.py --training_data {inputs.training_data} --max_epochs {inputs.max_epochs} --learning_rate {inputs.learning_rate} --model_output {outputs.model_output}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-consume-mpi-distributed-component">
+<h3>How to consume mpi distributed component<a class="headerlink" href="#how-to-consume-mpi-distributed-component" title="Permalink to this headline">¶</a></h3>
+<p>Below is a example pipeline which configures the desired runsetting on <code class="docutils literal"><span class="pre">node_count</span></code>, <code class="docutils literal"><span class="pre">process_count_per_node</span></code>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azure.ml.component</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">dsl</span>
+
+<span class="c1"># load the mpi train component you create by the component yaml</span>
+<span class="n">train_component_func</span> <span class="o">=</span> <span class="n">Component</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">yaml_file</span><span class="o">=</span><span class="s1">&#39;components/imagecnn-train/entry.spec.yaml&#39;</span><span class="p">)</span>
+
+<span class="c1"># define pipeline</span>
+<span class="nd">@dsl</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;mpi train pipeline&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;mpi train pipeline&#39;</span><span class="p">,</span> <span class="n">default_compute_target</span><span class="o">=</span><span class="n">cpu_compute_target</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">train_pipeline</span><span class="p">():</span>
+    <span class="n">train</span> <span class="o">=</span> <span class="n">train_component_func</span><span class="p">(</span><span class="n">script_arg_0</span><span class="o">=</span><span class="n">arg_0</span><span class="p">,</span> <span class="n">script_arg_1</span><span class="o">=</span><span class="n">arg_1</span><span class="p">)</span>
+	
+    <span class="c1"># below runsettings give the equivalent command as:</span>
+    <span class="n">train</span><span class="o">.</span><span class="n">runsettings</span><span class="o">.</span><span class="n">resource_layout</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+        <span class="n">node_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="c1"># use 2 nodes to train the model</span>
+        <span class="n">process_count_per_node</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># use 2 processes per node</span>
+
+<span class="c1"># submit the pipeline</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">train_pipeline</span><span class="p">()</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">experiment_name</span><span class="o">=</span><span class="s1">&#39;mpi-sample-experiment&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-use-mpi-in-user-script">
+<h3>How to use MPI in user script<a class="headerlink" href="#how-to-use-mpi-in-user-script" title="Permalink to this headline">¶</a></h3>
+<p>When the MPI job is submitted to the AzureML compute, the user script will be launched by <code class="docutils literal"><span class="pre">mpirun</span></code> and the MPI environment will be initialized.
+To get the MPI information in the user script, basically we recommend to use <a class="reference external" href="https://mpi4py.readthedocs.io/en/stable/intro.html">mpi4py</a>.
+<code class="docutils literal"><span class="pre">mpi4py</span></code> should be added to the conda dependencies or the custom image.</p>
+<p>Here is a simple example script:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+<span class="n">comm</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+<span class="n">world_size</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span>  <span class="c1"># Get the size of the launched processes</span>
+<span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span>  <span class="c1"># Get the process&#39; rank among all processes</span>
+</pre></div>
+</div>
+<p>Note:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">mpi4py</span></code> works well both in IntelMPI images and OpenMpi images;</li>
+<li>In a distributed training job, we usually need <code class="docutils literal"><span class="pre">local_rank</span></code> to allocate gpus in the node, <code class="docutils literal"><span class="pre">mpi4py</span></code> doesn&#8216;t provide such method. In this case, you may use an OpenMpi image and get the rank from environment variables, see <a class="reference external" href="#environment-variables-from-openmpi">the reference</a> below.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="samples">
+<h2>Samples<a class="headerlink" href="#samples" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/image-classification.ipynb">Image classification with MPI training</a> - Demonstrates how to perform a distributed mpi training using PyTorch.</li>
+<li><a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-distributed-component-to-train-a-tensorflow-model-with-horovod.ipynb">Train Tensorflow model with horovod</a> - Demonstrates how to create a distributed component for Horovod script to train a Tensorflow model.</li>
+</ul>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<p>Please refer to <a class="reference external" href="../component-spec-definition.html#launcher">DistributedComponent spec doc</a> for spec definition.</p>
+<p>Please refer to <a class="reference external" href="https://componentsdk.blob.core.windows.net/jsonschema/DistributedComponent.json">DistributedComponent Schema</a> for the schema.</p>
+<div class="section" id="environment-variables-from-openmpi">
+<h3>Environment Variables from OpenMPI<a class="headerlink" href="#environment-variables-from-openmpi" title="Permalink to this headline">¶</a></h3>
+<p>When running MPIRUN with OpenMPI images, AzureML sets the following environment variables for each process launched:</p>
+<ol class="simple">
+<li>OMPI_COMM_WORLD_RANK - the rank of the process</li>
+<li>OMPI_COMM_WORLD_SIZE - the world size</li>
+<li>AZ_BATCH_MASTER_NODE - master address with port, MASTER_ADDR:MASTER_PORT</li>
+<li>OMPI_COMM_WORLD_LOCAL_RANK - the local rank of the process on the node</li>
+<li>OMPI_COMM_WORLD_LOCAL_SIZE - number of processes on the node</li>
+</ol>
+<blockquote>
+<div><p><strong>Caution</strong>:</p>
+<p>Despite the name, environment variable OMPI_COMM_WORLD_NODE_RANK does not correspond to the NODE_RANK. To use per-node-launcher, simply set <code class="docutils literal"><span class="pre">process_count_per_node=1</span></code> and use <code class="docutils literal"><span class="pre">OMPI_COMM_WORLD_RANK</span></code> as the NODE_RANK.</p>
+</div></blockquote>
+<p>The following code maps the OpenMPI environment variables to PyTorch style. For majority of the pytorch script, simply call <code class="docutils literal"><span class="pre">set_environment_variables_for_nccl_backend()</span></code> function before your script calls <code class="docutils literal"><span class="pre">torch.distributed.init_process_group</span></code>. If your script passes in information like local_rank or rank as script arguments, just remove these and use provided helper functions <code class="docutils literal"><span class="pre">get_local_rank()</span></code> and <code class="docutils literal"><span class="pre">get_rank()</span></code> instead.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">set_environment_variables_for_nccl_backend</span><span class="p">(</span><span class="n">master_port</span><span class="o">=</span><span class="mi">6105</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;RANK&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OMPI_COMM_WORLD_RANK&quot;</span><span class="p">]</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;WORLD_SIZE&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OMPI_COMM_WORLD_SIZE&quot;</span><span class="p">]</span>
+    <span class="n">single_node</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OMPI_COMM_WORLD_LOCAL_SIZE&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;WORLD_SIZE&quot;</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">single_node</span><span class="p">:</span>
+        <span class="n">master_node_params</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;AZ_BATCH_MASTER_NODE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MASTER_ADDR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">master_node_params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># Do not overwrite master port with that defined in AZ_BATCH_MASTER_NODE</span>
+        <span class="k">if</span> <span class="s2">&quot;MASTER_PORT&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MASTER_PORT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">master_port</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MASTER_ADDR&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;AZ_BATCHAI_MPI_MASTER_NODE&quot;</span><span class="p">]</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MASTER_PORT&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;54965&quot;</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;NCCL_SOCKET_IFNAME original value = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;NCCL_SOCKET_IFNAME&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;NCCL_SOCKET_IFNAME&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;^docker0,lo&quot;</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RANK = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;RANK&quot;</span><span class="p">]))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WORLD_SIZE = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;WORLD_SIZE&quot;</span><span class="p">]))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MASTER_ADDR = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MASTER_ADDR&quot;</span><span class="p">]))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;MASTER_PORT = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MASTER_PORT&quot;</span><span class="p">]))</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;NCCL_SOCKET_IFNAME new value = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;NCCL_SOCKET_IFNAME&quot;</span><span class="p">])</span>
+        <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">get_rank</span><span class="p">():</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OMPI_COMM_WORLD_RANK&quot;</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">get_local_rank</span><span class="p">():</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OMPI_COMM_WORLD_LOCAL_RANK&quot;</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">get_global_size</span><span class="p">():</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OMPI_COMM_WORLD_SIZE&quot;</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">get_local_size</span><span class="p">():</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OMPI_COMM_WORLD_LOCAL_SIZE&quot;</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">get_world_size</span><span class="p">():</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OMPI_COMM_WORLD_SIZE&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Tip</strong>:</p>
+<p>To see the list of environment variables provided by AzureML, just print <code class="docutils literal"><span class="pre">os.environ</span></code> in your training script.</p>
+</div></blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="horovod.html" class="btn btn-neutral float-right" title="Horovod" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="launcher.html" class="btn btn-neutral float-left" title="Process Group and Communication Backend" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2021, Microsoft
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

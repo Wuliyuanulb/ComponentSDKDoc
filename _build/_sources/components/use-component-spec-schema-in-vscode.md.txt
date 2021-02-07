@@ -10,9 +10,15 @@
 
 ### Associate component spec schema to your yaml files
 
-1. Open your settings (File -> Preferences -> Settings or `Ctrl+,`) and find **Yaml:Schemas**  ![image-opensetting](../images/opensetting.png)
+1. Press `Ctrl+Shift+p` in VS Code to toggle `Command Palette`, and enter "Settings" to find settings configurations. If you just want to use component spec schema in current opened folder, it recommended to choose "Preferences: Open Workspace Settings". Reference [here](https://code.visualstudio.com/docs/getstarted/settings) for more information about settings in VS Code.
+
+   ![image-20210112145726340](../images/yaml-schema-command-palette.png)
   
-2. In **settings.json**, add below section:
+2. Find **Yaml:Schemas**  in opened settings page, click **Edit in settings.json**.
+
+   ![image-20210112150004928](../images/yaml-schema-settings.png)
+
+3. In **settings.json**, add below section:
 
     We provided a [merged schema](https://componentsdk.blob.core.windows.net/jsonschema/ComponentSchema.json ) to validate different kind of components:
 
@@ -47,9 +53,13 @@
 
 After the configuration, you can follow the steps below to write a yaml.
 
-1. Press `ctrl+space` , a list of templates for different kind of component is shown, select one to get started.
+1. Press `Ctrl+Space` or type "add" for hint, a list of templates for different kind of component will be shown, select one to get started.
 
    ![image-20210108232003216](../images/yaml-snippets.png)
+
+   If `Ctrl+Space` not working for you, this hotkey may have been occupied by other programs. You can reference this [doc](https://code.visualstudio.com/docs/getstarted/keybindings) and assign a new hotkey for command  **Trigger Suggest**.
+
+   ![image-20210112150901259](../images/yaml-hotkey.png)
 
 2. Fill required fields in the template, use `tab` to switch between "<>" wrapped fields and replace them with your own definition.
 
@@ -63,7 +73,6 @@ After the configuration, you can follow the steps below to write a yaml.
    version: 0.0.1
    display_name: < Put your component Display name here.>
    type: CommandComponent
-   is_deterministic: false
    tags: 
      from_schema_snippet: true
    inputs: 
@@ -72,12 +81,12 @@ After the configuration, you can follow the steps below to write a yaml.
        description: < Edit description for your input >  
      < Your 2nd Input name >: 
        type: path
+       optional: true
        description: < Edit description for your input >  
    outputs: 
      < Your 1st Output name >: 
        type: path
        description: < Edit description for your output >  
-   command: < Your command file name >  --< Your 1st Input name > {inputs.< Your 1st Input name >} --< Your 2nd Input name > {inputs.< Your 2nd Input name >}  --< Your 1st Output name > {outputs.< Your 1st Output name >} 
    environment: 
      conda: 
        conda_dependencies: 
@@ -91,6 +100,7 @@ After the configuration, you can follow the steps below to write a yaml.
              - azureml-sdk
              - < Specify your extra dependencies >      
      os: Linux
+   command: < Your command file name >  --< Your 1st Input name > {inputs.< Your 1st Input name >} [--< Your 2nd Input name > {inputs.< Your 2nd Input name >}]  --< Your 1st Output name > {outputs.< Your 1st Output name >} 
    ```
 
 3. If you need more fields for your spec, use `ctrl+space` to toggle hint about more supported fields.

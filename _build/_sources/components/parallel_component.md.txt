@@ -1,13 +1,18 @@
 # Parallel Component
 
-## Overivew
+## Overview
 ParallelComponent is a kind of component to run [ParallelRunStep](https://docs.microsoft.com/en-us/python/api/azureml-pipeline-steps/azureml.pipeline.steps.parallelrunstep?view=azure-ml-py#constructor)
 
-### scenarios
-TODO: Describe what's the target scenarios for this Component.
+### Scenarios
+Similar to ParallelRunStep, ParallelComponent is suitable for the scenarios that the input includes a large amount of data.
+The typical scenarios include the following:
+* Image processing, text processing, and other tasks to process a large number of files;
+* Use a trained model to do batch inference on a large amount of input data;
 
-### limitation
-TODO: Describe what's the limitation.
+### Limitation
+Compared to ParallelRunStep, currently ParallelComponent can only process FileDataset, TabularDataset is not supported.
+
+Other behaviors and the limitations are the same as [ParallelRunStep in AzureML](https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/machine-learning-pipelines/parallel-run)
 
 ## How to write ParallelComponent yaml spec
 
@@ -73,7 +78,7 @@ See [more examples in github samples repo](https://github.com/Azure/DesignerPriv
 
 ## Appendix
 
-In legacy module concept, this maps to `basic` jobType Module.
+In legacy module concept, this maps to `parallel` jobType Module.
 
 - legacy [module sepc doc](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/azureml-pipeline-wrapper/azureml-modules/docs/module-spec-definition.md#parallel)
 

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Pipeline &mdash; Component SDK beta documentation</title>
+  <title>Pipeline &mdash; Component SDK  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../',
-              VERSION:'beta',
+              VERSION:'',
               LANGUAGE:'None',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -49,7 +49,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="PipelineParameter" href="pipeline_parameter.html" />
-    <link rel="prev" title="Component" href="component.html" /> 
+    <link rel="prev" title="Inputs and Outputs" href="inputs-and-outputs.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -100,9 +100,20 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../concepts.html">Concepts</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="component.html">Component</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Pipeline</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline_parameter.html">PipelineParameter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="runsettings.html">RunSettings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputs-and-outputs.html">Inputs and Outputs</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Pipeline</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-are-azure-machine-learning-pipelines">What are Azure Machine Learning Pipelines?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-pipelines-with-the-component-sdk">Building pipelines with the Component SDK</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#a-simple-pipeline">A simple pipeline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#a-multi-layer-pipeline">A multi-layer pipeline</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#key-advantages">Key advantages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#next-steps">Next steps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline_parameter.html">PipelineParameter</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Components</a></li>
@@ -179,8 +190,166 @@
             
   <div class="section" id="pipeline">
 <h1>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-are-azure-machine-learning-pipelines">
+<h2>What are Azure Machine Learning Pipelines?<a class="headerlink" href="#what-are-azure-machine-learning-pipelines" title="Permalink to this headline">¶</a></h2>
 <p>An Azure Machine Learning pipeline is an independently executable workflow of a complete machine learning task. Azure Machine Learning pipelines help you build, optimize, and manage machine learning workflows with simplicity, repeatability and quality assurance.</p>
 <p>These benefits become significant as soon as your machine learning project moves beyond pure exploration and into iteration. Even simple one-step pipelines can be valuable. Machine learning projects are often in a complex state, and it can be a relief to make the precise accomplishment of a single workflow a trivial process.</p>
+</div>
+<div class="section" id="building-pipelines-with-the-component-sdk">
+<h2>Building pipelines with the Component SDK<a class="headerlink" href="#building-pipelines-with-the-component-sdk" title="Permalink to this headline">¶</a></h2>
+<p>In the Component SDK, a pipeline can be defined as a function with <code class="docutils literal"><span class="pre">&#64;dsl.pipeline</span></code> decorator imported from <code class="docutils literal"><span class="pre">azure.ml.component</span></code> to declare itself an Azure
+Machine Learning pipeline.
+There are one or more <a class="reference internal" href="component.html"><span class="doc">Component</span></a> objects in the pipeline, and a <code class="docutils literal"><span class="pre">Pipeline</span></code> runs as part of an <code class="docutils literal"><span class="pre">Experiment</span></code>.</p>
+<p>An Azure Machine Learning pipeline is associated with an Azure Machine Learning workspace and a Component is
+associated with a compute target available within that workspace. For more information, see
+<a class="reference external" href="https://docs.microsoft.com/en-us/azure/machine-learning/how-to-manage-workspace?tabs=python"><strong>Create and manage Azure Machine Learning workspaces in the Azure portal</strong></a>
+or <a class="reference external" href="https://docs.microsoft.com/en-us/azure/machine-learning/concept-compute-target"><strong>What are compute targets in Azure Machine Learning?</strong></a>.</p>
+<div class="section" id="a-simple-pipeline">
+<h3>A simple pipeline<a class="headerlink" href="#a-simple-pipeline" title="Permalink to this headline">¶</a></h3>
+<p>This snippet shows the objects and calls needed to create and run a simple pipeline with only one component inside.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>from azureml.core import Dataset, Workspace
+from azure.ml.component import dsl, Component
+
+# get workspace
+ws = Workspace.from_config()
+# prepare dataset
+sample_dataset = Dataset.get_by_name(ws, name=&#39;sample_dataset_name&#39;)
+# load named component which created in workspace
+# The component with name `azureml://Execute Python Script` is a built-in component.
+execute_python_script_component = Component.load(ws, name=&#39;azureml://Execute Python Script&#39;)
+
+# define the sample pipeline
+@dsl.pipeline(name=&#39;sample-pipeline&#39;, 
+              description=&#39;a sample pipeline&#39;，
+              default_compute_target = &#39;aml-compute&#39;
+              )
+def sample_pipeline():
+    # instantiate the component
+    component = execute_python_script_component(dataset1=sample_dataset)
+    return component.outputs
+
+# create and validate the pipeline
+pipeline = sample_pipeline()
+pipeline.validate()
+
+# submit the pipeline
+pipeline.submit()
+</pre></div>
+</div>
+<ul class="simple">
+<li>Read more about load &amp; parameterize a componet in <a class="reference internal" href="component.html"><span class="doc">component</span></a></li>
+</ul>
+</div>
+<div class="section" id="a-multi-layer-pipeline">
+<h3>A multi-layer pipeline<a class="headerlink" href="#a-multi-layer-pipeline" title="Permalink to this headline">¶</a></h3>
+<p>A multi-layer pipeline is compounded from multiple components or pipelines.
+The snippet below shows how to create and run a multi-layer pipeline.</p>
+<p>Define a training pipeline include train, score, evaluate component.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># get workspace</span>
+<span class="kn">from</span> <span class="nn">azureml.core</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">Workspace</span>
+<span class="kn">from</span> <span class="nn">azure.ml.component</span> <span class="kn">import</span> <span class="n">dsl</span><span class="p">,</span> <span class="n">Component</span>
+
+<span class="n">ws</span> <span class="o">=</span> <span class="n">Workspace</span><span class="o">.</span><span class="n">from_config</span><span class="p">()</span>
+<span class="c1"># prepare dataset</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">get_by_name</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;train_data&#39;</span><span class="p">)</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">get_by_name</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;test_data&#39;</span><span class="p">)</span>
+<span class="c1"># load components from local yaml spec as anonymous component</span>
+<span class="n">train_component_func</span> <span class="o">=</span> <span class="n">Component</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">yaml_file</span><span class="o">=</span><span class="s1">&#39;./components/get-started-train/train.yaml&#39;</span><span class="p">)</span>
+<span class="n">score_component_func</span> <span class="o">=</span> <span class="n">Component</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">yaml_file</span><span class="o">=</span><span class="s1">&#39;./components/get-started-score/score.yaml&#39;</span><span class="p">)</span>
+<span class="n">eval_component_func</span> <span class="o">=</span> <span class="n">Component</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">yaml_file</span><span class="o">=</span><span class="s1">&#39;./components/get-started-eval/eval.yaml&#39;</span><span class="p">)</span>
+<span class="n">compare_component_func</span> <span class="o">=</span> <span class="n">Component</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">yaml_file</span><span class="o">=</span><span class="s1">&#39;./components/get-started-compare-two-models/compare2.yaml&#39;</span><span class="p">)</span>
+
+<span class="c1"># define the training pipeline</span>
+<span class="nd">@dsl</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;A training pipeline including train/score/eval&#39;</span><span class="p">,</span> 
+              <span class="n">description</span><span class="o">=</span><span class="s1">&#39;train model and evaluate model performance&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">training_pipeline</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">):</span>
+    <span class="n">train</span> <span class="o">=</span> <span class="n">train_component_func</span><span class="p">(</span>
+        <span class="n">training_data</span><span class="o">=</span><span class="n">train_data</span><span class="p">,</span> 
+        <span class="n">max_epochs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
+        <span class="n">learning_rate</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+    <span class="c1"># connect two components by setting the output of one as the input of the other. </span>
+    <span class="n">score</span> <span class="o">=</span> <span class="n">score_component_func</span><span class="p">(</span>
+        <span class="n">model_input</span><span class="o">=</span><span class="n">train</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">model_output</span><span class="p">,</span> 
+        <span class="n">test_data</span><span class="o">=</span><span class="n">test_data</span><span class="p">)</span>
+
+    <span class="nb">eval</span> <span class="o">=</span> <span class="n">eval_component_func</span><span class="p">(</span><span class="n">scoring_result</span><span class="o">=</span><span class="n">score</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">score_output</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">train</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">model_output</span><span class="p">,</span>
+            <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="nb">eval</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">eval_output</span><span class="p">}</span>  
+</pre></div>
+</div>
+<p>Define a root pipeline to compare the training results of two sub-pipelines with different <code class="docutils literal"><span class="pre">learning_rate</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nd">@dsl</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;A training pipeline including train/score/eval&#39;</span><span class="p">,</span> 
+              <span class="n">description</span><span class="o">=</span><span class="s1">&#39;train model and evaluate model performance&#39;</span><span class="p">,</span>
+              <span class="n">default_compute_target</span> <span class="o">=</span> <span class="s1">&#39;aml-compute&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">root_pipeline</span><span class="p">():</span>
+    <span class="c1"># training pipeline 1 with learning rate 0.01</span>
+    <span class="n">training_pipeline1</span> <span class="o">=</span> <span class="n">training_pipeline</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+    <span class="c1"># training pipeline 2 with learning rate 0.02</span>
+    <span class="n">training_pipeline2</span> <span class="o">=</span> <span class="n">training_pipeline</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span>
+    <span class="n">compare_component</span> <span class="o">=</span> <span class="n">compare_component_func</span><span class="p">(</span><span class="n">model1</span><span class="o">=</span><span class="n">training_pipeline1</span><span class="o">.</span><span class="n">outpus</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+                                               <span class="n">eval_result1</span><span class="o">=</span><span class="n">training_pipeline1</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">,</span>
+                                               <span class="n">model2</span><span class="o">=</span><span class="n">training_pipeline2</span><span class="o">.</span><span class="n">outpus</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+                                               <span class="n">eval_result2</span><span class="o">=</span><span class="n">training_pipeline2</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">compare_component</span><span class="o">.</span><span class="n">outputs</span>
+
+<span class="c1"># create and validate the pipeline</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">root_pipeline</span><span class="p">()</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
+
+<span class="c1"># submit the pipeline</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="key-advantages">
+<h2>Key advantages<a class="headerlink" href="#key-advantages" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Key advantage</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Unattended runs</strong></td>
+<td>Schedule steps to run in parallel or in sequence in a reliable and unattended manner. Data preparation and modeling can last days or weeks, and pipelines allow you to focus on other tasks while the process is running.</td>
+</tr>
+<tr>
+<td><strong>Heterogenous compute</strong></td>
+<td>Use multiple pipelines that are reliably coordinated across heterogeneous and scalable compute resources and storage locations. Make efficient use of available compute resources by running individual pipeline steps on different compute targets, such as HDInsight, GPU Data Science VMs, and Databricks.</td>
+</tr>
+<tr>
+<td><strong>Re-usability</strong></td>
+<td>Create pipeline templates for specific scenarios, such as retraining and batch-scoring. Trigger published pipelines from external systems via simple REST calls.</td>
+</tr>
+<tr>
+<td><strong>Tracking and versioning</strong></td>
+<td>Instead of manually tracking data and result paths as you iterate, use the pipelines SDK to explicitly name and version your data sources, inputs, and outputs. You can also manage scripts and data separately for increased productivity.</td>
+</tr>
+<tr>
+<td><strong>Modularity</strong></td>
+<td>Separating areas of concerns and isolating changes allows software to evolve at a faster rate with higher quality.</td>
+</tr>
+<tr>
+<td><strong>Collaboration</strong></td>
+<td>Pipelines allow data scientists to collaborate across all areas of the machine learning design process, while being able to concurrently work on pipeline steps.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="section" id="next-steps">
+<h2>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">¶</a></h2>
+<p>Azure Machine Learning pipelines are a powerful facility that begins delivering value in the early development stages.
+The value increases as the team and project grows. This article has explained how pipelines are specified with
+the Component SDK. You&#8216;ve seen some simple source code and been introduced to a few of the <code class="docutils literal"><span class="pre">dsl.pipeline</span></code> decorator that are available.
+You should have a sense of when to use Azure Machine Learning pipelines and how Azure runs them.</p>
+<ul class="simple">
+<li>Learn how to create your first pipeline with our example Jupyter notebooks <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/get-started.ipynb"><strong>get-started</strong></a>.</li>
+<li>Learn how to <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/create-pipeline-with-subpipeline.ipynb"><strong>create a pipeline with sub pipeline</strong></a>.</li>
+<li>See the SDK reference docs for <a class="reference internal" href="component.html"><span class="doc">component</span></a>, <a class="reference internal" href="runsettings.html"><span class="doc">runsettings</span></a> and <a class="reference internal" href="pipeline_parameter.html"><span class="doc">pipeline parameter</span></a>.</li>
+</ul>
+</div>
 </div>
 
 
@@ -194,7 +363,7 @@
         <a href="pipeline_parameter.html" class="btn btn-neutral float-right" title="PipelineParameter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="component.html" class="btn btn-neutral float-left" title="Component" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="inputs-and-outputs.html" class="btn btn-neutral float-left" title="Inputs and Outputs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -204,7 +373,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, microsoft
+        &copy; Copyright 2021, Microsoft
 
     </p>
   </div>

@@ -1,26 +1,54 @@
 # Change Log
 
-## [upcomming release]() (target date: 2021.01.15)
+## [upcomming release]() (target date: 2021.02.05)
 
-Features listed in this secetion are available in preview version: 29211468.
+Features listed in this secetion are under development and may goes in the new stable release.
+
+**New Features:**
+- Support [Distributed Component](components/distributed_component.md)
+- Runsetting: Support runsettings.environment_variables
+- PipelineParameter: Support [**use pipeline parameter as substring in a component parameter**](./docs/concepts/pipeline_parameter.md#PipelineParameter-as-substrings-of-a-component-parameter)
+- Environment: Support reference an existing environment by name in component yaml
+- Component.Run: Support run arbitrary command component locally
+- Output: Support configure path_on_datastore of component's output.
+
+**Improvements:**
+
+- Improve validation logic of local/remote run
+- Fundamental
+    - Improve Performance
+- Remove fields(source, contact, helpDocument, shared_scope) in CLI outputs to align with UX
+- Improve snapshot creating speed by 2x in AML Notebooks(which has low file system performance when based on Azure File Share)
+    - Added debug info for `az ml component craete/build`, user can check by adding `--verbose` parameter in CLI.
+    - Supports snapshot cache for all components(We don't support component with additional includes or amlignore files before).
+    - Supports [**recursive ignore files**](./docs/components/component-spec-topics/ignore-files.md#Ignore-files-in-subdirectory) in component code snapshot.
+
+**Known Bugs to address in this release:**
+
+- Bug 1005863: Output.configure(mode='download') should take effect
+- Bug 1008265: Optional boolean argument is set as False rather than not specified in AML
+
+## [v0.1.0.29596699](https://pypi.org/project/azure-ml-component/0.1.0.29596699/) (2021.01.15)
+
+This release contains support of new component types like CommandComponent, ParallelComponent, HDInsightComponent.
 
 **New Features:**
 - Provide component SDK json schema to help authoring yaml spec, doc: [use-component-spec-schema-in-vscode.md](components/use-component-spec-schema-in-vscode.md)
 
-- Support Any CommandComponent
+- Support Any [CommandComponent](components/command_component.md)
     - Sample1: [how-to-use-command-component.ipynb](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-command-component.ipynb)
     - Sample2: [how-to-use-r-command-component.ipynb](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-r-command-component.ipynb)
     - This feature is still in preview, has known backend limitations and not recommended for production use case yet.
     - Command starts with python will work same as previous basic module.
 
-- Support ParallelComponent SDK 1.5 component yaml
+- Support [ParallelComponent](components/parallel_component.md) SDK 1.5 component yaml
     - Sample: [how-to-use-parallel-component.ipynb](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-parallel-component.ipynb)
     
-- Support HDInsightComponent SDK 1.5 component yaml
+- Support [HDInsightComponent](components/hdi_component.md) SDK 1.5 component yaml
     - Sample: [how-to-use-hdinsight-component.ipynb](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-hdi-component.ipynb)
 
 - Support `az ml component build`: user can get a local component snapshot and do some processing like code-sign before create.
-    - Doc: [component-build.md](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/docs/component-spec-topics/component-build.md)
+    - Doc: [component-build.md](components/component-spec-topics/component-build.md)
     - Sample: [how-to-use-component-cli.ipynb](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-component-cli.ipynb)
 
 - Components created using new component yaml can shown correctly in Pipeline Draft Module Tree and Modules Management page of workspace portal UX. Add `&flight=cm` in browser url to enable this flight feature.
@@ -38,8 +66,8 @@ Features listed in this secetion are available in preview version: 29211468.
 
 - Improve Docs
     - Improved [reference doc site](https://aka.ms/azure-ml-component-reference)
-    - Add [runsettings doc](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/docs/component-runsettings.md)
-    - Add [pipeline parameter doc](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/docs/pipeline-parameter.md)
+    - Add [runsettings doc](concepts/runsettings.md)
+    - Add [pipeline parameter doc](concepts/pipeline_parameter.md)
 
 **Fixed Bugs:**
 

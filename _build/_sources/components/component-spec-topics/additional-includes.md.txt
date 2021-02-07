@@ -59,7 +59,7 @@ library2/
 
 * Additional includes file should be a plain text file, place each item in one line. The line break could be either `\r\n` or `\n`, but it is recommended to use `\n`.
 
-* Specified additional file (or folder) will be copied directly into the base folder of snapshot. No parent folders included.
+* Specified additional file (or folder) will be copied directly into the base folder of the snapshot. No parent folders are included.
 
 * Each item in the additional include file:
 

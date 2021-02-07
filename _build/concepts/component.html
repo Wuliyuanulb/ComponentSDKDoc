@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Component &mdash; Component SDK beta documentation</title>
+  <title>Component &mdash; Component SDK  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../',
-              VERSION:'beta',
+              VERSION:'',
               LANGUAGE:'None',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -48,7 +48,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Pipeline" href="pipeline.html" />
+    <link rel="next" title="RunSettings" href="runsettings.html" />
     <link rel="prev" title="Concepts" href="../concepts.html" /> 
 </head>
 
@@ -100,8 +100,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../concepts.html">Concepts</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Component</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#component-specification">Component specification</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#what-s-the-benefit-of-component">What&#8216;s the benefit of component?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-azure-machine-learning-component">What is Azure Machine Learning component?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#component-types">Component types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-create-an-azure-ml-component">How to create an Azure ML component</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#define-components-with-component-specification">Define components with component specification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#manage-components-with-ui-cli">Manage components with UI &amp; CLI</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-consume-a-component-using-sdk">How to consume a component using SDK</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#load-a-component">Load a component</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parameterize-a-component">Parameterize a component</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#run-a-component-locally">Run a component locally</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-and-submit-a-pipeline-with-the-component">Build and submit a pipeline with the component</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#what-s-the-benefit-of-component">What&#8216;s the benefit of Component?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#next-steps">Next steps</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#getting-started">Getting Started</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#consume-existing-components">Consume existing components</a></li>
@@ -109,9 +124,10 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="runsettings.html">RunSettings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputs-and-outputs.html">Inputs and Outputs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline_parameter.html">PipelineParameter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="runsettings.html">RunSettings</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Components</a></li>
@@ -188,28 +204,101 @@
             
   <div class="section" id="component">
 <h1>Component<a class="headerlink" href="#component" title="Permalink to this headline">¶</a></h1>
-<p>A component is self-contained set of code that performs one step in the ML workflow (pipeline), such as data preprocessing, model training, model scoring and so on. A component is analogous to a function, in that it has a name, parameters, expects certain input and returns some value.</p>
-<p>Data scientists or developers can wrap their arbitrary code as Azure Machine Learning component by following the component specification .</p>
-<div class="section" id="component-specification">
-<h2>Component specification<a class="headerlink" href="#component-specification" title="Permalink to this headline">¶</a></h2>
-<p>A component specification in YAML format describes the component in the Azure Machine Learning system. A component definition captures the following information:</p>
+<div class="section" id="what-is-azure-machine-learning-component">
+<h2>What is Azure Machine Learning component?<a class="headerlink" href="#what-is-azure-machine-learning-component" title="Permalink to this headline">¶</a></h2>
+<p>A component is self-contained set of code that performs one step in the ML workflow (pipeline), such as data preprocessing, model training, model scoring and so on. A component is analogous to a function, in that it has a name, parameters, expects certain input, and returns some value.</p>
+<div class="section" id="component-types">
+<h3>Component types<a class="headerlink" href="#component-types" title="Permalink to this headline">¶</a></h3>
+<p>Component SDK support multiple component types, for example:</p>
+<ul class="simple">
+<li><a class="reference internal" href="../components/command_component.html"><span class="doc">CommandComponent</span></a>: where you can specify a launching command line with a container so that you can invoke your script (Python, R, shell) or Exe.</li>
+<li><a class="reference external" href="../components/distributed_component.rst">DistributedComponent</a>: to help user launch distributed training jobs for popular deep learning frameworks like PyTorch.</li>
+<li><a class="reference internal" href="../components/parallel_component.html"><span class="doc">ParallelComponent</span></a>: to create a reusable component to asynchronously process large amount of data in parallel, built on top of AzureML&#8216;s <a class="reference external" href="https://docs.microsoft.com/en-us/python/api/azureml-pipeline-steps/azureml.pipeline.steps.parallelrunstep?view=azure-ml-py#constructor">ParallelRunStep</a> capability.</li>
+<li><a class="reference internal" href="../components/hdi_component.html"><span class="doc">HDInsightComponent</span></a>: to execute a spark job in a HDInsight cluster.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="how-to-create-an-azure-ml-component">
+<h2>How to create an Azure ML component<a class="headerlink" href="#how-to-create-an-azure-ml-component" title="Permalink to this headline">¶</a></h2>
+<p>Data scientists or developers can wrap their arbitrary code as Azure ML component by following steps.</p>
+<div class="section" id="define-components-with-component-specification">
+<h3>Define components with component specification<a class="headerlink" href="#define-components-with-component-specification" title="Permalink to this headline">¶</a></h3>
+<p>A <a class="reference internal" href="../components/component-spec-definition.html"><span class="doc">component specification</span></a> in YAML format describes the component in the Azure Machine Learning system. A component definition captures the following information:</p>
 <ul class="simple">
 <li><strong>Metadata:</strong> name, display_name, version, type, etc.</li>
-<li><strong>Interface:</strong>: input/output specifications (name, type, description, default value, etc).</li>
-<li><strong>Command, Code &amp; Envrionment:</strong>: command, code and environment required to run the component.</li>
+<li><strong>Interface:</strong> <a class="reference internal" href="../components/component-spec-topics/inputs-and-outputs.html"><span class="doc">input/output specifications</span></a> (name, type, description, default value, etc).</li>
+<li><strong>Command, Code &amp; Environment:</strong> command, code and <a class="reference internal" href="../components/component-spec-topics/running-environment.html"><span class="doc">environment</span></a> required to run the component.</li>
 </ul>
-<p>Refer to <a class="reference internal" href="../components/component-spec-definition.html"><span class="doc">component spec definition</span></a> for more details.</p>
+</div>
+<div class="section" id="manage-components-with-ui-cli">
+<h3>Manage components with UI &amp; CLI<a class="headerlink" href="#manage-components-with-ui-cli" title="Permalink to this headline">¶</a></h3>
+<p>After user defined components with component spec, user can manage components with UI &amp; CLI tools.</p>
+<ul class="simple">
+<li>Azure ML CLI:<ul>
+<li>User can use a command like <code class="docutils literal"><span class="pre">az</span> <span class="pre">ml</span> <span class="pre">component</span> <span class="pre">create</span></code> to create component into workspace.</li>
+<li>After creation, the component will be shared to all users that have access to the workspace.</li>
+<li>Reference this <a class="reference external" href="https://aka.ms/component-cli-walk-through">quick walk through</a> to the azure cli extension that manipulates the component.</li>
+</ul>
+</li>
+<li><a class="reference external" href="https://ml.azure.com/">Azure ML Studio UI</a>:<ul>
+<li>Adding &amp;flight=cm to url in your browser will enable the <code class="docutils literal"><span class="pre">Modules</span></code> page which can help create, list, update your components.</li>
+<li>Note: <code class="docutils literal"><span class="pre">Module</span></code> is a legacy name of <code class="docutils literal"><span class="pre">Component</span></code>. UI renaming change will happen in near future.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="how-to-consume-a-component-using-sdk">
+<h2>How to consume a component using SDK<a class="headerlink" href="#how-to-consume-a-component-using-sdk" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="load-a-component">
+<h3>Load a component<a class="headerlink" href="#load-a-component" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference external" href="../azure.ml.component.html#azure.ml.component.Component.from_yaml">Component.from_yaml</a>: Load component from yaml spec as an anonymous component. Then you can run the component in local to test.</li>
+<li><a class="reference external" href="../azure.ml.component.html#azure.ml.component.Component.load">Component.Load</a>: Load component by name and version from workspace. The component needs to have been created in the workspace using <code class="docutils literal"><span class="pre">az</span> <span class="pre">ml</span> <span class="pre">component</span> <span class="pre">create</span></code>.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">train_component_func</span> <span class="o">=</span> <span class="n">Component</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">yaml_file</span><span class="o">=</span><span class="s1">&#39;./components/get-started-train/train.yaml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="parameterize-a-component">
+<h3>Parameterize a component<a class="headerlink" href="#parameterize-a-component" title="Permalink to this headline">¶</a></h3>
+<p>User can control the runtime behavior of a component by specifying:</p>
+<ul class="simple">
+<li>inputs and outputs: learn more on available runtime settings in the reference doc <a class="reference internal" href="inputs-and-outputs.html"><span class="doc">inputs and outputs</span></a>.</li>
+<li>runsettings: learn more about runsettings in the reference doc <a class="reference internal" href="runsettings.html"><span class="doc">runsettings</span></a>.</li>
+</ul>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">component</span> <span class="o">=</span> <span class="n">train_component_func</span><span class="p">(</span>
+        <span class="c1"># inputs can be an existing dataset or outputs of other components</span>
+        <span class="n">training_data</span><span class="o">=</span><span class="n">train_data</span><span class="p">,</span> 
+        <span class="c1"># parameters </span>
+        <span class="n">max_epochs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
+        <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="c1"># component runsettings</span>
+<span class="n">component</span><span class="o">.</span><span class="n">runsettings</span><span class="o">.</span><span class="n">target</span><span class="o">=</span><span class="s1">&#39;aml-compute&#39;</span>
+<span class="c1"># output runtime behavior configuration: the relative path of component&#39;s output on datastore</span>
+<span class="n">component</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">model_output</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">path_on_datastore</span><span class="o">=</span><span class="s2">&quot;azureml/train_component/{run-id}/{output-name}&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="run-a-component-locally">
+<h3>Run a component locally<a class="headerlink" href="#run-a-component-locally" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="../azure.ml.component.html#azure.ml.component.Component.run">Component.run</a>: Run component in your local docker container, conda, or host environment.</p>
+</div>
+<div class="section" id="build-and-submit-a-pipeline-with-the-component">
+<h3>Build and submit a pipeline with the component<a class="headerlink" href="#build-and-submit-a-pipeline-with-the-component" title="Permalink to this headline">¶</a></h3>
+<p>Reference <a class="reference internal" href="pipeline.html"><span class="doc">pipeline</span></a> for more details.</p>
+</div>
 </div>
 <div class="section" id="what-s-the-benefit-of-component">
-<h2>What&#8216;s the benefit of component?<a class="headerlink" href="#what-s-the-benefit-of-component" title="Permalink to this headline">¶</a></h2>
-<p>Currently Azure Machine Learning offers PipelineStep as the basic building block of machine learning pipeline. PipelineStep is one-off wrap of code that cannot be reused across different pipelines. Compare to PipelineStep, component greatly simplifies the ML pipeline develpoment lifecycle, enables reproducibility and accelerates the collaboration for all-skill data scientists in a team:</p>
+<h2>What&#8216;s the benefit of Component?<a class="headerlink" href="#what-s-the-benefit-of-component" title="Permalink to this headline">¶</a></h2>
+<p>Currently Azure Machine Learning offers PipelineStep as the basic building block of machine learning pipeline. PipelineStep is one-off wrap of code that cannot be reused across different pipelines. Compare to PipelineStep, component greatly simplifies the ML pipeline development lifecycle, enables reproducibility and accelerates the collaboration for all-skill data scientists in a team:</p>
 <ul class="simple">
-<li><strong>Composability:</strong> This is the native benefit of component. It hides the complicated logic, and only exposes simple interface. So component consumers don&#8216;t need to worry about underlying implementation. They can easily use components built by themselves or by others. In the meanwhile the ground truth (component specification) of a component is visible, making secondary development easy.</li>
+<li><strong>Composability:</strong> This is the native benefit of the component. It hides the complicated logic, and only exposes a simple interface. So component consumers don&#8216;t need to worry about the underlying implementation. They can easily use components built by themselves or by others. In the meanwhile the ground truth (component specification) of a component is visible, making secondary development easy.</li>
 <li><strong>Reusability:</strong> Component can be easily reused across different ML pipelines, different ML workspaces, even different organizations.</li>
-<li><strong>Easy development, testing &amp; debug:</strong> Rich SDK and CLI features to make component development, testing and debug much easier.</li>
-<li><strong>Easy pipeline authoring:</strong> Once a component is createed in the workspace, it can be easily consumed in both Python Python SDK and drag-and-drop Designer UI.</li>
+<li><strong>Easy development, testing &amp; debug:</strong> Rich SDK and CLI feature to make component development, testing, and debugging much easier.</li>
+<li><strong>Easy pipeline authoring:</strong> Once a component is created in the workspace, it can be easily consumed in both Python Python SDK and drag-and-drop Designer UI.</li>
 <li><strong>Reproducibility:</strong> By capturing all information in component specification, AML Component can be easily reproduced in different environments. Components can be managed in versions so it&#8216;s easy to trace back if a data scientist wants to reproduce a specific experiment result.</li>
-<li><strong>Sharing &amp; collaboration:</strong> Data scientists who prefer low-code/no-code can use Designer UI to quickly prototype and export the pipeline to Python code for code-first data scientists for further tuning or check in. The exported Python notebook can also be submitted to different workspaces for sharing &amp; collaboration.</li>
+<li><strong>Sharing &amp; collaboration:</strong> Data scientists who prefer low-code/no-code can use Designer UI to quickly prototype and export the pipeline to Python code for code-first data scientists for further tuning or check-in. The exported Python notebook can also be submitted to different workspaces for sharing &amp; collaboration.</li>
 </ul>
 </div>
 <div class="section" id="next-steps">
@@ -220,7 +309,7 @@
 </div>
 <div class="section" id="consume-existing-components">
 <h3>Consume existing components<a class="headerlink" href="#consume-existing-components" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://github.com/Azure/AzureMachineLearningGallery">Component gallery</a> is an open community for data scientists to contribute, share, and find machine learning pipelines as well as custom-built components to be used in Azure Machine Learning. It has more that 50 components for common machine learning tasks. Source code of all components can be found in the gallery.</p>
+<p><a class="reference external" href="https://github.com/Azure/AzureMachineLearningGallery">Component gallery</a> is an open community for data scientists to contribute, share, and find machine learning pipelines as well as custom-built components to be used in Azure Machine Learning. It has more than 50 components for common machine learning tasks. Source code of all components can be found in the gallery.</p>
 </div>
 </div>
 </div>
@@ -233,7 +322,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="pipeline.html" class="btn btn-neutral float-right" title="Pipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="runsettings.html" class="btn btn-neutral float-right" title="RunSettings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../concepts.html" class="btn btn-neutral float-left" title="Concepts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -246,7 +335,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, microsoft
+        &copy; Copyright 2021, Microsoft
 
     </p>
   </div>

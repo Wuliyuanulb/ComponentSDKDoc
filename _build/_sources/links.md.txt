@@ -2,6 +2,7 @@
 
 ## How to get support
 
+* Refer to [FAQ](faq.md) or contact us at <amlcomponentsdk@microsoft.com> for further questions.
 * Ask questions on [Teams Channel](https://teams.microsoft.com/l/channel/19%3aad330b8316204faf8ea3bca2219fe011%40thread.tacv2/Custom%2520Module?groupId=96fec103-1096-4e58-9ac4-d3fc32308972&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47)
 * Ask for new [features](https://aka.ms/component-sdk-feature-asks)
 * Report [bugs](https://aka.ms/component-sdk-bugs)

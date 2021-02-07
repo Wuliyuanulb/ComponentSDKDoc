@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Concepts &mdash; Component SDK beta documentation</title>
+  <title>Concepts &mdash; Component SDK  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'./',
-              VERSION:'beta',
+              VERSION:'',
               LANGUAGE:'None',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -100,9 +100,10 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Concepts</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="concepts/component.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/runsettings.html">RunSettings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/inputs-and-outputs.html">Inputs and Outputs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concepts/pipeline.html">Pipeline</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concepts/pipeline_parameter.html">PipelineParameter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts/runsettings.html">RunSettings</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
@@ -180,26 +181,37 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="concepts/component.html">Component</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="concepts/component.html#component-specification">Component specification</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts/component.html#what-s-the-benefit-of-component">What&#8216;s the benefit of component?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/component.html#what-is-azure-machine-learning-component">What is Azure Machine Learning component?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/component.html#how-to-create-an-azure-ml-component">How to create an Azure ML component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/component.html#how-to-consume-a-component-using-sdk">How to consume a component using SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/component.html#what-s-the-benefit-of-component">What&#8216;s the benefit of Component?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concepts/component.html#next-steps">Next steps</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="concepts/pipeline.html">Pipeline</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/runsettings.html">RunSettings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts/runsettings.html#user-interface">User Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/runsettings.html#runsettings-reference">RunSettings Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/inputs-and-outputs.html">Inputs and Outputs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts/inputs-and-outputs.html#configure-runtime-behavior-of-inputs-and-outputs">Configure runtime behavior of Inputs and Outputs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/inputs-and-outputs.html#input-configuration-not-ready-for-use">Input Configuration [Not ready for use]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/inputs-and-outputs.html#output-configuration">Output Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts/pipeline.html">Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts/pipeline.html#what-are-azure-machine-learning-pipelines">What are Azure Machine Learning Pipelines?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/pipeline.html#building-pipelines-with-the-component-sdk">Building pipelines with the Component SDK</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/pipeline.html#key-advantages">Key advantages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/pipeline.html#next-steps">Next steps</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="concepts/pipeline_parameter.html">PipelineParameter</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="concepts/pipeline_parameter.html#what-is-pipelineparameter">What is PipelineParameter?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concepts/pipeline_parameter.html#supported-type">Supported type</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts/pipeline_parameter.html#use-pipelineparameter-as-component-s-input">Use PipelineParameter as component&#8216;s input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts/pipeline_parameter.html#use-pipelineparameter">Use PipelineParameter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concepts/pipeline_parameter.html#submit-with-pipelineparameter">Submit with PipelineParameter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concepts/pipeline_parameter.html#publish-run-with-pipelineparameter">Publish run with PipelineParameter</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="concepts/runsettings.html">RunSettings</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="concepts/runsettings.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts/runsettings.html#command-component">Command component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts/runsettings.html#parallel-component">Parallel component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts/runsettings.html#hdinsight-component">HDInsight component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="concepts/runsettings.html#examples">Examples</a></li>
 </ul>
 </li>
 </ul>
@@ -227,7 +239,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, microsoft
+        &copy; Copyright 2021, Microsoft
 
     </p>
   </div>

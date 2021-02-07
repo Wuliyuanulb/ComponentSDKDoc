@@ -1,0 +1,343 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Inputs and Outputs &mdash; Component SDK  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pipeline" href="pipeline.html" />
+    <link rel="prev" title="RunSettings" href="runsettings.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> Component SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../concepts.html">Concepts</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="component.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="runsettings.html">RunSettings</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Inputs and Outputs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configure-runtime-behavior-of-inputs-and-outputs">Configure runtime behavior of Inputs and Outputs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#input-configuration-not-ready-for-use">Input Configuration [Not ready for use]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#output-configuration">Output Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pipeline_parameter.html">PipelineParameter</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../sdk_reference.html">SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../links.html">Useful Links</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Component SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../concepts.html">Concepts</a> &raquo;</li>
+        
+      <li>Inputs and Outputs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/concepts/inputs-and-outputs.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="inputs-and-outputs">
+<h1>Inputs and Outputs<a class="headerlink" href="#inputs-and-outputs" title="Permalink to this headline">¶</a></h1>
+<p>The component interface is defined by its inputs and outputs.</p>
+<p>The input could either be an <strong>Input Port</strong> or a <strong>Parameter</strong>. The output could only be an <strong>Output Port</strong>.</p>
+<p>Input ports and output ports typically refer to a path. In Designer, they will be displayed as a <strong>port</strong> on the component. They could have arbitrary type names such as <code class="docutils literal"><span class="pre">CsvFile</span></code>, <code class="docutils literal"><span class="pre">ImageFolder</span></code> to describe the underlying data. A component&#8216;s output port could be connected to another component&#8216;s input port, given they have the same type name.</p>
+<p><img alt="input_output_port" src="../_images/input_output_port.png" /></p>
+<p>Parameters are input values passed to the component by the command line while executing. In Designer, they are displayed on the right panel of the component. A parameter could only have scalar values such as <code class="docutils literal"><span class="pre">Integer</span></code>, <code class="docutils literal"><span class="pre">String</span></code>, <code class="docutils literal"><span class="pre">Boolean</span></code>, <code class="docutils literal"><span class="pre">Enum</span></code>. Each parameter could have additional attributes such as <code class="docutils literal"><span class="pre">default</span></code>, <code class="docutils literal"><span class="pre">min</span></code>, <code class="docutils literal"><span class="pre">max</span></code>, etc.</p>
+<div class="section" id="configure-runtime-behavior-of-inputs-and-outputs">
+<h2>Configure runtime behavior of Inputs and Outputs<a class="headerlink" href="#configure-runtime-behavior-of-inputs-and-outputs" title="Permalink to this headline">¶</a></h2>
+<p>The configurations of Input and Output ports are used to adjust their behaviors while running.</p>
+</div>
+<div class="section" id="input-configuration-not-ready-for-use">
+<h2>Input Configuration [Not ready for use]<a class="headerlink" href="#input-configuration-not-ready-for-use" title="Permalink to this headline">¶</a></h2>
+<p>Configure input port (input parameters are not supported) settings of a component, including Command Component, Parallel Component and HDIInsight Component.</p>
+<p>Supported settings:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mode</td>
+<td><a href="https://docs.microsoft.com/en-us/azure/machine-learning/how-to-train-with-datasets#mount-vs-download">"mount" and "download"</a></td>
+<td>"mount"</td>
+<td>The mode that will be used for this input.</td>
+</tr>
+</tbody>
+</table><p>Example SDK usage: Suppose we have a component with an input named &#8220;input_path&#8220;, its configuration will be:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">component</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">input_path</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;mount&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="output-configuration">
+<h2>Output Configuration<a class="headerlink" href="#output-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Configure output port settings of a component, including Command Component, Parallel Component and HDIInsight Component.</p>
+<p>Supported settings:</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>datastore</td>
+<td>azureml.core.datastore.Datastore</td>
+<td>Default datastore in the Workspace</td>
+<td>The datastore that will be used for the output.</td>
+</tr>
+<tr>
+<td>output_mode</td>
+<td>"upload" or "mount"</td>
+<td>"mount"</td>
+<td>Specify use "upload" or "mount" to access the data.</td>
+</tr>
+<tr>
+<td>path_on_compute</td>
+<td>str</td>
+<td>A temporary folder on Compute.</td>
+<td>The path of output data on the compute.</td>
+</tr>
+<tr>
+<td>path_on_datastore</td>
+<td>str</td>
+<td>Relative path on datastore: azureml/{run-id}/outputs/{output-name}</td>
+<td>The relative output path on datastore.</td>
+</tr>
+</tbody>
+</table><p><strong>Note:</strong></p>
+<p><strong>path_on_compute:</strong> <code class="docutils literal"><span class="pre">path_on_compute</span></code> differs according to the OS, E.g., &#8220;/tmp/path&#8220; on Linux compute, &#8220;C:/tmp/path&#8220; on Windows compute.
+If it is not specified, a temp folder will be used. If the specified path doesn&#8216;t exist, a new folder will be created for writing data.
+Absolute path and relative path are both supported.</p>
+<p><strong>path_on_datastore:</strong> Pattern path is supported, which means you can use {run-id} and {output-name} expressions in the pattern path,
+E.g. <em>&#8220;azureml/component/{run-id}/outputs/{output-name}&#8220;</em>, to specify the run-id and output&#8216;s name in the output&#8216;s path on datastore.
+Running Component on Windows compute and HDInsight Component are not verified yet.</p>
+<p>Find the output data on datastore:</p>
+<p><img alt="datastore_illustrate" src="../_images/datastore_illustrate.png" /></p>
+<p>Example usage: Suppose we have a component with an output port named &#8220;result_dataset&#8220;, code below illustrates a sample configuration.
+<code class="docutils literal"><span class="pre">my_datastore</span></code> is a datastore on the workspace, which can be got by <code class="docutils literal"><span class="pre">Datastore.get</span></code>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">azureml.core</span> <span class="kn">import</span> <span class="n">Datastore</span>
+<span class="n">my_datastore</span> <span class="o">=</span> <span class="n">Datastore</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">workspace</span><span class="o">=</span><span class="n">workspace</span><span class="p">,</span> <span class="n">datastore_name</span><span class="o">=</span><span class="s2">&quot;datastore_name&quot;</span><span class="p">)</span>
+
+<span class="n">component</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">result_dataset</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">datastore</span><span class="o">=</span><span class="n">my_datastore</span><span class="p">,</span>
+                                           <span class="n">output_mode</span><span class="o">=</span><span class="s2">&quot;mount&quot;</span><span class="p">,</span>
+                                           <span class="n">path_on_compute</span><span class="o">=</span><span class="s2">&quot;/component/run/compute/&quot;</span><span class="p">,</span> <span class="c1"># Suppose it&#39;s on a Linux compute</span>
+                                           <span class="n">path_on_datastore</span><span class="o">=</span><span class="s2">&quot;azureml/component/outputs/result_dataset&quot;</span><span class="p">,</span>
+                                           <span class="c1"># Or use pattern path</span>
+                                           <span class="c1"># path_on_datastore=&quot;azureml/component/{run-id}/outputs/{output-name}&quot;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pipeline.html" class="btn btn-neutral float-right" title="Pipeline" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="runsettings.html" class="btn btn-neutral float-left" title="RunSettings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2021, Microsoft
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

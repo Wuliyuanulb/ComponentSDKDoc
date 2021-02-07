@@ -1,18 +1,91 @@
 # Environment
 
-There are several ways to set running environment of a component.
+Enviroment is used to capture the runtime dependencies of a Component. It is almost identical to the definition of the [Environment class](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.core.environment(class)?view=azure-ml-py) in the AzureML python SDK.
 
-The following sample components demonstrate the component running environment definition using:
+## Define new envrionment inline 
 
-## Using conda
+User can define environment inline in a component spec yaml file. In this case a new environment will be created when the component is sumtted for running.
+
+There are several ways to set running environment of a component. Here is a basic example defining using inline conda.
+
+```yaml
+environment:
+  conda:
+    conda_dependencies:
+      name: project_environment
+      channels:
+      - defaults
+      dependencies:
+      - python=3.6.8
+      - pip=20.0
+      - pip:
+        - azureml-defaults
+        - azureml-dataprep>=1.6
+  os: Linux
+```
+
+The following sample components demonstrate more scenarios.
+
+### Using conda
 
 * [Separate conda environment file](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-conda-file)
+* [Separate pip requirements file](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-pip-file)
 * [Inlined conda environment definition](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-conda-inline)
 * [Inlined conda environemnt definition, with gpu support](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-conda-inline-gpu)
 
-## Using docker
+### Using docker
 
-> NOTE: sample docker files could be found [here](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-sample-dockerfiles).
+NOTE: sample docker files could be found [here](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-sample-dockerfiles).
 
 * [Docker image](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-docker-cpu)
 * [Docker image, with gpu support](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-conda-inline-gpu)
+
+## Reference existing environment [Not ready for use]
+
+User may want to reference exsting curated envrionment, instead of writing the definition in component yaml spec. For example:
+- Reference Azure ML provided [curated environment](https://docs.microsoft.com/en-us/azure/machine-learning/resource-curated-environments): like AzureML-DeepSpeed-0.3-GPU.
+- Reference envrionment maintained by partner in same workspace. These environments can be create and manage follow this [doc](https://docs.microsoft.com/en-us/azure/machine-learning/concept-environments#create-and-manage-environments).
+
+User may archieve similar functionality by refrencing a pre-cooked docker image. But this requires hardcode an image uri and may need to specify user and password of a private container registry in yaml which is not ideal.
+
+### Reference existing environment by name and version
+
+For example: User want to reference the version 19 of `AzureML-DeepSpeed-0.3-GPU` curated environment.
+
+```yaml
+environment:
+    name: AzureML-DeepSpeed-0.3-GPU
+    version: 19
+```
+
+### Reference existing environment only by name
+
+For example: User reference the `AzureML-DeepSpeed-0.3-GPU` curated environment by name.
+The default version of the environment name will be used in component run.
+
+```yaml
+environment:
+    name: AzureML-DeepSpeed-0.3-GPU
+```
+
+### Notes
+
+**Default version resolve at component create time**
+
+The default environment version will be resolved at component `create` (registration) time, i.e. the environment definition will be pinned in this certain component version. Rerun the component version will always use same environment definition, even default version changed for this referenced cutrated envrionment.
+In this case the component version runtime behavior is deterministic.
+
+If user want to upgrade the envrionment version, the best practice is to create a new component version.
+
+**No named environment creation**
+
+If there is name or version in environment definition, there should be no other things like conda, docker. Definition like below will be **banned**.
+```yaml
+# this is not acceptable
+environment:
+    name: AzureML-DeepSpeed-0.3-GPU
+    conda:
+        conda_dependencies_file: conda.yaml
+```
+
+

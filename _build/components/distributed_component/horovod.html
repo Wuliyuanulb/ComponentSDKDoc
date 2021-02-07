@@ -1,0 +1,683 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Horovod &mdash; Component SDK  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/my_theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'../../',
+              VERSION:'',
+              LANGUAGE:'None',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'.html',
+              HAS_SOURCE:  true,
+              SOURCELINK_SUFFIX: '.txt'
+          };
+      </script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/clipboard.min.js"></script>
+        <script type="text/javascript" src="../../_static/copybutton.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Parallel Component" href="../parallel_component.html" />
+    <link rel="prev" title="MPI" href="mpi.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> Component SDK
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts.html">Concepts</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../components.html">Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../command_component.html">Command Component</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../distributed_component.html">Distributed Component</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../distributed_component.html#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../distributed_component.html#launcher">Launcher</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../distributed_component.html#supported-launchers">Supported Launchers</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="mpi.html">MPI</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Horovod</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../parallel_component.html">Parallel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hdi_component.html">HDInsight Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../component-spec-definition.html">Definition of component spec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../component-spec-topics.html">Component spec advanced topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../sdk_reference.html">SDK Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../links.html">Useful Links</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Component SDK</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../components.html">Components</a> &raquo;</li>
+        
+          <li><a href="../distributed_component.html">Distributed Component</a> &raquo;</li>
+        
+      <li>Horovod</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/components/distributed_component/horovod.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="horovod">
+<h1>Horovod<a class="headerlink" href="#horovod" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/horovod/horovod">Horovod</a> is a distributed deep learning training framework for TensorFlow, Keras, PyTorch, and Apache MXNet.
+The python script using Horovod can be launched by two commands, <code class="docutils literal"><span class="pre">horovodrun</span></code> and <code class="docutils literal"><span class="pre">mpirun</span></code>.</p>
+<ul>
+<li><p class="first">horovodrun</p>
+<p><code class="docutils literal"><span class="pre">horovodrun</span></code> is a convenient, Open MPI-based wrapper for running Horovod script. It supports some unique Horovod knobs, such as <code class="docutils literal"><span class="pre">--autotune</span></code>, <code class="docutils literal"><span class="pre">--fusion-threshold-mb</span></code>, etc. Below is an example:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>horovodrun -np <span class="m">4</span> -H server1:2,server2:2 --autotune python train.py
+</pre></div>
+</div>
+</li>
+<li><p class="first">mpirun</p>
+<p>Horovod jobs can also be launched by the <code class="docutils literal"><span class="pre">mpirun</span></code> command directly, and <strong>this is what we do today in Azure ML</strong>.</p>
+<p>Most of the <code class="docutils literal"><span class="pre">horovodrun</span></code> commands have the equivalent <code class="docutils literal"><span class="pre">mpirun</span></code> commands. And for the <code class="docutils literal"><span class="pre">horovodrun</span></code> supports knobs, many of them can be used with <code class="docutils literal"><span class="pre">mpirun</span></code> through the use of environment variables. Below is an example equivalent with the above <code class="docutils literal"><span class="pre">horovodrun</span></code> example:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>mpirun -x <span class="nv">HOROVOD_AUTOTUNE</span><span class="o">=</span><span class="m">1</span> -np <span class="m">4</span> -H server1:2,server2:2 -bind-to none -map-by slot -x <span class="nv">NCCL_DEBUG</span><span class="o">=</span>INFO -x LD_LIBRARY_PATH -x PATH -mca pml ob1 -mca btl ^openib python train.py
+</pre></div>
+</div>
+<p>For a Horovod knob and environment variable name lookup, please check the table in the reference.</p>
+</li>
+</ul>
+<blockquote>
+<div><p><strong>Note</strong>:</p>
+<p>Component SDK currently only supports mpirun approach.</p>
+</div></blockquote>
+</div>
+<div class="section" id="how-to-write-horovod-distributed-component-yaml-spec">
+<h2>How to write horovod distributed component yaml spec<a class="headerlink" href="#how-to-write-horovod-distributed-component-yaml-spec" title="Permalink to this headline">¶</a></h2>
+<p>To create a component that trains the model by Horovod, you need to use the distributed component spec to describe this component.
+You can find a sample yaml <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/components/distributed/horovod/horovod-train-sentiment-classification/train_sentiment_classification/train_sentiment_classification.yaml">here</a>.
+And the main points to prepare a horovod distributed component yaml are:</p>
+<ul>
+<li><p class="first">Specify the component type as &#8220;DistributedComponent&#8220;</p>
+</li>
+<li><p class="first">Specify the launcher type as &#8220;mpi&#8220;</p>
+</li>
+<li><p class="first">Specify the component running environment</p>
+<p>The environment should meet the <a class="reference external" href="https://horovod.readthedocs.io/en/stable/summary_include.html#install">requirements of the Horovod</a>. You can provide one OpenMPI image as well as the Horovod package as a pip requirement.</p>
+</li>
+</ul>
+<p>Example yaml:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">$schema</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">http://azureml/sdk-1-5/DistributedComponent.json</span>
+<span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">samples.train_sentiment_classification</span>
+<span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.0.1</span>
+<span class="nt">display_name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Train Sentiment Classification</span>
+<span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">DistributedComponent</span>
+<span class="nt">description</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">A dummy component to show how to distributedly train sentiment classification with Horovod by</span>
+  <span class="l l-Scalar l-Scalar-Plain">custom component.</span>
+<span class="nt">tags</span><span class="p">:</span> <span class="p p-Indicator">{}</span>
+<span class="nt">inputs</span><span class="p">:</span>
+  <span class="nt">input_data</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">path</span>
+  <span class="nt">max_tokens</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Integer</span>
+    <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10000</span>
+  <span class="nt">sequence_length</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Integer</span>
+    <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">260</span>
+  <span class="nt">embedding_dimension</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Integer</span>
+    <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">16</span>
+  <span class="nt">epochs</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Integer</span>
+    <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10</span>
+  <span class="nt">batch_size</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Integer</span>
+    <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">32</span>
+  <span class="nt">learning_rate</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Float</span>
+    <span class="nt">default</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.001</span>
+<span class="nt">outputs</span><span class="p">:</span>
+  <span class="nt">trained_model</span><span class="p">:</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ModelDirectory</span>
+<span class="nt">environment</span><span class="p">:</span>
+  <span class="nt">docker</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mcr.microsoft.com/azureml/openmpi3.1.2-cuda10.1-cudnn7-ubuntu18.04</span>
+  <span class="nt">conda</span><span class="p">:</span>
+    <span class="nt">conda_dependencies</span><span class="p">:</span>
+      <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">project_environment</span>
+      <span class="nt">channels</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">defaults</span>
+      <span class="nt">dependencies</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python=3.6.8</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip=20.2</span>
+        <span class="p p-Indicator">-</span> <span class="nt">pip</span><span class="p">:</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">tensorflow-gpu==2.3.0</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">horovod==0.19.5</span>
+            <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pandas==1.0.4</span>
+  <span class="nt">os</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Linux</span>
+<span class="nt">launcher</span><span class="p">:</span>
+  <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mpi</span>
+  <span class="nt">additional_arguments</span><span class="p">:</span> <span class="p p-Indicator">&gt;-</span>
+    <span class="no">python train_sentiment_classification.py --input-data {inputs.input_data} --trained-model {outputs.trained_model}</span>
+    <span class="no">--max-tokens {inputs.max_tokens} --sequence-length {inputs.sequence_length}</span>
+    <span class="no">--embedding-dimension {inputs.embedding_dimension} --epochs {inputs.epochs} --batch-size {inputs.batch_size}</span>
+    <span class="no">--learning-rate {inputs.learning_rate}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-to-consume-horovod-distributed-component">
+<h2>How to consume horovod distributed component<a class="headerlink" href="#how-to-consume-horovod-distributed-component" title="Permalink to this headline">¶</a></h2>
+<p>After the horovod distributed component prepared, you can submit a pipeline to run this component by Component SDK. <a class="reference external" href="https://github.com/PengSY/DesignerPrivatePreviewFeatures/blob/shiyu/add_horovod_distributed_component_sample/azure-ml-components/samples/components/distributed/horovod/horovod-train-sentiment-classification/Horovod_disributed_train_sentiment_classification.ipynb">Here</a> is a sample notebook to submit a horovod component run. You can configure the Horovod job with Component API. For example, specify node count, process count per node and horovod knobs by <a class="reference internal" href="../../concepts/runsettings.html"><span class="doc">RunSettings</span></a>.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># load the horovod component you create by the component yaml</span>
+<span class="n">horovod_component_func</span> <span class="o">=</span> <span class="n">Component</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">ws</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;horovod_sample_component&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.0.1&#39;</span><span class="p">)</span>
+
+<span class="c1"># generate a pipelien with one horovod component</span>
+<span class="nd">@dsl</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Horovod component example&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">generated_pipeline</span><span class="p">():</span>
+    <span class="n">horovod_component</span> <span class="o">=</span> <span class="n">horovod_component_func</span><span class="p">(</span><span class="n">script_arg_0</span><span class="o">=</span><span class="n">arg_0</span><span class="p">,</span> <span class="n">script_arg_1</span><span class="o">=</span><span class="n">arg_1</span><span class="p">)</span>
+	
+    <span class="c1"># below runsettings give the equivalent command as:</span>
+    <span class="c1"># horovodrun -np 4 -H server1:2,server2:2 --timeline-filename ./outputs/timeline.json python component_entry.py \</span>
+    <span class="c1"># --script-arg-0 arg_0 --script-arg-1 arg_1</span>
+    <span class="n">horovod_component</span><span class="o">.</span><span class="n">runsettings</span><span class="o">.</span><span class="n">environment_variables</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;HOROVOD_TIMELINE&#39;</span><span class="p">:</span> <span class="s1">&#39;./outputs/timeline.json&#39;</span><span class="p">}</span>  <span class="c1"># specify the Horovod --timeline-filename</span>
+    <span class="n">horovod_component</span><span class="o">.</span><span class="n">runsettings</span><span class="o">.</span><span class="n">resource_layout</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
+        <span class="n">node_count</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="c1"># use 2 nodes to train the model</span>
+        <span class="n">process_count_per_node</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># use 2 processes per node</span>
+
+<span class="c1"># submit the pipeline</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">generated_pipeline</span><span class="p">()</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">experiment_name</span><span class="o">=</span><span class="s1">&#39;horovod-sample-experiment&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="prepare-horovod-script">
+<h3>Prepare Horovod script<a class="headerlink" href="#prepare-horovod-script" title="Permalink to this headline">¶</a></h3>
+<ol class="simple">
+<li><a class="reference external" href="https://github.com/horovod/horovod/tree/master/examples">Horovod examples</a></li>
+<li><a class="reference external" href="https://spell.ml/blog/distributed-model-training-using-horovod-XvqEGRUAACgAa5th">Distributed model training using Horovod</a></li>
+</ol>
+</div>
+<div class="section" id="horovod-arguments-and-environment-variable-name-lookup">
+<h3>Horovod arguments and environment variable name lookup<a class="headerlink" href="#horovod-arguments-and-environment-variable-name-lookup" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Category</th>
+<th>Argument</th>
+<th>Environment  variables support</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Optional arguments</td>
+<td>-np</td>
+<td></td>
+<td>Total number of training processes.</td>
+</tr>
+<tr>
+<td></td>
+<td>--disable-cache</td>
+<td></td>
+<td>Disable horovod  initialization check</td>
+</tr>
+<tr>
+<td></td>
+<td>--start-timeout</td>
+<td></td>
+<td>Has to perform all  the checks and init before the timeout</td>
+</tr>
+<tr>
+<td></td>
+<td>--network-interface</td>
+<td></td>
+<td>Network interface  for communication</td>
+</tr>
+<tr>
+<td></td>
+<td>--output-filename</td>
+<td></td>
+<td>For Gloo, writes  stdout / stderr of all processes to a filename</td>
+</tr>
+<tr>
+<td></td>
+<td>--config-file</td>
+<td></td>
+<td>Path to YAML file containing runtime  parameter configuration for Horovod.</td>
+</tr>
+<tr>
+<td>SSH arguments</td>
+<td>-p</td>
+<td></td>
+<td>SSH port</td>
+</tr>
+<tr>
+<td></td>
+<td>-I</td>
+<td></td>
+<td>Private key file</td>
+</tr>
+<tr>
+<td>Tuneable parameter</td>
+<td>--fusion-threshold-mb</td>
+<td>HOROVOD_FUSION_THRESHOLD</td>
+<td>Fusion buffer size</td>
+</tr>
+<tr>
+<td></td>
+<td>--cycle-time-ms</td>
+<td>HOROVOD_CYCLE_TIME</td>
+<td>Delay between each  tensor fusion cycle</td>
+</tr>
+<tr>
+<td></td>
+<td>--cache-capacity</td>
+<td>OROVOD_CACHE_CAPACITY</td>
+<td>Maximum number of  tensor names that will be cached</td>
+</tr>
+<tr>
+<td></td>
+<td>--hierarchical-allreduce</td>
+<td>HOROVOD_HIERARCHICAL_ALLREDUCE</td>
+<td>Perform  hierarchical allreduce between workers instead of  ring allreduce.</td>
+</tr>
+<tr>
+<td></td>
+<td>--no-hierarchical-allreduce</td>
+<td></td>
+<td>Disable  hierarchical allreduce</td>
+</tr>
+<tr>
+<td></td>
+<td>--hierarchical-allgather</td>
+<td>HOROVOD_HIERARCHICAL_ALLGATHER</td>
+<td>Perform hierarchical allgather between workers instead of ring allgather</td>
+</tr>
+<tr>
+<td></td>
+<td>--no-hierarchical-allgather</td>
+<td></td>
+<td>Disable hierarchical allgather</td>
+</tr>
+<tr>
+<td>Autotune</td>
+<td>--autotune</td>
+<td>HOROVOD_AUTOTUNE</td>
+<td>Auto select params  to maximize the throughput</td>
+</tr>
+<tr>
+<td></td>
+<td>--autotune-log-file</td>
+<td>HOROVOD_AUTOTUNE_LOG</td>
+<td>Comma-separated log of trials containing each hyperparameter and the score of the trial</td>
+</tr>
+<tr>
+<td></td>
+<td>--autotune-warmup-samples</td>
+<td>HOROVOD_AUTOTUNE_WARMUP_SAMPLES</td>
+<td>Number of samples to discard before beginning the optimization process during autotuning.</td>
+</tr>
+<tr>
+<td></td>
+<td>--autotune-steps-per-sample</td>
+<td>HOROVOD_AUTOTUNE_STEPS_PER_SAMPLE</td>
+<td>Number of steps (approximate) to record before observing a sample.</td>
+</tr>
+<tr>
+<td></td>
+<td>--autotune-bayes-opt-max-samples</td>
+<td>HOROVOD_AUTOTUNE_BAYES_OPT_MAX_SAMPLES</td>
+<td>Maximum number of samples to collect for each Bayesian optimization process.</td>
+</tr>
+<tr>
+<td></td>
+<td>--autotune-gaussian-process-noise</td>
+<td>HOROVOD_AUTOTUNE_GAUSSIAN_PROCESS_NOISE</td>
+<td>Regularization value [0, 1] applied to account for noise in samples</td>
+</tr>
+<tr>
+<td>Elastic</td>
+<td>--min-np</td>
+<td></td>
+<td>Minimum number of  processes running for training to continue</td>
+</tr>
+<tr>
+<td></td>
+<td>--max-np</td>
+<td></td>
+<td>Maximum number of training processes, beyond which no additional processes will be created.</td>
+</tr>
+<tr>
+<td></td>
+<td>--slots-per-host</td>
+<td></td>
+<td>Number of slots for processes per host. Normally 1 slot per GPU per host.</td>
+</tr>
+<tr>
+<td></td>
+<td>--elastic-timeout</td>
+<td></td>
+<td>Timeout for  elastic initialisation after re-scaling the cluster</td>
+</tr>
+<tr>
+<td></td>
+<td>--reset-limit</td>
+<td></td>
+<td>Maximum number of  times that the training job can scale up or down</td>
+</tr>
+<tr>
+<td>Timeline</td>
+<td>--timeline-filename</td>
+<td>HOROVOD_TIMELINE</td>
+<td>JSON file containing timeline of Horovod events used for debugging performance.</td>
+</tr>
+<tr>
+<td></td>
+<td>--timeline-mark-cycles</td>
+<td>HOROVOD_TIMELINE_MARK_CYCLES</td>
+<td>Mark cycles on the timeline.</td>
+</tr>
+<tr>
+<td>Stall check</td>
+<td>--no-stall-check</td>
+<td>HOROVOD_STALL_CHECK_DISABLE</td>
+<td>The stall check  will log a warning when workers have stalled waiting</td>
+</tr>
+<tr>
+<td></td>
+<td>--stall-check-warning-time-seconds</td>
+<td>HOROVOD_STALL_CHECK_TIME_SECONDS</td>
+<td>Seconds until the stall warning is logged to stderr.</td>
+</tr>
+<tr>
+<td></td>
+<td>--stall-check-shutdown-time-seconds</td>
+<td>HOROVOD_STALL_SHUTDOWN_TIME_SECONDS</td>
+<td>Seconds until Horovod is shutdown due to stall.</td>
+</tr>
+<tr>
+<td>Library</td>
+<td>--mpi-threads-disable</td>
+<td>HOROVOD_MPI_THREADS_DISABLE</td>
+<td>Disable MPI threading support.</td>
+</tr>
+<tr>
+<td></td>
+<td>--mpi-args</td>
+<td></td>
+<td>Extra MPI  arguments to pass to mpirun</td>
+</tr>
+<tr>
+<td></td>
+<td>--tcp</td>
+<td>NCCL_IB_DISABLE</td>
+<td>If this flag is set, only TCP is used for communication.</td>
+</tr>
+<tr>
+<td></td>
+<td>--binding-args</td>
+<td></td>
+<td>Process binding arguments.</td>
+</tr>
+<tr>
+<td></td>
+<td>--num-nccl-streams</td>
+<td>HOROVOD_NUM_NCCL_STREAMS</td>
+<td>Number of NCCL streams.</td>
+</tr>
+<tr>
+<td></td>
+<td>--thread-affinity</td>
+<td>HOROVOD_THREAD_AFFINITY</td>
+<td>Horovod background thread affinity.</td>
+</tr>
+<tr>
+<td></td>
+<td>--gloo-timeout-seconds</td>
+<td>HOROVOD_GLOO_TIMEOUT_SECONDS</td>
+<td>Timeout in seconds for Gloo operations to complete.</td>
+</tr>
+<tr>
+<td>Logging</td>
+<td>--log-level</td>
+<td>HOROVOD_LOG_LEVEL</td>
+<td>Minimum level to log to stderr from the Horovod backend.</td>
+</tr>
+<tr>
+<td></td>
+<td>--log-without-timestamp</td>
+<td>HOROVOD_LOG_HIDE_TIME</td>
+<td>Hide the timestamp from Horovod internal log messages.</td>
+</tr>
+<tr>
+<td></td>
+<td>--prefix-output-with-timestamp</td>
+<td></td>
+<td>Timestamp each line of output to stdout, stderr, and stddiag.</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>--hosts</td>
+<td></td>
+<td>List of host names and the number of available slots for running processes on each.</td>
+</tr>
+<tr>
+<td></td>
+<td>--hostfile</td>
+<td></td>
+<td>Path to a host file containing the list of host names and the number of available slots</td>
+</tr>
+<tr>
+<td></td>
+<td>--host-discovery-script</td>
+<td></td>
+<td>Used for elastic  training (autoscaling and fault tolerance).</td>
+</tr>
+<tr>
+<td>Controller</td>
+<td>--gloo</td>
+<td></td>
+<td>Run Horovod using the Gloo controller.</td>
+</tr>
+<tr>
+<td></td>
+<td>--mpi</td>
+<td></td>
+<td>Run Horovod using the MPI controller.</td>
+</tr>
+<tr>
+<td></td>
+<td>--jsrun</td>
+<td></td>
+<td>Launch Horovod  processes with jsrun and use the MPI controller</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../parallel_component.html" class="btn btn-neutral float-right" title="Parallel Component" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="mpi.html" class="btn btn-neutral float-left" title="MPI" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2021, Microsoft
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

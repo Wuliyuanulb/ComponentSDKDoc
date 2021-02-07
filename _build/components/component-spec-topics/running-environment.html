@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Environment &mdash; Component SDK beta documentation</title>
+  <title>Environment &mdash; Component SDK  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../../',
-              VERSION:'beta',
+              VERSION:'',
               LANGUAGE:'None',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -48,7 +48,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Additional includes" href="additional-includes.html" />
+    <link rel="next" title="Code snapshot" href="code-snapshot.html" />
     <link rel="prev" title="Inputs and outputs" href="inputs-and-outputs.html" /> 
 </head>
 
@@ -100,24 +100,24 @@
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../concepts.html">Concepts</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../components.html">Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../command_component.html">Command Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../distributed_component.html">Distributed Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../parallel_component.html">Parallel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hdi_component.html">HDInsight Component</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../component-spec-definition.html">Definition of component spec</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../component-spec-topics.html">Component spec advanced topics</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="inputs-and-outputs.html">Inputs and outputs</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Environment</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#using-conda">Using conda</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#using-docker">Using docker</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#define-new-envrionment-inline">Define new envrionment inline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reference-existing-environment-not-ready-for-use">Reference existing environment [Not ready for use]</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="additional-includes.html">Additional includes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="code-snapshot.html">Code snapshot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="component-build.html">Component build</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ignore-files.html">Ignore files when creating snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="component-build.html">Component build</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../command_component.html">Command Component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../parallel_component.html">Parallel Component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hdi_component.html">HDInsight Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
@@ -195,24 +195,87 @@
             
   <div class="section" id="environment">
 <h1>Environment<a class="headerlink" href="#environment" title="Permalink to this headline">¶</a></h1>
-<p>There are several ways to set running environment of a component.</p>
-<p>The following sample components demonstrate the component running environment definition using:</p>
+<p>Enviroment is used to capture the runtime dependencies of a Component. It is almost identical to the definition of the <a class="reference external" href="https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.core.environment(class)?view=azure-ml-py">Environment class</a> in the AzureML python SDK.</p>
+<div class="section" id="define-new-envrionment-inline">
+<h2>Define new envrionment inline<a class="headerlink" href="#define-new-envrionment-inline" title="Permalink to this headline">¶</a></h2>
+<p>User can define environment inline in a component spec yaml file. In this case a new environment will be created when the component is sumtted for running.</p>
+<p>There are several ways to set running environment of a component. Here is a basic example defining using inline conda.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">environment</span><span class="p">:</span>
+  <span class="nt">conda</span><span class="p">:</span>
+    <span class="nt">conda_dependencies</span><span class="p">:</span>
+      <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">project_environment</span>
+      <span class="nt">channels</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">defaults</span>
+      <span class="nt">dependencies</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">python=3.6.8</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">pip=20.0</span>
+      <span class="p p-Indicator">-</span> <span class="nt">pip</span><span class="p">:</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">azureml-defaults</span>
+        <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">azureml-dataprep&gt;=1.6</span>
+  <span class="nt">os</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Linux</span>
+</pre></div>
+</div>
+<p>The following sample components demonstrate more scenarios.</p>
 <div class="section" id="using-conda">
-<h2>Using conda<a class="headerlink" href="#using-conda" title="Permalink to this headline">¶</a></h2>
+<h3>Using conda<a class="headerlink" href="#using-conda" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-conda-file">Separate conda environment file</a></li>
+<li><a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-pip-file">Separate pip requirements file</a></li>
 <li><a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-conda-inline">Inlined conda environment definition</a></li>
 <li><a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-conda-inline-gpu">Inlined conda environemnt definition, with gpu support</a></li>
 </ul>
 </div>
 <div class="section" id="using-docker">
-<h2>Using docker<a class="headerlink" href="#using-docker" title="Permalink to this headline">¶</a></h2>
-<blockquote>
-<div>NOTE: sample docker files could be found <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-sample-dockerfiles">here</a>.</div></blockquote>
+<h3>Using docker<a class="headerlink" href="#using-docker" title="Permalink to this headline">¶</a></h3>
+<p>NOTE: sample docker files could be found <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-sample-dockerfiles">here</a>.</p>
 <ul class="simple">
 <li><a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-docker-cpu">Docker image</a></li>
 <li><a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/env-conda-inline-gpu">Docker image, with gpu support</a></li>
 </ul>
+</div>
+</div>
+<div class="section" id="reference-existing-environment-not-ready-for-use">
+<h2>Reference existing environment [Not ready for use]<a class="headerlink" href="#reference-existing-environment-not-ready-for-use" title="Permalink to this headline">¶</a></h2>
+<p>User may want to reference exsting curated envrionment, instead of writing the definition in component yaml spec. For example:</p>
+<ul class="simple">
+<li>Reference Azure ML provided <a class="reference external" href="https://docs.microsoft.com/en-us/azure/machine-learning/resource-curated-environments">curated environment</a>: like AzureML-DeepSpeed-0.3-GPU.</li>
+<li>Reference envrionment maintained by partner in same workspace. These environments can be create and manage follow this <a class="reference external" href="https://docs.microsoft.com/en-us/azure/machine-learning/concept-environments#create-and-manage-environments">doc</a>.</li>
+</ul>
+<p>User may archieve similar functionality by refrencing a pre-cooked docker image. But this requires hardcode an image uri and may need to specify user and password of a private container registry in yaml which is not ideal.</p>
+<div class="section" id="reference-existing-environment-by-name-and-version">
+<h3>Reference existing environment by name and version<a class="headerlink" href="#reference-existing-environment-by-name-and-version" title="Permalink to this headline">¶</a></h3>
+<p>For example: User want to reference the version 19 of <code class="docutils literal"><span class="pre">AzureML-DeepSpeed-0.3-GPU</span></code> curated environment.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">environment</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">AzureML-DeepSpeed-0.3-GPU</span>
+    <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">19</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reference-existing-environment-only-by-name">
+<h3>Reference existing environment only by name<a class="headerlink" href="#reference-existing-environment-only-by-name" title="Permalink to this headline">¶</a></h3>
+<p>For example: User reference the <code class="docutils literal"><span class="pre">AzureML-DeepSpeed-0.3-GPU</span></code> curated environment by name.
+The default version of the environment name will be used in component run.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">environment</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">AzureML-DeepSpeed-0.3-GPU</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h3>
+<p><strong>Default version resolve at component create time</strong></p>
+<p>The default environment version will be resolved at component <code class="docutils literal"><span class="pre">create</span></code> (registration) time, i.e. the environment definition will be pinned in this certain component version. Rerun the component version will always use same environment definition, even default version changed for this referenced cutrated envrionment.
+In this case the component version runtime behavior is deterministic.</p>
+<p>If user want to upgrade the envrionment version, the best practice is to create a new component version.</p>
+<p><strong>No named environment creation</strong></p>
+<p>If there is name or version in environment definition, there should be no other things like conda, docker. Definition like below will be <strong>banned</strong>.</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="c1"># this is not acceptable</span>
+<span class="nt">environment</span><span class="p">:</span>
+    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">AzureML-DeepSpeed-0.3-GPU</span>
+    <span class="nt">conda</span><span class="p">:</span>
+        <span class="nt">conda_dependencies_file</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">conda.yaml</span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -224,7 +287,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="additional-includes.html" class="btn btn-neutral float-right" title="Additional includes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="code-snapshot.html" class="btn btn-neutral float-right" title="Code snapshot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="inputs-and-outputs.html" class="btn btn-neutral float-left" title="Inputs and outputs" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -237,7 +300,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, microsoft
+        &copy; Copyright 2021, Microsoft
 
     </p>
   </div>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Code snapshot &mdash; Component SDK beta documentation</title>
+  <title>Code snapshot &mdash; Component SDK  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../../',
-              VERSION:'beta',
+              VERSION:'',
               LANGUAGE:'None',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -48,8 +48,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Component build" href="component-build.html" />
-    <link rel="prev" title="Additional includes" href="additional-includes.html" /> 
+    <link rel="next" title="Ignore files when creating snapshot" href="ignore-files.html" />
+    <link rel="prev" title="Environment" href="running-environment.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -100,23 +100,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../concepts.html">Concepts</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../components.html">Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../command_component.html">Command Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../distributed_component.html">Distributed Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../parallel_component.html">Parallel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hdi_component.html">HDInsight Component</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../component-spec-definition.html">Definition of component spec</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../component-spec-topics.html">Component spec advanced topics</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="inputs-and-outputs.html">Inputs and outputs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="running-environment.html">Environment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="additional-includes.html">Additional includes</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Code snapshot</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="component-build.html">Component build</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ignore-files.html">Ignore files when creating snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="component-build.html">Component build</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../command_component.html">Command Component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../parallel_component.html">Parallel Component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hdi_component.html">HDInsight Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
@@ -226,10 +226,10 @@ For example, for the following folder structure:</p>
 </div>
 <p>Here are some notes for the usage of <em>code snapshot</em>:</p>
 <ul class="simple">
-<li>Specify the relative path start from the folder containing the component spec yaml file. The code snapshot should be parent folders of the component spec file since component spec file should always be included in the snapshot file. Thus, the possible value for <code class="docutils literal"><span class="pre">code</span></code> must be one or more sections of <code class="docutils literal"><span class="pre">../</span></code>s. For the above folder structure example, specify <code class="docutils literal"><span class="pre">../</span></code> will set the snapshot folder to <code class="docutils literal"><span class="pre">src/</span></code>. For other folder structures which need to include further more top levels of parent folders, use <code class="docutils literal"><span class="pre">../../</span></code>, <code class="docutils literal"><span class="pre">../../../</span></code>, etc. accordingly.</li>
-<li>Use the relative path start from the snapshot folder for any file references in the spec file. For the above example, conda file should be <code class="docutils literal"><span class="pre">component_entry/conda.yaml</span></code> and entry script should be <code class="docutils literal"><span class="pre">component_entry/run.py</span></code> inside the component spec file.</li>
+<li>Specify the relative path start from the folder containing the component spec yaml file. The code snapshot should be parent folders of the component spec file since the component spec file should always be included in the snapshot file. Thus, the possible value for <code class="docutils literal"><span class="pre">code</span></code> must be one or more sections of <code class="docutils literal"><span class="pre">../</span></code>s. For the above folder structure example, specify <code class="docutils literal"><span class="pre">../</span></code> will set the snapshot folder to <code class="docutils literal"><span class="pre">src/</span></code>. For other folder structures which need to include furthermore top levels of parent folders, use <code class="docutils literal"><span class="pre">../../</span></code>, <code class="docutils literal"><span class="pre">../../../</span></code>, etc. accordingly.</li>
+<li>Use the relative path start from the snapshot folder for any file references in the spec file. For the above example, conda file should be <code class="docutils literal"><span class="pre">component_entry/conda.yaml</span></code> and the entry script should be <code class="docutils literal"><span class="pre">component_entry/run.py</span></code> inside the component spec file.</li>
 <li>Use <code class="docutils literal"><span class="pre">.amlignore</span></code> and optionally use <code class="docutils literal"><span class="pre">--amlignore-file</span></code> option to exclude unused files. Refer to <a class="reference internal" href="ignore-files.html"><span class="doc">the document</span></a> for details.</li>
-<li>Do not use <a class="reference internal" href="additional-includes.html"><span class="doc">additional includes</span></a> along with the <em>code snapshot</em>. They could not be used together.</li>
+<li>Do not use <a class="reference external" href="https://aka.ms/component-additional-includes">additional includes</a> along with the <em>code snapshot</em>. They could not be used together.</li>
 </ul>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
@@ -245,10 +245,10 @@ For example, for the following folder structure:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="component-build.html" class="btn btn-neutral float-right" title="Component build" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ignore-files.html" class="btn btn-neutral float-right" title="Ignore files when creating snapshot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="additional-includes.html" class="btn btn-neutral float-left" title="Additional includes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="running-environment.html" class="btn btn-neutral float-left" title="Environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -258,7 +258,7 @@ For example, for the following folder structure:</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, microsoft
+        &copy; Copyright 2021, Microsoft
 
     </p>
   </div>

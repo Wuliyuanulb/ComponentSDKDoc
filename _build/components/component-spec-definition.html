@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Definition of component spec &mdash; Component SDK beta documentation</title>
+  <title>Definition of component spec &mdash; Component SDK  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../',
-              VERSION:'beta',
+              VERSION:'',
               LANGUAGE:'None',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -48,8 +48,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="How to use component spec schema in vscode" href="use-component-spec-schema-in-vscode.html" />
-    <link rel="prev" title="Components" href="../components.html" /> 
+    <link rel="next" title="Component spec advanced topics" href="component-spec-topics.html" />
+    <link rel="prev" title="HDInsight Component" href="hdi_component.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -100,6 +100,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../components.html">Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="command_component.html">Command Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distributed_component.html">Distributed Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel_component.html">Parallel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hdi_component.html">HDInsight Component</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Definition of component spec</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#component-definition">Component Definition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#name">Name</a></li>
@@ -122,6 +126,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#hdinsight-internal-only-for-now">HDInsight [internal only for now]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#parallel">Parallel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#launcher">launcher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#data-types">Data Types</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#data-types-for-inputs-outputs">Data Types for Inputs/Outputs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#data-types-for-parameters">Data Types for Parameters</a></li>
@@ -129,11 +134,8 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
 <li class="toctree-l2"><a class="reference internal" href="component-spec-topics.html">Component spec advanced topics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="command_component.html">Command Component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parallel_component.html">Parallel Component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hdi_component.html">HDInsight Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
@@ -250,7 +252,7 @@
 <td>type</td>
 <td>String</td>
 <td>No</td>
-<td>Defines type of the Component. Could be <code>CommandComponent</code>, <code>ParallelComponent</code>, etc.. Defaults to <code>CommandComponent</code> if not specified.</td>
+<td>Defines type of the component. Could be <code>CommandComponent</code>, <code>ParallelComponent</code>, etc.. Component type should match the $schema.</td>
 </tr>
 <tr>
 <td>description</td>
@@ -299,6 +301,12 @@
 <td>String</td>
 <td>No</td>
 <td>Specify the command to start to run the component code.</td>
+</tr>
+<tr>
+<td>launcher</td>
+<td><a href="#launcher">Launcher</a></td>
+<td>No</td>
+<td>Launcher settings for <code>DistributedComponent</code> only. Refer to <a href="#launcher">here</a> for details.</td>
 </tr>
 <tr>
 <td>parallel</td>
@@ -408,12 +416,6 @@ and <a class="reference external" href="https://github.com/Azure/DesignerPrivate
 <td>Defines the data type(s) of this input port. Refer to <a href="#data-types-for-inputs/outputs">Data Types for Inputs/Outputs</a> for details.</td>
 </tr>
 <tr>
-<td>display_name</td>
-<td>String</td>
-<td>No</td>
-<td>Display name of the input port.</td>
-</tr>
-<tr>
 <td>optional</td>
 <td>Boolean</td>
 <td>No</td>
@@ -445,12 +447,6 @@ and <a class="reference external" href="https://github.com/Azure/DesignerPrivate
 <td>String</td>
 <td>Yes</td>
 <td>Defines the type of this data. Refer to <a href="#data-types-for-parameters">Data Types for Parameters</a> for details.</td>
-</tr>
-<tr>
-<td>display_name</td>
-<td>String</td>
-<td>No</td>
-<td>Display name of the parameter.</td>
 </tr>
 <tr>
 <td>optional</td>
@@ -504,22 +500,10 @@ and <a class="reference external" href="https://github.com/Azure/DesignerPrivate
 </thead>
 <tbody>
 <tr>
-<td>name</td>
-<td>String</td>
-<td>Yes</td>
-<td>Name of the output port. This field is used for program logic and cannot be duplicated with other inputs of the component.</td>
-</tr>
-<tr>
 <td>type</td>
 <td>String</td>
 <td>Yes</td>
 <td>Defines the data type(s) of this output port. Refer to <a href="#data-types-for-inputs/outputs">Data Types for Inputs/Outputs</a> for details.</td>
-</tr>
-<tr>
-<td>display_name</td>
-<td>String</td>
-<td>No</td>
-<td>Display name of the parameter.</td>
 </tr>
 <tr>
 <td>description</td>
@@ -531,7 +515,7 @@ and <a class="reference external" href="https://github.com/Azure/DesignerPrivate
 </table></div>
 <div class="section" id="command">
 <h2>Command<a class="headerlink" href="#command" title="Permalink to this headline">¶</a></h2>
-<p>Command is a string which specify the command line to run the component.
+<p>Command is a string that specify the command line to run the component.
 It is expected to be a <em><strong>one-line string</strong></em> in which the arguments are separated by spaces.
 The string will be split to a command list according to the shell split rule with the python built-in function <a class="reference external" href="https://docs.python.org/3/library/shlex.html">shlex.split</a>.</p>
 <p>Example:</p>
@@ -751,14 +735,42 @@ Parallel component is a kind of component to run <a class="reference external" h
 </tr>
 </tbody>
 </table></div>
+<div class="section" id="launcher">
+<h2>launcher<a class="headerlink" href="#launcher" title="Permalink to this headline">¶</a></h2>
+<p>This section is used only for DistributedComponents.
+DistributedComponent is a kind of component to support distributed training scenarios.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Yes</td>
+<td>Launch type of a distributed training, Could be <code>mpi</code>, <code>torch.distributed</code>.</td>
+</tr>
+<tr>
+<td>additional_arguments</td>
+<td>String</td>
+<td>Yes</td>
+<td>The command to invoke custom script.</td>
+</tr>
+</tbody>
+</table></div>
 <div class="section" id="data-types">
 <h2>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h2>
 <p>Data Type is a short word or phrase that describes the data type of the Input or Output.</p>
 <div class="section" id="data-types-for-inputs-outputs">
 <h3>Data Types for Inputs/Outputs<a class="headerlink" href="#data-types-for-inputs-outputs" title="Permalink to this headline">¶</a></h3>
-<p>Designer allows its user to connect an Output to another component&#8216;s Input that with the same data type.</p>
-<p>Data type for a Input/Output could be an arbitrary string (except <code class="docutils literal"><span class="pre">&lt;</span></code> and <code class="docutils literal"><span class="pre">&gt;</span></code>).</p>
-<p>Below are list of data types that will be auto registered and can be directly used by user out-of-box.
+<p>Designer allows its user to connect an Output to another component&#8216;s Input with the same data type.</p>
+<p>The data type for an Input/Output could be an arbitrary string (except <code class="docutils literal"><span class="pre">&lt;</span></code> and <code class="docutils literal"><span class="pre">&gt;</span></code>).</p>
+<p>Below is a list of data types that will be auto-registered and can be directly used by users out-of-box.
 For other data type names, please create the DataTypes first following guide from https://aka.ms/azureml-sdk-create-data-type.</p>
 <p><strong>Data Types</strong></p>
 <table border="1" class="docutils">
@@ -841,15 +853,15 @@ For other data type names, please create the DataTypes first following guide fro
 </tr>
 <tr>
 <td>Integer</td>
-<td>Indicates that the input value is an integer.</td>
+<td>Indicates that the input value is a 64-bit signed integer, values out of range will cause an exception.</td>
 </tr>
 <tr>
 <td>Float</td>
-<td>Indicates that the input value is a float.</td>
+<td>Indicates that the input value is a 64-bit signed floating-point number, floating-numbers more than 64-bit will lose accuracy, non-number values will cause an exception.</td>
 </tr>
 <tr>
 <td>Boolean</td>
-<td>Indicates that the input value is a boolean value.</td>
+<td>Indicates that the input value is a boolean value, it should be 'True' or 'False', all other values will cause an exception.</td>
 </tr>
 <tr>
 <td>Enum</td>
@@ -868,10 +880,10 @@ For other data type names, please create the DataTypes first following guide fro
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="use-component-spec-schema-in-vscode.html" class="btn btn-neutral float-right" title="How to use component spec schema in vscode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="component-spec-topics.html" class="btn btn-neutral float-right" title="Component spec advanced topics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../components.html" class="btn btn-neutral float-left" title="Components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="hdi_component.html" class="btn btn-neutral float-left" title="HDInsight Component" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -881,7 +893,7 @@ For other data type names, please create the DataTypes first following guide fro
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, microsoft
+        &copy; Copyright 2021, Microsoft
 
     </p>
   </div>

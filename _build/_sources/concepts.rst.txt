@@ -7,6 +7,7 @@ Concepts
    :glob:
 
    concepts/component.md
+   concepts/runsettings.md
+   concepts/inputs-and-outputs.md
    concepts/pipeline.md
    concepts/pipeline_parameter.md
-   concepts/runsettings.md

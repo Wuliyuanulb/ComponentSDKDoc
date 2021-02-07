@@ -1,23 +1,17 @@
 # Inputs and outputs
 
-The component could have inputs and outputs.
-
-An input could either be an *Input Port* or a *Parameter*. Output could only be an *Output Port*.
-
-Input ports and output ports typically refers to a path. In Designer, they will be displayed as a *port* on the component. They could be have arbitrary type names such as `CsvFile`, `ImageFolder` to describe the underlying data. A component's output port could be connected to another component's input port, given they have the same type name.
-
-Parameters are input values passed to the component while executing. In Designer, they are displayed on the right panel of the component. Parameter could only have scalar values such as `Integer`, `String`, `Boolean`, `Enum`. Each parameter could have additional attributes such as `default`, `min`, `max`, etc.
-
-Refer to [the component spec](../component-spec-definition.md) for full description.
+For full introduction about Inputs and Outputs concept, please refer to [Inputs and Outputs](../../concepts/inputs-and-outputs.md) documentation.
 
 To define component inputs and outputs:
 * Add `inputs` and `outputs` section to the component spec to specify the component interface.
-* Add reference to the inputs and outputs in `command` section. A reference looks like `{inputs.name_of_parameter}`, which will be replaced by the value of the parameter when invoking the component.
+* Add reference to the inputs and outputs in the `command` section. A reference looks like `{inputs.name_of_parameter}`, which will be replaced by the value of the parameter when invoking the component.
+
+Refer to [the component spec](../component-spec-definition.md) for full description.
 
 ## Optional Inputs and Parameters
 
 Use `optional` to make an input port or a parameter optional.
-In the snippet bellow, two input ports and the parameter "Optional string parameter" are optional.
+In the snippet below, two input ports and the parameter "Optional string parameter" are optional.
 
 ```yaml
 inputs:
@@ -66,3 +60,10 @@ python optional_input.py --input-path /aaa/bbb --string-param abc
 ## Sample component
 
 [A component with optional inputs and parameters](https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/inputs-and-outputs)
+
+## Default Parameters
+
+Use `default` to specify the default value of a parameter.
+Once a default value is set, Component SDK will set the value to corresponding when initialize the component by `component = component_func()`.
+Note that `default` and `optional` are independent properties, no matter the parameter is optional or not, the default value will be set.
+Thus usually you don't need to both set `default` and `optional`.

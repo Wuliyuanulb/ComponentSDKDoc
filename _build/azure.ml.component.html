@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>azure.ml.component package &mdash; Component SDK beta documentation</title>
+  <title>azure.ml.component package &mdash; Component SDK  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'./',
-              VERSION:'beta',
+              VERSION:'',
               LANGUAGE:'None',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -425,7 +425,7 @@ you can choose one between selector and name, version.</li>
 
 <dl class="method">
 <dt id="azure.ml.component.Component.run">
-<code class="descname">run</code><span class="sig-paren">(</span><em>experiment_name=None</em>, <em>working_dir=None</em>, <em>use_docker=True</em>, <em>track_run_history=True</em>, <em>show_output=True</em>, <em>python_interpreter_path=None</em>, <em>skip_validation=True</em>, <em>raise_on_error=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.Component.run" title="Permalink to this definition">¶</a></dt>
+<code class="descname">run</code><span class="sig-paren">(</span><em>experiment_name=None</em>, <em>working_dir=None</em>, <em>use_docker=True</em>, <em>track_run_history=True</em>, <em>show_output=True</em>, <em>python_interpreter_path=None</em>, <em>skip_validation=False</em>, <em>raise_on_error=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.Component.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run component in local environment.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -682,17 +682,24 @@ the results of this run.</li>
 
 <dl class="method">
 <dt id="azure.ml.component.Pipeline.validate">
-<code class="descname">validate</code><span class="sig-paren">(</span><em>raise_error=False</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.Pipeline.validate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">validate</code><span class="sig-paren">(</span><em>raise_error=False</em>, <em>is_local=False</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.Pipeline.validate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph/component validation and visualization.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>raise_error</strong> (<em>bool</em>) &#8211; Whether directly raises the error or just shows the error list.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>raise_error</strong> (<em>bool</em>) &#8211; Whether directly raises the error or just shows the error list.</li>
+<li><strong>is_local</strong> (<em>bool</em>) &#8211; Whether the validation is for local run in the host, false if it is for remote run in AzureML.
+If is_local=True, TabularDataset not support and local path is supported as input.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of errors</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">List of errors</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">builtin.list</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">builtin.list</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1044,7 +1051,7 @@ you can choose one between selector and name, version.</li>
 
 <dl class="method">
 <dt id="azure.ml.component.component.Component.run">
-<code class="descname">run</code><span class="sig-paren">(</span><em>experiment_name=None</em>, <em>working_dir=None</em>, <em>use_docker=True</em>, <em>track_run_history=True</em>, <em>show_output=True</em>, <em>python_interpreter_path=None</em>, <em>skip_validation=True</em>, <em>raise_on_error=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Component.run" title="Permalink to this definition">¶</a></dt>
+<code class="descname">run</code><span class="sig-paren">(</span><em>experiment_name=None</em>, <em>working_dir=None</em>, <em>use_docker=True</em>, <em>track_run_history=True</em>, <em>show_output=True</em>, <em>python_interpreter_path=None</em>, <em>skip_validation=False</em>, <em>raise_on_error=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Component.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run component in local environment.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1172,14 +1179,15 @@ in system-managed conda-based environment.</li>
 <p>Define one input of a Component.</p>
 <dl class="method">
 <dt id="azure.ml.component.component.Input.configure">
-<code class="descname">configure</code><span class="sig-paren">(</span><em>mode='mount'</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Input.configure" title="Permalink to this definition">¶</a></dt>
+<code class="descname">configure</code><span class="sig-paren">(</span><em>mode=None</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Input.configure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use this method to configure the input.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>mode</strong> (<em>str</em>) &#8211; The mode that will be used for this input. Available options are
-&#8216;mount&#8217; and &#8216;download&#8217;. See <a class="reference external" href="https://aka.ms/dataset-mount-vs-download">https://aka.ms/dataset-mount-vs-download</a> for more details.</td>
+&#8216;mount&#8217; and &#8216;download&#8217;. See <a class="reference external" href="https://aka.ms/dataset-mount-vs-download">https://aka.ms/dataset-mount-vs-download</a> for more details.
+Note that &#8216;mount&#8217; only works in a linux compute, windows compute only supports &#8216;download&#8217;.</td>
 </tr>
 </tbody>
 </table>
@@ -1221,12 +1229,12 @@ in system-managed conda-based environment.</li>
 
 <dl class="class">
 <dt id="azure.ml.component.component.Output">
-<em class="property">class </em><code class="descclassname">azure.ml.component.component.</code><code class="descname">Output</code><span class="sig-paren">(</span><em>name: str</em>, <em>datastore=None</em>, <em>output_mode='mount'</em>, <em>port_name=None</em>, <em>owner=None</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Output" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">azure.ml.component.component.</code><code class="descname">Output</code><span class="sig-paren">(</span><em>name: str</em>, <em>datastore=None</em>, <em>output_mode=None</em>, <em>port_name=None</em>, <em>owner=None</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Output" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">azure.ml.component._util._telemetry.TelemetryMixin</span></code></p>
 <p>Define one output of a Component.</p>
 <dl class="method">
 <dt id="azure.ml.component.component.Output.configure">
-<code class="descname">configure</code><span class="sig-paren">(</span><em>datastore=None</em>, <em>output_mode='mount'</em>, <em>path_on_compute=None</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Output.configure" title="Permalink to this definition">¶</a></dt>
+<code class="descname">configure</code><span class="sig-paren">(</span><em>datastore=None</em>, <em>output_mode=None</em>, <em>path_on_compute=None</em>, <em>path_on_datastore=None</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.component.Output.configure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use this method to configure the output.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -1234,8 +1242,20 @@ in system-managed conda-based environment.</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>datastore</strong> (<em>azureml.core.datastore.Datastore</em>) &#8211; The datastore that will be used for the output.</li>
-<li><strong>output_mode</strong> (<em>str</em>) &#8211; Specify whether to use &#8220;upload&#8221; or &#8220;mount&#8221; to access the data.</li>
-<li><strong>path_on_compute</strong> (<em>str</em>) &#8211; Specify the local path of the output when using component/pipeline.run.</li>
+<li><strong>output_mode</strong> (<em>str</em>) &#8211; Specify whether to use &#8220;upload&#8221; or &#8220;mount&#8221; to access the data.
+Note that &#8216;mount&#8217; only works in a linux compute, windows compute only supports &#8216;upload&#8217;.
+If &#8216;upload&#8217; is specified, the output data will be uploaded to the datastore
+after the component process ends;
+If &#8216;mount&#8217; is specified, all the updates of the output folder will be synced to the
+datastore when the component process is writting the output folder.</li>
+<li><strong>path_on_compute</strong> (<em>str</em>) &#8211; Specify the output path to write the data on the compute,
+should be adapted to the OS of the compute.
+E.g., &#8220;/tmp/path&#8221; in linux compute, &#8220;C:/tmp/path&#8221; in windows compute.
+Both absolute path and relative path are supported.
+If the path doesn&#8217;t exists, new folder will be created for writing data.
+If it is not specified, a temp folder will be used.</li>
+<li><strong>path_on_datastore</strong> (<em>str</em>) &#8211; Specify the location in datastore to write the data. If it is not specified, the
+default path will be &#8220;azureml/{run-id}/outputs/{output-name}&#8221;.</li>
 </ul>
 </td>
 </tr>
@@ -1466,17 +1486,24 @@ the results of this run.</li>
 
 <dl class="method">
 <dt id="azure.ml.component.pipeline.Pipeline.validate">
-<code class="descname">validate</code><span class="sig-paren">(</span><em>raise_error=False</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.pipeline.Pipeline.validate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">validate</code><span class="sig-paren">(</span><em>raise_error=False</em>, <em>is_local=False</em><span class="sig-paren">)</span><a class="headerlink" href="#azure.ml.component.pipeline.Pipeline.validate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Graph/component validation and visualization.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>raise_error</strong> (<em>bool</em>) &#8211; Whether directly raises the error or just shows the error list.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>raise_error</strong> (<em>bool</em>) &#8211; Whether directly raises the error or just shows the error list.</li>
+<li><strong>is_local</strong> (<em>bool</em>) &#8211; Whether the validation is for local run in the host, false if it is for remote run in AzureML.
+If is_local=True, TabularDataset not support and local path is supported as input.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of errors</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">List of errors</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">builtin.list</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">builtin.list</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1609,7 +1636,7 @@ are &#8220;Target&#8221;.
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, microsoft
+        &copy; Copyright 2021, Microsoft
 
     </p>
   </div>

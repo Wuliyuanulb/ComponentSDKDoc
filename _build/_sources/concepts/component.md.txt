@@ -1,29 +1,89 @@
 # Component
-A component is self-contained set of code that performs one step in the ML workflow (pipeline), such as data preprocessing, model training, model scoring and so on. A component is analogous to a function, in that it has a name, parameters, expects certain input and returns some value.
 
-Data scientists or developers can wrap their arbitrary code as Azure Machine Learning component by following the component specification .
+## What is Azure Machine Learning component?
 
-### Component specification
+A component is self-contained set of code that performs one step in the ML workflow (pipeline), such as data preprocessing, model training, model scoring and so on. A component is analogous to a function, in that it has a name, parameters, expects certain input, and returns some value.
 
-A component specification in YAML format describes the component in the Azure Machine Learning system. A component definition captures the following information:
+### Component types
+
+Component SDK support multiple component types, for example:
+
+- [CommandComponent](../components/command_component.md): where you can specify a launching command line with a container so that you can invoke your script (Python, R, shell) or Exe.
+- [DistributedComponent](../components/distributed_component.rst): to help user launch distributed training jobs for popular deep learning frameworks like PyTorch.
+- [ParallelComponent](../components/parallel_component.md): to create a reusable component to asynchronously process large amount of data in parallel, built on top of AzureML's [ParallelRunStep](https://docs.microsoft.com/en-us/python/api/azureml-pipeline-steps/azureml.pipeline.steps.parallelrunstep?view=azure-ml-py#constructor) capability.
+- [HDInsightComponent](../components/hdi_component.md): to execute a spark job in a HDInsight cluster.
+
+## How to create an Azure ML component
+
+Data scientists or developers can wrap their arbitrary code as Azure ML component by following steps.
+
+### Define components with component specification
+
+A [component specification](../components/component-spec-definition.md) in YAML format describes the component in the Azure Machine Learning system. A component definition captures the following information:
 
 - **Metadata:** name, display_name, version, type, etc.
-- **Interface:**: input/output specifications (name, type, description, default value, etc).
-- **Command, Code & Envrionment:**: command, code and environment required to run the component.
+- **Interface:** [input/output specifications](../components/component-spec-topics/inputs-and-outputs.md) (name, type, description, default value, etc).
+- **Command, Code & Environment:** command, code and [environment](../components/component-spec-topics/running-environment.md) required to run the component.
 
-Refer to [component spec definition](../components/component-spec-definition.md) for more details.
+### Manage components with UI & CLI
+After user defined components with component spec, user can manage components with UI & CLI tools.
+- Azure ML CLI: 
+    - User can use a command like `az ml component create` to create component into workspace. 
+    - After creation, the component will be shared to all users that have access to the workspace.
+    - Reference this [quick walk through](https://aka.ms/component-cli-walk-through) to the azure cli extension that manipulates the component.
+- [Azure ML Studio UI](https://ml.azure.com/): 
+    - Adding &flight=cm to url in your browser will enable the `Modules` page which can help create, list, update your components.
+    - Note: `Module` is a legacy name of `Component`. UI renaming change will happen in near future.
 
-## What's the benefit of component?
+## How to consume a component using SDK
 
-Currently Azure Machine Learning offers PipelineStep as the basic building block of machine learning pipeline. PipelineStep is one-off wrap of code that cannot be reused across different pipelines. Compare to PipelineStep, component greatly simplifies the ML pipeline develpoment lifecycle, enables reproducibility and accelerates the collaboration for all-skill data scientists in a team:
+### Load a component
 
-- **Composability:** This is the native benefit of component. It hides the complicated logic, and only exposes simple interface. So component consumers don't need to worry about underlying implementation. They can easily use components built by themselves or by others. In the meanwhile the ground truth (component specification) of a component is visible, making secondary development easy.
+- [Component.from_yaml](../azure.ml.component.html#azure.ml.component.Component.from_yaml): Load component from yaml spec as an anonymous component. Then you can run the component in local to test.
+- [Component.Load](../azure.ml.component.html#azure.ml.component.Component.load): Load component by name and version from workspace. The component needs to have been created in the workspace using `az ml component create`.
+
+```python
+train_component_func = Component.from_yaml(ws, yaml_file='./components/get-started-train/train.yaml')
+```
+
+### Parameterize a component 
+
+User can control the runtime behavior of a component by specifying: 
+- inputs and outputs: learn more on available runtime settings in the reference doc [**inputs and outputs**](inputs-and-outputs.md).
+- runsettings: learn more about runsettings in the reference doc [**runsettings**](runsettings.md).
+
+```python
+component = train_component_func(
+        # inputs can be an existing dataset or outputs of other components
+        training_data=train_data, 
+        # parameters 
+        max_epochs=5, 
+        learning_rate=0.01)
+# component runsettings
+component.runsettings.target='aml-compute'
+# output runtime behavior configuration: the relative path of component's output on datastore
+component.outputs.model_output.configure(path_on_datastore="azureml/train_component/{run-id}/{output-name}")
+```
+
+### Run a component locally
+
+[Component.run](../azure.ml.component.html#azure.ml.component.Component.run): Run component in your local docker container, conda, or host environment.
+
+### Build and submit a pipeline with the component
+
+Reference [pipeline](pipeline.md) for more details.
+
+
+## What's the benefit of Component?
+
+Currently Azure Machine Learning offers PipelineStep as the basic building block of machine learning pipeline. PipelineStep is one-off wrap of code that cannot be reused across different pipelines. Compare to PipelineStep, component greatly simplifies the ML pipeline development lifecycle, enables reproducibility and accelerates the collaboration for all-skill data scientists in a team:
+
+- **Composability:** This is the native benefit of the component. It hides the complicated logic, and only exposes a simple interface. So component consumers don't need to worry about the underlying implementation. They can easily use components built by themselves or by others. In the meanwhile the ground truth (component specification) of a component is visible, making secondary development easy.
 - **Reusability:** Component can be easily reused across different ML pipelines, different ML workspaces, even different organizations.
-- **Easy development, testing & debug:** Rich SDK and CLI features to make component development, testing and debug much easier.
-- **Easy pipeline authoring:** Once a component is createed in the workspace, it can be easily consumed in both Python Python SDK and drag-and-drop Designer UI.
+- **Easy development, testing & debug:** Rich SDK and CLI feature to make component development, testing, and debugging much easier.
+- **Easy pipeline authoring:** Once a component is created in the workspace, it can be easily consumed in both Python Python SDK and drag-and-drop Designer UI.
 - **Reproducibility:** By capturing all information in component specification, AML Component can be easily reproduced in different environments. Components can be managed in versions so it's easy to trace back if a data scientist wants to reproduce a specific experiment result.
-- **Sharing & collaboration:** Data scientists who prefer low-code/no-code can use Designer UI to quickly prototype and export the pipeline to Python code for code-first data scientists for further tuning or check in. The exported Python notebook can also be submitted to different workspaces for sharing & collaboration.
-
+- **Sharing & collaboration:** Data scientists who prefer low-code/no-code can use Designer UI to quickly prototype and export the pipeline to Python code for code-first data scientists for further tuning or check-in. The exported Python notebook can also be submitted to different workspaces for sharing & collaboration.
 
 ## Next steps
 
@@ -32,5 +92,4 @@ Follow [getting started tutorial](../getting_started.md) to learn how to build a
 
 ### Consume existing components
 
-[Component gallery](https://github.com/Azure/AzureMachineLearningGallery) is an open community for data scientists to contribute, share, and find machine learning pipelines as well as custom-built components to be used in Azure Machine Learning. It has more that 50 components for common machine learning tasks. Source code of all components can be found in the gallery.
-
+[Component gallery](https://github.com/Azure/AzureMachineLearningGallery) is an open community for data scientists to contribute, share, and find machine learning pipelines as well as custom-built components to be used in Azure Machine Learning. It has more than 50 components for common machine learning tasks. Source code of all components can be found in the gallery.

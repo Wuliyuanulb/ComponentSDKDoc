@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Component build &mdash; Component SDK beta documentation</title>
+  <title>Component build &mdash; Component SDK  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../../',
-              VERSION:'beta',
+              VERSION:'',
               LANGUAGE:'None',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -48,8 +48,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Ignore files when creating snapshot" href="ignore-files.html" />
-    <link rel="prev" title="Code snapshot" href="code-snapshot.html" /> 
+    <link rel="next" title="How to use component spec schema in vscode" href="../use-component-spec-schema-in-vscode.html" />
+    <link rel="prev" title="Ignore files when creating snapshot" href="ignore-files.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -100,25 +100,25 @@
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../concepts.html">Concepts</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../components.html">Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../command_component.html">Command Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../distributed_component.html">Distributed Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../parallel_component.html">Parallel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hdi_component.html">HDInsight Component</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../component-spec-definition.html">Definition of component spec</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../component-spec-topics.html">Component spec advanced topics</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="inputs-and-outputs.html">Inputs and outputs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="running-environment.html">Environment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="additional-includes.html">Additional includes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="code-snapshot.html">Code snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ignore-files.html">Ignore files when creating snapshot</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Component build</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#use-scenarios">Use scenarios</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="ignore-files.html">Ignore files when creating snapshot</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../command_component.html">Command Component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../parallel_component.html">Parallel Component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hdi_component.html">HDInsight Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
@@ -198,12 +198,12 @@
 <h1>Component build<a class="headerlink" href="#component-build" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>When developing custom components, data scientists may need to get a &#8220;fully resolved&#8220; snapshot of a component and do some processing before creating it(e.g. may need to sent the component snapshot to code signing before creating it).</p>
+<p>When developing custom components, data scientists may need to get a &#8220;fully resolved&#8220; snapshot of a component and do some processing before creating it(e.g. may need to send the component snapshot to code signing before creating it).</p>
 <p>In this case, use <code class="docutils literal"><span class="pre">az</span> <span class="pre">ml</span> <span class="pre">component</span> <span class="pre">build</span></code> to build a local snapshot of the component based on the component yaml.
-The built snapshot is the same as the one created to workspaces which has resolved source directory, <a class="reference internal" href="ignore-files.html"><span class="doc">aml ignores</span></a> and <a class="reference internal" href="additional-includes.html"><span class="doc">additional includes</span></a>.</p>
+The built snapshot is the same as the one created to workspaces which has resolved source directory, <a class="reference internal" href="ignore-files.html"><span class="doc">aml ignores</span></a> and <a class="reference external" href="https://aka.ms/component-additional-includes">additional includes</a>.</p>
 <p>Goal:</p>
 <ul class="simple">
-<li>if &#8220;code&#8220; is specified in spec file, the built snapshot should follow it</li>
+<li>if &#8220;code&#8220; is specified in the spec file, the built snapshot should follow it</li>
 <li>additional include files should be included</li>
 <li>files inside amlignore file should be excluded</li>
 </ul>
@@ -216,11 +216,11 @@ The built snapshot is the same as the one created to workspaces which has resolv
 <h2>Use scenarios<a class="headerlink" href="#use-scenarios" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="local-test">
 <h3>Local test<a class="headerlink" href="#local-test" title="Permalink to this headline">¶</a></h3>
-<p>User would like verify the snapshot content before create it as component in workspace with the following steps.</p>
+<p>User would like verify the snapshot content before create it as a component in workspace with the following steps.</p>
 <ol class="simple">
 <li>build the snapshot to a local folder</li>
 <li>check if the local folder contains expected files</li>
-<li>use the built snapshot to create component in workspace</li>
+<li>use the built snapshot to create a component in workspace</li>
 </ol>
 </div>
 <div class="section" id="ci-cd">
@@ -331,7 +331,7 @@ The built snapshot is the same as the one created to workspaces which has resolv
 <div class="section" id="example-build-snapshot-with-additional-aml-ignore-files">
 <h3>Example: build snapshot with additional aml ignore files<a class="headerlink" href="#example-build-snapshot-with-additional-aml-ignore-files" title="Permalink to this headline">¶</a></h3>
 <p>Besides putting an <code class="docutils literal"><span class="pre">.amlignore</span></code> file in the base folder of each component, some components may share same <code class="docutils literal"><span class="pre">.amlignore</span></code> file(e.g. all python component need to ignore <code class="docutils literal"><span class="pre">__pycache__/</span></code> folder).</p>
-<p>We supported create a shared <code class="docutils literal"><span class="pre">.amlignore</span></code> file, and specify the path to the shared <code class="docutils literal"><span class="pre">.amlignore</span></code> file when building the component.</p>
+<p>We supported to create a shared <code class="docutils literal"><span class="pre">.amlignore</span></code> file, and specify the path to the shared <code class="docutils literal"><span class="pre">.amlignore</span></code> file when building the component.</p>
 <p>Suppose we have an additional aml ignore file <code class="docutils literal"><span class="pre">/shared/.amlignore</span></code> with the following content.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">file</span>
 </pre></div>
@@ -441,10 +441,10 @@ The built snapshot is the same as the one created to workspaces which has resolv
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ignore-files.html" class="btn btn-neutral float-right" title="Ignore files when creating snapshot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../use-component-spec-schema-in-vscode.html" class="btn btn-neutral float-right" title="How to use component spec schema in vscode" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="code-snapshot.html" class="btn btn-neutral float-left" title="Code snapshot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ignore-files.html" class="btn btn-neutral float-left" title="Ignore files when creating snapshot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -454,7 +454,7 @@ The built snapshot is the same as the one created to workspaces which has resolv
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, microsoft
+        &copy; Copyright 2021, Microsoft
 
     </p>
   </div>

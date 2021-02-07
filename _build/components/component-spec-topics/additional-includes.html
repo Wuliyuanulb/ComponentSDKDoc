@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Additional includes &mdash; Component SDK beta documentation</title>
+  <title>Additional includes &mdash; Component SDK  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../../',
-              VERSION:'beta',
+              VERSION:'',
               LANGUAGE:'None',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -47,9 +47,7 @@
 
     
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Code snapshot" href="code-snapshot.html" />
-    <link rel="prev" title="Environment" href="running-environment.html" /> 
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -95,31 +93,11 @@
             
             
               <p class="caption"><span class="caption-text">Table of Contents</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../../overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../concepts.html">Concepts</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../../components.html">Components</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../component-spec-definition.html">Definition of component spec</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../component-spec-topics.html">Component spec advanced topics</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="inputs-and-outputs.html">Inputs and outputs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="running-environment.html">Environment</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Additional includes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#notes">Notes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sample-component">Sample component</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="code-snapshot.html">Code snapshot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="component-build.html">Component build</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ignore-files.html">Ignore files when creating snapshot</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../command_component.html">Command Component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../parallel_component.html">Parallel Component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hdi_component.html">HDInsight Component</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../components.html">Components</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../sdk_reference.html">SDK Reference</a></li>
@@ -169,10 +147,6 @@
   <ul class="wy-breadcrumbs">
     
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-        
-          <li><a href="../../components.html">Components</a> &raquo;</li>
-        
-          <li><a href="../component-spec-topics.html">Component spec advanced topics</a> &raquo;</li>
         
       <li>Additional includes</li>
     
@@ -244,7 +218,7 @@
 <h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>Additional includes file should be a plain text file, place each item in one line. The line break could be either <code class="docutils literal"><span class="pre">\r\n</span></code> or <code class="docutils literal"><span class="pre">\n</span></code>, but it is recommended to use <code class="docutils literal"><span class="pre">\n</span></code>.</li>
-<li>Specified additional file (or folder) will be copied directly into the base folder of snapshot. No parent folders included.</li>
+<li>Specified additional file (or folder) will be copied directly into the base folder of the snapshot. No parent folders are included.</li>
 <li>Each item in the additional include file:<ul>
 <li>Could either be a file or a folder. In the sample above, <code class="docutils literal"><span class="pre">../src/python/library1</span></code> and <code class="docutils literal"><span class="pre">../src/python/library2</span></code> are folders, while <code class="docutils literal"><span class="pre">../assets/LECENSE</span></code> is a file.</li>
 <li>Could be optionally specified with a <code class="docutils literal"><span class="pre">.zip</span></code> suffix. As an example, for entry item <code class="docutils literal"><span class="pre">../hello.zip</span></code>:<ul>
@@ -285,22 +259,13 @@
           </div>
           <footer>
   
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="code-snapshot.html" class="btn btn-neutral float-right" title="Code snapshot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="running-environment.html" class="btn btn-neutral float-left" title="Environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
-    </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, microsoft
+        &copy; Copyright 2021, Microsoft
 
     </p>
   </div>

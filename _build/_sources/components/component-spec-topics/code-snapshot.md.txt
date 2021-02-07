@@ -37,11 +37,10 @@ component_entry/
 ```
 
 Here are some notes for the usage of *code snapshot*:
-* Specify the relative path start from the folder containing the component spec yaml file. The code snapshot should be parent folders of the component spec file since component spec file should always be included in the snapshot file. Thus, the possible value for `code` must be one or more sections of `../`s. For the above folder structure example, specify `../` will set the snapshot folder to `src/`. For other folder structures which need to include further more top levels of parent folders, use `../../`, `../../../`, etc. accordingly.
-* Use the relative path start from the snapshot folder for any file references in the spec file. For the above example, conda file should be `component_entry/conda.yaml` and entry script should be `component_entry/run.py` inside the component spec file.
+* Specify the relative path start from the folder containing the component spec yaml file. The code snapshot should be parent folders of the component spec file since the component spec file should always be included in the snapshot file. Thus, the possible value for `code` must be one or more sections of `../`s. For the above folder structure example, specify `../` will set the snapshot folder to `src/`. For other folder structures which need to include furthermore top levels of parent folders, use `../../`, `../../../`, etc. accordingly.
+* Use the relative path start from the snapshot folder for any file references in the spec file. For the above example, conda file should be `component_entry/conda.yaml` and the entry script should be `component_entry/run.py` inside the component spec file.
 * Use `.amlignore` and optionally use `--amlignore-file` option to exclude unused files. Refer to [the document](ignore-files.md) for details.
-* Do not use [additional includes](additional-includes.md) along with the *code snapshot*. They could not be used together.
-
+* Do not use [additional includes](https://aka.ms/component-additional-includes) along with the *code snapshot*. They could not be used together.
 
 ## Examples
 

@@ -12,7 +12,7 @@ This document describes the specification to define an AzureML component. The sp
 | name                | String                                                   | Yes      | Name of the component. Name will be unique identifier of the component. |
 | version             | String                                                   | Yes      | Version of the component. Could be arbitrary text, but it is recommended to follow the [Semantic Versioning](https://semver.org/) specification. |
 | display_name        | String                                                   | No       | Display name of the component. Defaults to same as name. |
-| type                | String                                                   | No       | Defines type of the Component. Could be `CommandComponent`, `ParallelComponent`, etc.. Defaults to `CommandComponent` if not specified. |
+| type                | String                                                   | No       | Defines type of the component. Could be `CommandComponent`, `ParallelComponent`, etc.. Component type should match the $schema. |
 | description         | String                                                   | No       | Detailed description of the Component. |
 | tags                | Dictionary<String>                                       | No | A list of key-value pairs to describe the different perspectives of the component. Each tag's key and value should be one word or a short phrase, e.g. `Product:Office`, `Domain:NLP`, `Scenario:Image Classification`. |
 | is_deterministic    | Boolean                                                  | No       | Specify whether the component will always generate the same result when given the same input data. Defaults to `True` if not specified. Typically for components which will load data from external resources, e.g. Import data from a given url, should set to `False` since the data to where the url points to may be updated. |
@@ -21,6 +21,7 @@ This document describes the specification to define an AzureML component. The sp
 | code                | String                                                   | No       | Location of the [Code](#code) snapshot. |
 | environment         | [Environment](#environment)                              | No       | An Environment defines the runtime environment for the component to run. Refer to [here](component-spec-topics/running-environment.md) for details. |
 | command             | String                                             | No    | Specify the command to start to run the component code.         |
+| launcher | [Launcher](#launcher) | No | Launcher settings for `DistributedComponent` only. Refer to [here](#launcher) for details. |
 | parallel | [Parallel](#parallel) | No | Settings for `ParallelComponent` only. Refer to [here](#parallel) for details. |
 | hdinsight | [HDInsight](#hdinsight-internal-only-for-now) | No | Settings for `HDInsightComponent` only. Refer to [here](#hdinsight-internal-only-for-now) for details. |
 
@@ -88,7 +89,6 @@ Defines an input port of the component. Refer to [here](component-spec-topics/in
 | Name         | Type                    | Required | Description                                                  |
 | ------------ | ----------------------- | -------- | ------------------------------------------------------------ |
 | type         | String or  List<String> | Yes      | Defines the data type(s) of this input port. Refer to [Data Types for Inputs/Outputs](#data-types-for-inputs/outputs) for details. |
-| display_name | String                  | No      | Display name of the input port. |
 | optional     | Boolean                 | No       | Indicates whether this input is an optional port. Defaults to `False` if not specified. |
 | description  | String                  | No       | Detailed description to the input port.      |
 
@@ -99,7 +99,6 @@ Defines a parameter of the component. Refer to [here](component-spec-topics/inpu
 | Name         | Type    | Required | Description                                                  |
 | ------------ | ------- | -------- | ------------------------------------------------------------ |
 | type         | String  | Yes      | Defines the type of this data. Refer to [Data Types for Parameters](#data-types-for-parameters) for details. |
-| display_name | String  | No      | Display name of the parameter. |
 | optional     | Boolean | No       | Indicates whether this input is optional. Default value is `False`. |
 | default      | Dynamic | No       | The default value for this parameter. The type of this value is dynamic. e.g. If `type` field in Input is `Integer`, this value should be `Inteter`. If `type` is `String`, this value should also be `String`. This field is optional, defaults to `null` or `None` if not specified. |
 | description  | String  | No       | Detailed description to the parameter.                       |
@@ -114,14 +113,12 @@ Defines an output port of the component. Refer to [here](component-spec-topics/i
 
 | Name         | Type   | Required | Description                                                  |
 | ------------ | ------ | -------- | ------------------------------------------------------------ |
-| name         | String | Yes      | Name of the output port. This field is used for program logic and cannot be duplicated with other inputs of the component. |
 | type         | String | Yes      | Defines the data type(s) of this output port. Refer to [Data Types for Inputs/Outputs](#data-types-for-inputs/outputs) for details. |
-| display_name | String | No       | Display name of the parameter.                               |
 | description  | String | No       | Detailed description to the output port.                     |
 
 ### Command
 
-Command is a string which specify the command line to run the component.
+Command is a string that specify the command line to run the component.
 It is expected to be a ***one-line string*** in which the arguments are separated by spaces.
 The string will be split to a command list according to the shell split rule with the python built-in function [shlex.split](https://docs.python.org/3/library/shlex.html).
 
@@ -214,17 +211,27 @@ Parallel component is a kind of component to run [ParallelRunStep](https://docs.
 | entry       | String                 | Yes      | The user script to process mini_batches.                     |
 | args        | String                 | No       | Specify the arguments used along with `entry`. This list may consist place holders of Inputs and Outputs. See [CLI Argument Place Holders](#cli-argument-place-holders) for details. |
 
+### launcher
+
+This section is used only for DistributedComponents.
+DistributedComponent is a kind of component to support distributed training scenarios.
+
+| Name        | Type                   | Required | Description                                                  |
+| ----------- | ---------------------- | -------- | ------------------------------------------------------------ |
+| type  | String | Yes      | Launch type of a distributed training, Could be `mpi`, `torch.distributed`. |
+| additional_arguments | String   | Yes      | The command to invoke custom script. |
+
 ### Data Types
 
 Data Type is a short word or phrase that describes the data type of the Input or Output.
 
 #### Data Types for Inputs/Outputs
 
-Designer allows its user to connect an Output to another component's Input that with the same data type.
+Designer allows its user to connect an Output to another component's Input with the same data type.
 
-Data type for a Input/Output could be an arbitrary string (except `<` and `>`).
+The data type for an Input/Output could be an arbitrary string (except `<` and `>`).
 
-Below are list of data types that will be auto registered and can be directly used by user out-of-box.
+Below is a list of data types that will be auto-registered and can be directly used by users out-of-box.
 For other data type names, please create the DataTypes first following guide from https://aka.ms/azureml-sdk-create-data-type.
 
 **Data Types**
@@ -254,8 +261,8 @@ For other data type names, please create the DataTypes first following guide fro
 | Name    | Description                                                  |
 | ------- | ------------------------------------------------------------ |
 | String  | Indicates that the input value is a string.                  |
-| Integer | Indicates that the input value is an integer.                |
-| Float   | Indicates that the input value is a float.                   |
-| Boolean | Indicates that the input value is a boolean value.           |
+| Integer | Indicates that the input value is a 64-bit signed integer, values out of range will cause an exception.                |
+| Float   | Indicates that the input value is a 64-bit signed floating-point number, floating-numbers more than 64-bit will lose accuracy, non-number values will cause an exception. |
+| Boolean | Indicates that the input value is a boolean value, it should be 'True' or 'False', all other values will cause an exception. |
 | Enum    | Indicates that the input value is a enumerated (limited list of) String values. |
 

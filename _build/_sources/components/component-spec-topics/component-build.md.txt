@@ -2,14 +2,14 @@
 
 ## Overview
 
-When developing custom components, data scientists may need to get a "fully resolved" snapshot of a component and do some processing before creating it(e.g. may need to sent the component snapshot to code signing before creating it).
+When developing custom components, data scientists may need to get a "fully resolved" snapshot of a component and do some processing before creating it(e.g. may need to send the component snapshot to code signing before creating it).
 
 In this case, use `az ml component build` to build a local snapshot of the component based on the component yaml. 
-The built snapshot is the same as the one created to workspaces which has resolved source directory, [aml ignores](./ignore-files.md) and [additional includes](./additional-includes.md).
+The built snapshot is the same as the one created to workspaces which has resolved source directory, [aml ignores](./ignore-files.md) and [additional includes](https://aka.ms/component-additional-includes).
 
 Goal:
 
-- if "code" is specified in spec file, the built snapshot should follow it
+- if "code" is specified in the spec file, the built snapshot should follow it
 
 - additional include files should be included
 - files inside amlignore file should be excluded
@@ -22,11 +22,11 @@ Non-Goal:
 
 ### Local test
 
-User would like verify the snapshot content before create it as component in workspace with the following steps.
+User would like verify the snapshot content before create it as a component in workspace with the following steps.
 
 1. build the snapshot to a local folder
 2. check if the local folder contains expected files
-3. use the built snapshot to create component in workspace
+3. use the built snapshot to create a component in workspace
 
 ### CI/CD
 
@@ -146,7 +146,7 @@ snapshot/
 
 Besides putting an `.amlignore` file in the base folder of each component, some components may share same `.amlignore` file(e.g. all python component need to ignore `__pycache__/` folder).
 
-We supported create a shared `.amlignore` file, and specify the path to the shared `.amlignore` file when building the component.
+We supported to create a shared `.amlignore` file, and specify the path to the shared `.amlignore` file when building the component.
 
 Suppose we have an additional aml ignore file `/shared/.amlignore` with the following content.
 

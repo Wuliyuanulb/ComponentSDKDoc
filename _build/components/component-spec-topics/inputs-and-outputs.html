@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Inputs and outputs &mdash; Component SDK beta documentation</title>
+  <title>Inputs and outputs &mdash; Component SDK  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../../',
-              VERSION:'beta',
+              VERSION:'',
               LANGUAGE:'None',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -100,24 +100,25 @@
 <li class="toctree-l1"><a class="reference internal" href="../../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../concepts.html">Concepts</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../components.html">Components</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../command_component.html">Command Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../distributed_component.html">Distributed Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../parallel_component.html">Parallel Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hdi_component.html">HDInsight Component</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../component-spec-definition.html">Definition of component spec</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../component-spec-topics.html">Component spec advanced topics</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Inputs and outputs</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#optional-inputs-and-parameters">Optional Inputs and Parameters</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#sample-component">Sample component</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#default-parameters">Default Parameters</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="running-environment.html">Environment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="additional-includes.html">Additional includes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="code-snapshot.html">Code snapshot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="component-build.html">Component build</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ignore-files.html">Ignore files when creating snapshot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="component-build.html">Component build</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../command_component.html">Command Component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../parallel_component.html">Parallel Component</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../hdi_component.html">HDInsight Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../CHANGELOG.html">Change Log</a></li>
@@ -195,20 +196,17 @@
             
   <div class="section" id="inputs-and-outputs">
 <h1>Inputs and outputs<a class="headerlink" href="#inputs-and-outputs" title="Permalink to this headline">¶</a></h1>
-<p>The component could have inputs and outputs.</p>
-<p>An input could either be an <em>Input Port</em> or a <em>Parameter</em>. Output could only be an <em>Output Port</em>.</p>
-<p>Input ports and output ports typically refers to a path. In Designer, they will be displayed as a <em>port</em> on the component. They could be have arbitrary type names such as <code class="docutils literal"><span class="pre">CsvFile</span></code>, <code class="docutils literal"><span class="pre">ImageFolder</span></code> to describe the underlying data. A component&#8216;s output port could be connected to another component&#8216;s input port, given they have the same type name.</p>
-<p>Parameters are input values passed to the component while executing. In Designer, they are displayed on the right panel of the component. Parameter could only have scalar values such as <code class="docutils literal"><span class="pre">Integer</span></code>, <code class="docutils literal"><span class="pre">String</span></code>, <code class="docutils literal"><span class="pre">Boolean</span></code>, <code class="docutils literal"><span class="pre">Enum</span></code>. Each parameter could have additional attributes such as <code class="docutils literal"><span class="pre">default</span></code>, <code class="docutils literal"><span class="pre">min</span></code>, <code class="docutils literal"><span class="pre">max</span></code>, etc.</p>
-<p>Refer to <a class="reference internal" href="../component-spec-definition.html"><span class="doc">the component spec</span></a> for full description.</p>
+<p>For full introduction about Inputs and Outputs concept, please refer to <a class="reference internal" href="../../concepts/inputs-and-outputs.html"><span class="doc">Inputs and Outputs</span></a> documentation.</p>
 <p>To define component inputs and outputs:</p>
 <ul class="simple">
 <li>Add <code class="docutils literal"><span class="pre">inputs</span></code> and <code class="docutils literal"><span class="pre">outputs</span></code> section to the component spec to specify the component interface.</li>
-<li>Add reference to the inputs and outputs in <code class="docutils literal"><span class="pre">command</span></code> section. A reference looks like <code class="docutils literal"><span class="pre">{inputs.name_of_parameter}</span></code>, which will be replaced by the value of the parameter when invoking the component.</li>
+<li>Add reference to the inputs and outputs in the <code class="docutils literal"><span class="pre">command</span></code> section. A reference looks like <code class="docutils literal"><span class="pre">{inputs.name_of_parameter}</span></code>, which will be replaced by the value of the parameter when invoking the component.</li>
 </ul>
+<p>Refer to <a class="reference internal" href="../component-spec-definition.html"><span class="doc">the component spec</span></a> for full description.</p>
 <div class="section" id="optional-inputs-and-parameters">
 <h2>Optional Inputs and Parameters<a class="headerlink" href="#optional-inputs-and-parameters" title="Permalink to this headline">¶</a></h2>
 <p>Use <code class="docutils literal"><span class="pre">optional</span></code> to make an input port or a parameter optional.
-In the snippet bellow, two input ports and the parameter &#8220;Optional string parameter&#8220; are optional.</p>
+In the snippet below, two input ports and the parameter &#8220;Optional string parameter&#8220; are optional.</p>
 <div class="highlight-yaml"><div class="highlight"><pre><span></span><span class="nt">inputs</span><span class="p">:</span>
   <span class="nt">input_path</span><span class="p">:</span>
     <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">path</span>
@@ -254,6 +252,13 @@ python optional_input.py --input-path /aaa/bbb --string-param abc
 <h2>Sample component<a class="headerlink" href="#sample-component" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/tree/master/azure-ml-components/samples/components/inputs-and-outputs">A component with optional inputs and parameters</a></p>
 </div>
+<div class="section" id="default-parameters">
+<h2>Default Parameters<a class="headerlink" href="#default-parameters" title="Permalink to this headline">¶</a></h2>
+<p>Use <code class="docutils literal"><span class="pre">default</span></code> to specify the default value of a parameter.
+Once a default value is set, Component SDK will set the value to corresponding when initialize the component by <code class="docutils literal"><span class="pre">component</span> <span class="pre">=</span> <span class="pre">component_func()</span></code>.
+Note that <code class="docutils literal"><span class="pre">default</span></code> and <code class="docutils literal"><span class="pre">optional</span></code> are independent properties, no matter the parameter is optional or not, the default value will be set.
+Thus usually you don&#8216;t need to both set <code class="docutils literal"><span class="pre">default</span></code> and <code class="docutils literal"><span class="pre">optional</span></code>.</p>
+</div>
 </div>
 
 
@@ -277,7 +282,7 @@ python optional_input.py --input-path /aaa/bbb --string-param abc
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, microsoft
+        &copy; Copyright 2021, Microsoft
 
     </p>
   </div>

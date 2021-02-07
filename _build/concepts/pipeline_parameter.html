@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>PipelineParameter &mdash; Component SDK beta documentation</title>
+  <title>PipelineParameter &mdash; Component SDK  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../',
-              VERSION:'beta',
+              VERSION:'',
               LANGUAGE:'None',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -48,7 +48,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="RunSettings" href="runsettings.html" />
+    <link rel="next" title="Components" href="../components.html" />
     <link rel="prev" title="Pipeline" href="pipeline.html" /> 
 </head>
 
@@ -100,11 +100,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../concepts.html">Concepts</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="component.html">Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="runsettings.html">RunSettings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputs-and-outputs.html">Inputs and Outputs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline.html">Pipeline</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">PipelineParameter</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#what-is-pipelineparameter">What is PipelineParameter?</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#supported-type">Supported type</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#use-pipelineparameter-as-component-s-input">Use PipelineParameter as component&#8216;s input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-pipelineparameter">Use PipelineParameter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pipelineparameter-as-a-component-input-parameter">PipelineParameter as a component input/parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pipelineparameter-as-substrings-of-a-component-parameter">PipelineParameter as substrings of a component parameter</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#submit-with-pipelineparameter">Submit with PipelineParameter</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#submit-pipeline-with-pipelineparameter-via-component-sdk">Submit pipeline with PipelineParameter via Component SDK</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#resubmit-run-with-pipelineparameter">Resubmit run with PipelineParameter</a></li>
@@ -113,7 +119,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#publish-run-with-pipelineparameter">Publish run with PipelineParameter</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="runsettings.html">RunSettings</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../components.html">Components</a></li>
@@ -226,8 +231,10 @@
 </tr>
 </tbody>
 </table></div>
-<div class="section" id="use-pipelineparameter-as-component-s-input">
-<h2>Use PipelineParameter as component&#8216;s input<a class="headerlink" href="#use-pipelineparameter-as-component-s-input" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="use-pipelineparameter">
+<h2>Use PipelineParameter<a class="headerlink" href="#use-pipelineparameter" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pipelineparameter-as-a-component-input-parameter">
+<h3>PipelineParameter as a component input/parameter<a class="headerlink" href="#pipelineparameter-as-a-component-input-parameter" title="Permalink to this headline">¶</a></h3>
 <p>In the sample pipeline function below, pipeline parameters are:</p>
 <ul class="simple">
 <li>input_data - the original dataset</li>
@@ -270,6 +277,26 @@ a link.</p>
 question mark, which indicate a PipelineParameter value has been applied to the component&#8216;s parameter.</p>
 <p><img alt="image-pipeline-parameter-on-component" src="../_images/pipeline-parameter-on-component.png" /></p>
 </div>
+<div class="section" id="pipelineparameter-as-substrings-of-a-component-parameter">
+<h3>PipelineParameter as substrings of a component parameter<a class="headerlink" href="#pipelineparameter-as-substrings-of-a-component-parameter" title="Permalink to this headline">¶</a></h3>
+<p>PipelineParameter can be used as substrings of a string parameter.</p>
+<p>Suggest we have a pipeline with PipelineParameter <code class="docutils literal"><span class="pre">param_name</span></code> <code class="docutils literal"><span class="pre">param_value</span></code>, we&#8216;d like to format them as a json string
+then pass it to the component, the pipeline can be defined as follow.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="nd">@dsl</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;pipeline&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">pipeline</span><span class="p">(</span><span class="n">param_name</span><span class="p">,</span> <span class="n">param_value</span><span class="p">):</span>
+    <span class="n">print_string_component_func</span><span class="p">(</span>
+        <span class="n">string_parameter</span><span class="o">=</span><span class="s1">&#39;{{&quot;name&quot;: &quot;</span><span class="si">{0}</span><span class="s1">&quot;, &quot;value&quot;: &quot;</span><span class="si">{1}</span><span class="s1">&quot;}}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param_name</span><span class="p">,</span> <span class="n">param_value</span><span class="p">))</span>
+
+<span class="n">print_string_pipeline</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span><span class="s1">&#39;my_param&#39;</span><span class="p">,</span> <span class="s1">&#39;1/25/2021&#39;</span><span class="p">)</span>
+<span class="n">print_string_pipeline</span><span class="o">.</span><span class="n">submit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Submit the pipeline, we can see our two pipeline parameters <code class="docutils literal"><span class="pre">param_name=my_param</span></code>, <code class="docutils literal"><span class="pre">param_value=1/25/2021</span></code>.</p>
+<p><img alt="image-pipeline-parameter-as-substring" src="../_images/pipeline-parameter-as-substring.png" /></p>
+<p>And the <code class="docutils literal"><span class="pre">string_parameter</span></code> of component has been formatted just like what we want.</p>
+<p><img alt="image-pipeline-parameter-as-substring-on-component" src="../_images/pipeline-parameter-as-substring-on-component.png" /></p>
+</div>
+</div>
 <div class="section" id="submit-with-pipelineparameter">
 <h2>Submit with PipelineParameter<a class="headerlink" href="#submit-with-pipelineparameter" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="submit-pipeline-with-pipelineparameter-via-component-sdk">
@@ -308,7 +335,7 @@ question mark, which indicate a PipelineParameter value has been applied to the 
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="runsettings.html" class="btn btn-neutral float-right" title="RunSettings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../components.html" class="btn btn-neutral float-right" title="Components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="pipeline.html" class="btn btn-neutral float-left" title="Pipeline" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -321,7 +348,7 @@ question mark, which indicate a PipelineParameter value has been applied to the 
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, microsoft
+        &copy; Copyright 2021, Microsoft
 
     </p>
   </div>

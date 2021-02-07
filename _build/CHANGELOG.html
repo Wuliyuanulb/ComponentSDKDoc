@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Change Log &mdash; Component SDK beta documentation</title>
+  <title>Change Log &mdash; Component SDK  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'./',
-              VERSION:'beta',
+              VERSION:'',
               LANGUAGE:'None',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -49,7 +49,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Frequently Asked Questions" href="faq.html" />
-    <link rel="prev" title="HDInsight Component" href="components/hdi_component.html" /> 
+    <link rel="prev" title="How to use component spec schema in vscode" href="components/use-component-spec-schema-in-vscode.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -101,7 +101,8 @@
 <li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Change Log</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#upcomming-release-target-date-2021-01-15"><code class="docutils literal"><span class="pre">upcomming</span> <span class="pre">release</span></code> (target date: 2021.01.15)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#upcomming-release-target-date-2021-02-05"><code class="docutils literal"><span class="pre">upcomming</span> <span class="pre">release</span></code> (target date: 2021.02.05)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#v0-1-0-29596699-2021-01-15">v0.1.0.29596699 (2021.01.15)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-1-0-27532912-2020-11-30">v0.1.0.27532912 (2020.11.30)</a></li>
 </ul>
 </li>
@@ -175,29 +176,62 @@
             
   <div class="section" id="change-log">
 <h1>Change Log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="upcomming-release-target-date-2021-01-15">
-<h2><a class="reference external" href="#">upcomming release</a> (target date: 2021.01.15)<a class="headerlink" href="#upcomming-release-target-date-2021-01-15" title="Permalink to this headline">¶</a></h2>
-<p>Features listed in this secetion are available in preview version: 29211468.</p>
+<div class="section" id="upcomming-release-target-date-2021-02-05">
+<h2><a class="reference external" href="#">upcomming release</a> (target date: 2021.02.05)<a class="headerlink" href="#upcomming-release-target-date-2021-02-05" title="Permalink to this headline">¶</a></h2>
+<p>Features listed in this secetion are under development and may goes in the new stable release.</p>
+<p><strong>New Features:</strong></p>
+<ul class="simple">
+<li>Support <a class="reference internal" href="components/distributed_component.html"><span class="doc">Distributed Component</span></a></li>
+<li>Runsetting: Support runsettings.environment_variables</li>
+<li>PipelineParameter: Support <a class="reference external" href="./docs/concepts/pipeline_parameter.md#PipelineParameter-as-substrings-of-a-component-parameter"><strong>use pipeline parameter as substring in a component parameter</strong></a></li>
+<li>Environment: Support reference an existing environment by name in component yaml</li>
+<li>Component.Run: Support run arbitrary command component locally</li>
+<li>Output: Support configure path_on_datastore of component&#8216;s output.</li>
+</ul>
+<p><strong>Improvements:</strong></p>
+<ul class="simple">
+<li>Improve validation logic of local/remote run</li>
+<li>Fundamental<ul>
+<li>Improve Performance</li>
+</ul>
+</li>
+<li>Remove fields(source, contact, helpDocument, shared_scope) in CLI outputs to align with UX</li>
+<li>Improve snapshot creating speed by 2x in AML Notebooks(which has low file system performance when based on Azure File Share)<ul>
+<li>Added debug info for <code class="docutils literal"><span class="pre">az</span> <span class="pre">ml</span> <span class="pre">component</span> <span class="pre">craete/build</span></code>, user can check by adding <code class="docutils literal"><span class="pre">--verbose</span></code> parameter in CLI.</li>
+<li>Supports snapshot cache for all components(We don&#8216;t support component with additional includes or amlignore files before).</li>
+<li>Supports <a class="reference external" href="./docs/components/component-spec-topics/ignore-files.md#Ignore-files-in-subdirectory"><strong>recursive ignore files</strong></a> in component code snapshot.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Known Bugs to address in this release:</strong></p>
+<ul class="simple">
+<li>Bug 1005863: Output.configure(mode=&#8216;download&#8216;) should take effect</li>
+<li>Bug 1008265: Optional boolean argument is set as False rather than not specified in AML</li>
+</ul>
+</div>
+<div class="section" id="v0-1-0-29596699-2021-01-15">
+<h2><a class="reference external" href="https://pypi.org/project/azure-ml-component/0.1.0.29596699/">v0.1.0.29596699</a> (2021.01.15)<a class="headerlink" href="#v0-1-0-29596699-2021-01-15" title="Permalink to this headline">¶</a></h2>
+<p>This release contains support of new component types like CommandComponent, ParallelComponent, HDInsightComponent.</p>
 <p><strong>New Features:</strong></p>
 <ul class="simple">
 <li>Provide component SDK json schema to help authoring yaml spec, doc: <a class="reference internal" href="components/use-component-spec-schema-in-vscode.html"><span class="doc">use-component-spec-schema-in-vscode.md</span></a></li>
-<li>Support Any CommandComponent<ul>
+<li>Support Any <a class="reference internal" href="components/command_component.html"><span class="doc">CommandComponent</span></a><ul>
 <li>Sample1: <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-command-component.ipynb">how-to-use-command-component.ipynb</a></li>
 <li>Sample2: <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-r-command-component.ipynb">how-to-use-r-command-component.ipynb</a></li>
 <li>This feature is still in preview, has known backend limitations and not recommended for production use case yet.</li>
 <li>Command starts with python will work same as previous basic module.</li>
 </ul>
 </li>
-<li>Support ParallelComponent SDK 1.5 component yaml<ul>
+<li>Support <a class="reference internal" href="components/parallel_component.html"><span class="doc">ParallelComponent</span></a> SDK 1.5 component yaml<ul>
 <li>Sample: <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-parallel-component.ipynb">how-to-use-parallel-component.ipynb</a></li>
 </ul>
 </li>
-<li>Support HDInsightComponent SDK 1.5 component yaml<ul>
+<li>Support <a class="reference internal" href="components/hdi_component.html"><span class="doc">HDInsightComponent</span></a> SDK 1.5 component yaml<ul>
 <li>Sample: <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-hdi-component.ipynb">how-to-use-hdinsight-component.ipynb</a></li>
 </ul>
 </li>
 <li>Support <code class="docutils literal"><span class="pre">az</span> <span class="pre">ml</span> <span class="pre">component</span> <span class="pre">build</span></code>: user can get a local component snapshot and do some processing like code-sign before create.<ul>
-<li>Doc: <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/docs/component-spec-topics/component-build.md">component-build.md</a></li>
+<li>Doc: <a class="reference internal" href="components/component-spec-topics/component-build.html"><span class="doc">component-build.md</span></a></li>
 <li>Sample: <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/how-to-use-component-cli.ipynb">how-to-use-component-cli.ipynb</a></li>
 </ul>
 </li>
@@ -218,8 +252,8 @@
 </li>
 <li>Improve Docs<ul>
 <li>Improved <a class="reference external" href="https://aka.ms/azure-ml-component-reference">reference doc site</a></li>
-<li>Add <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/docs/component-runsettings.md">runsettings doc</a></li>
-<li>Add <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/docs/pipeline-parameter.md">pipeline parameter doc</a></li>
+<li>Add <a class="reference internal" href="concepts/runsettings.html"><span class="doc">runsettings doc</span></a></li>
+<li>Add <a class="reference internal" href="concepts/pipeline_parameter.html"><span class="doc">pipeline parameter doc</span></a></li>
 </ul>
 </li>
 </ul>
@@ -305,7 +339,7 @@
         <a href="faq.html" class="btn btn-neutral float-right" title="Frequently Asked Questions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="components/hdi_component.html" class="btn btn-neutral float-left" title="HDInsight Component" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="components/use-component-spec-schema-in-vscode.html" class="btn btn-neutral float-left" title="How to use component spec schema in vscode" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -315,7 +349,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, microsoft
+        &copy; Copyright 2021, Microsoft
 
     </p>
   </div>

@@ -1,0 +1,188 @@
+# Horovod
+
+## Overview
+
+[Horovod](https://github.com/horovod/horovod) is a distributed deep learning training framework for TensorFlow, Keras, PyTorch, and Apache MXNet.
+The python script using Horovod can be launched by two commands, `horovodrun` and `mpirun`. 
+
+- horovodrun
+
+  `horovodrun` is a convenient, Open MPI-based wrapper for running Horovod script. It supports some unique Horovod knobs, such as `--autotune`, `--fusion-threshold-mb`, etc. Below is an example:
+
+  ```bash
+  horovodrun -np 4 -H server1:2,server2:2 --autotune python train.py
+  ```
+
+- mpirun
+
+  Horovod jobs can also be launched by the `mpirun` command directly, and **this is what we do today in Azure ML**. 
+
+  Most of the `horovodrun` commands have the equivalent `mpirun` commands. And for the `horovodrun` supports knobs, many of them can be used with `mpirun` through the use of environment variables. Below is an example equivalent with the above `horovodrun` example:
+
+  ```bash
+  mpirun -x HOROVOD_AUTOTUNE=1 -np 4 -H server1:2,server2:2 -bind-to none -map-by slot -x NCCL_DEBUG=INFO -x LD_LIBRARY_PATH -x PATH -mca pml ob1 -mca btl ^openib python train.py
+  ```
+
+  For a Horovod knob and environment variable name lookup, please check the table in the reference.
+
+> **Note**:
+>
+> Component SDK currently only supports mpirun approach.
+
+## How to write horovod distributed component yaml spec
+
+To create a component that trains the model by Horovod, you need to use the distributed component spec to describe this component.
+You can find a sample yaml [here](https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/master/azure-ml-components/samples/components/distributed/horovod/horovod-train-sentiment-classification/train_sentiment_classification/train_sentiment_classification.yaml).
+And the main points to prepare a horovod distributed component yaml are:
+
+- Specify the component type as "DistributedComponent"
+
+- Specify the launcher type as "mpi"
+
+- Specify the component running environment
+
+  The environment should meet the [requirements of the Horovod](https://horovod.readthedocs.io/en/stable/summary_include.html#install). You can provide one OpenMPI image as well as the Horovod package as a pip requirement.
+
+Example yaml:
+``` yaml
+$schema: http://azureml/sdk-1-5/DistributedComponent.json
+name: samples.train_sentiment_classification
+version: 0.0.1
+display_name: Train Sentiment Classification
+type: DistributedComponent
+description: A dummy component to show how to distributedly train sentiment classification with Horovod by
+  custom component.
+tags: {}
+inputs:
+  input_data:
+    type: path
+  max_tokens:
+    type: Integer
+    default: 10000
+  sequence_length:
+    type: Integer
+    default: 260
+  embedding_dimension:
+    type: Integer
+    default: 16
+  epochs:
+    type: Integer
+    default: 10
+  batch_size:
+    type: Integer
+    default: 32
+  learning_rate:
+    type: Float
+    default: 0.001
+outputs:
+  trained_model:
+    type: ModelDirectory
+environment:
+  docker:
+    image: mcr.microsoft.com/azureml/openmpi3.1.2-cuda10.1-cudnn7-ubuntu18.04
+  conda:
+    conda_dependencies:
+      name: project_environment
+      channels:
+        - defaults
+      dependencies:
+        - python=3.6.8
+        - pip=20.2
+        - pip:
+            - tensorflow-gpu==2.3.0
+            - horovod==0.19.5
+            - pandas==1.0.4
+  os: Linux
+launcher:
+  type: mpi
+  additional_arguments: >-
+    python train_sentiment_classification.py --input-data {inputs.input_data} --trained-model {outputs.trained_model}
+    --max-tokens {inputs.max_tokens} --sequence-length {inputs.sequence_length}
+    --embedding-dimension {inputs.embedding_dimension} --epochs {inputs.epochs} --batch-size {inputs.batch_size}
+    --learning-rate {inputs.learning_rate}
+```
+
+## How to consume horovod distributed component
+
+After the horovod distributed component prepared, you can submit a pipeline to run this component by Component SDK. [Here](https://github.com/PengSY/DesignerPrivatePreviewFeatures/blob/shiyu/add_horovod_distributed_component_sample/azure-ml-components/samples/components/distributed/horovod/horovod-train-sentiment-classification/Horovod_disributed_train_sentiment_classification.ipynb) is a sample notebook to submit a horovod component run. You can configure the Horovod job with Component API. For example, specify node count, process count per node and horovod knobs by [RunSettings](../../concepts/runsettings.md). 
+
+```python
+# load the horovod component you create by the component yaml
+horovod_component_func = Component.load(ws, name='horovod_sample_component', version='0.0.1')
+
+# generate a pipelien with one horovod component
+@dsl.pipeline(name='Horovod component example')
+def generated_pipeline():
+    horovod_component = horovod_component_func(script_arg_0=arg_0, script_arg_1=arg_1)
+	
+    # below runsettings give the equivalent command as:
+    # horovodrun -np 4 -H server1:2,server2:2 --timeline-filename ./outputs/timeline.json python component_entry.py \
+    # --script-arg-0 arg_0 --script-arg-1 arg_1
+    horovod_component.runsettings.environment_variables = {'HOROVOD_TIMELINE': './outputs/timeline.json'}  # specify the Horovod --timeline-filename
+    horovod_component.runsettings.resource_layout.configure(
+        node_count=2,  # use 2 nodes to train the model
+        process_count_per_node=2)  # use 2 processes per node
+
+# submit the pipeline
+pipeline = generated_pipeline()
+pipeline.submit(experiment_name='horovod-sample-experiment')
+```
+
+## Reference
+
+### Prepare Horovod script
+
+1. [Horovod examples](https://github.com/horovod/horovod/tree/master/examples)
+2. [Distributed model training using Horovod](https://spell.ml/blog/distributed-model-training-using-horovod-XvqEGRUAACgAa5th)
+
+### Horovod arguments and environment variable name lookup
+
+| Category           | Argument                            | Environment  variables support          | Description                                                  |
+| ------------------ | ----------------------------------- | --------------------------------------- | ------------------------------------------------------------ |
+| Optional arguments | -np                                 |                                         | Total number of training processes.                          |
+|                    | --disable-cache                     |                                         | Disable horovod  initialization check                        |
+|                    | --start-timeout                     |                                         | Has to perform all  the checks and init before the timeout   |
+|                    | --network-interface                 |                                         | Network interface  for communication                         |
+|                    | --output-filename                   |                                         | For Gloo, writes  stdout / stderr of all processes to a filename |
+|                    | --config-file                       |                                         | Path to YAML file containing runtime  parameter configuration for Horovod. |
+| SSH arguments      | -p                                  |                                         | SSH port                                                     |
+|                    | -I                                  |                                         | Private key file                                             |
+| Tuneable parameter | --fusion-threshold-mb               | HOROVOD_FUSION_THRESHOLD                | Fusion buffer size                                           |
+|                    | --cycle-time-ms                     | HOROVOD_CYCLE_TIME                      | Delay between each  tensor fusion cycle                      |
+|                    | --cache-capacity                    | OROVOD_CACHE_CAPACITY                   | Maximum number of  tensor names that will be cached          |
+|                    | --hierarchical-allreduce            | HOROVOD_HIERARCHICAL_ALLREDUCE          | Perform  hierarchical allreduce between workers instead of  ring allreduce. |
+|                    | --no-hierarchical-allreduce         |                                         | Disable  hierarchical allreduce                              |
+|                    | --hierarchical-allgather            | HOROVOD_HIERARCHICAL_ALLGATHER          | Perform hierarchical allgather between workers instead of ring allgather |
+|                    | --no-hierarchical-allgather         |                                         | Disable hierarchical allgather                               |
+| Autotune           | --autotune                          | HOROVOD_AUTOTUNE                        | Auto select params  to maximize the throughput               |
+|                    | --autotune-log-file                 | HOROVOD_AUTOTUNE_LOG                    | Comma-separated log of trials containing each hyperparameter and the score of the trial |
+|                    | --autotune-warmup-samples           | HOROVOD_AUTOTUNE_WARMUP_SAMPLES         | Number of samples to discard before beginning the optimization process during autotuning. |
+|                    | --autotune-steps-per-sample         | HOROVOD_AUTOTUNE_STEPS_PER_SAMPLE       | Number of steps (approximate) to record before observing a sample. |
+|                    | --autotune-bayes-opt-max-samples    | HOROVOD_AUTOTUNE_BAYES_OPT_MAX_SAMPLES  | Maximum number of samples to collect for each Bayesian optimization process. |
+|                    | --autotune-gaussian-process-noise   | HOROVOD_AUTOTUNE_GAUSSIAN_PROCESS_NOISE | Regularization value [0, 1] applied to account for noise in samples |
+| Elastic            | --min-np                            |                                         | Minimum number of  processes running for training to continue |
+|                    | --max-np                            |                                         | Maximum number of training processes, beyond which no additional processes will be created. |
+|                    | --slots-per-host                    |                                         | Number of slots for processes per host. Normally 1 slot per GPU per host. |
+|                    | --elastic-timeout                   |                                         | Timeout for  elastic initialisation after re-scaling the cluster |
+|                    | --reset-limit                       |                                         | Maximum number of  times that the training job can scale up or down |
+| Timeline           | --timeline-filename                 | HOROVOD_TIMELINE                        | JSON file containing timeline of Horovod events used for debugging performance. |
+|                    | --timeline-mark-cycles              | HOROVOD_TIMELINE_MARK_CYCLES            | Mark cycles on the timeline.                                 |
+| Stall check        | --no-stall-check                    | HOROVOD_STALL_CHECK_DISABLE             | The stall check  will log a warning when workers have stalled waiting |
+|                    | --stall-check-warning-time-seconds  | HOROVOD_STALL_CHECK_TIME_SECONDS        | Seconds until the stall warning is logged to stderr.         |
+|                    | --stall-check-shutdown-time-seconds | HOROVOD_STALL_SHUTDOWN_TIME_SECONDS     | Seconds until Horovod is shutdown due to stall.              |
+| Library            | --mpi-threads-disable               | HOROVOD_MPI_THREADS_DISABLE             | Disable MPI threading support.                               |
+|                    | --mpi-args                          |                                         | Extra MPI  arguments to pass to mpirun                       |
+|                    | --tcp                               | NCCL_IB_DISABLE                         | If this flag is set, only TCP is used for communication.     |
+|                    | --binding-args                      |                                         | Process binding arguments.                                   |
+|                    | --num-nccl-streams                  | HOROVOD_NUM_NCCL_STREAMS                | Number of NCCL streams.                                      |
+|                    | --thread-affinity                   | HOROVOD_THREAD_AFFINITY                 | Horovod background thread affinity.                          |
+|                    | --gloo-timeout-seconds              | HOROVOD_GLOO_TIMEOUT_SECONDS            | Timeout in seconds for Gloo operations to complete.          |
+| Logging            | --log-level                         | HOROVOD_LOG_LEVEL                       | Minimum level to log to stderr from the Horovod backend.     |
+|                    | --log-without-timestamp             | HOROVOD_LOG_HIDE_TIME                   | Hide the timestamp from Horovod internal log messages.       |
+|                    | --prefix-output-with-timestamp      |                                         | Timestamp each line of output to stdout, stderr, and stddiag. |
+| Host               | --hosts                             |                                         | List of host names and the number of available slots for running processes on each. |
+|                    | --hostfile                          |                                         | Path to a host file containing the list of host names and the number of available slots |
+|                    | --host-discovery-script             |                                         | Used for elastic  training (autoscaling and fault tolerance). |
+| Controller         | --gloo                              |                                         | Run Horovod using the Gloo controller.                       |
+|                    | --mpi                               |                                         | Run Horovod using the MPI controller.                        |
+|                    | --jsrun                             |                                         | Launch Horovod  processes with jsrun and use the MPI controller |

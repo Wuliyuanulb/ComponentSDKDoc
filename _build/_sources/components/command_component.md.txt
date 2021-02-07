@@ -1,13 +1,19 @@
 # Command Component
 
-## Overivew
+## Overview
 A CommandComponent is a Component that executes a command in a docker container.
 
-### scenarios
-TODO: Describe what's the target scenarios for this Component.
+### Scenarios
+A CommandComponent could be used to execute any kinds of command, it covers the following typical scenarios:
+* Run a python script for data processing, machine learning, and other tasks;
+* Run an R script for data analytics, statistics, and other tasks;
+* Run a Linux executable or a shell script in a Linux container;
+* Run windows executable or a PowerShell script in a windows container; (Internal only as windows compute feature is internal only)
 
-### limitation
-TODO: Describe what's the limitation.
+### Limitation
+* When writing the command, currently there must be spaces on both sides of each placeholder, patterns like {inputs.input_dir}/output.txt, "{inputs.input_dir}" are not supported;
+* The command should follow the command line constraint on the corresponding OS, in a Linux compute, it should follow [Shell Command Language](https://pubs.opengroup.org/onlinepubs/009604499/utilities/xcu_chap02.html), in windows compute, it should follow [Command-Line Reference](https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/cc754340(v=ws.11));
+* Even a command does not use python, the image or the conda must contain the dependency "azureml-defaults" to run the command;
 
 ## How to write CommandComponent yaml spec
 

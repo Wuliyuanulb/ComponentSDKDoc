@@ -1,7 +1,7 @@
 # Overview
 
-Azure Machine Learning components allow you to create reusable machine learning workflows that can be used as a
-template for your machine learning scenarios. This package contains the core functionality for working with Azure ML
-components.
-
+Azure Machine Learning component SDK & CLI contains the core functionality for working with Azure ML
+components: 
+- Manage [Component](concepts/component.md): Capture a user program which can be a step of a workflow: data preprocessing, model training, model scoring, a hyperparameter tuning run, etc. Such that it can be parameterized and then used in different contexts.
+- Author [Pipeline](concepts/pipeline.md): Create and run reusable machine learning workflows that can be used as a template for your machine learning scenarios.
 

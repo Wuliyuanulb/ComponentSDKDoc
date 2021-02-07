@@ -15,7 +15,8 @@ PipelineParameter allow user dynamically running pipeline experiments with diffe
 | Dataset     | Azureml dataset type like [**FileDataset**](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.data.filedataset?view=azure-ml-py) | 
 
  
-## Use PipelineParameter as component's input
+## Use PipelineParameter
+### PipelineParameter as a component input/parameter
 In the sample pipeline function below, pipeline parameters are:
 
 * input_data - the original dataset
@@ -61,6 +62,29 @@ Click the `Clean Missing Data` component, you can see the input box of parameter
 question mark, which indicate a PipelineParameter value has been applied to the component's parameter.
 
 ![image-pipeline-parameter-on-component](../images/pipeline-parameter-on-component.png)
+
+### PipelineParameter as substrings of a component parameter
+PipelineParameter can be used as substrings of a string parameter.
+
+Suggest we have a pipeline with PipelineParameter `param_name` `param_value`, we'd like to format them as a json string 
+then pass it to the component, the pipeline can be defined as follow.
+```python
+@dsl.pipeline(name="pipeline")
+def pipeline(param_name, param_value):
+    print_string_component_func(
+        string_parameter='{{"name": "{0}", "value": "{1}"}}'.format(param_name, param_value))
+
+print_string_pipeline = pipeline('my_param', '1/25/2021')
+print_string_pipeline.submit()
+```
+Submit the pipeline, we can see our two pipeline parameters `param_name=my_param`, `param_value=1/25/2021`.
+
+![image-pipeline-parameter-as-substring](../images/pipeline-parameter-as-substring.png)
+
+And the `string_parameter` of component has been formatted just like what we want.
+
+![image-pipeline-parameter-as-substring-on-component](../images/pipeline-parameter-as-substring-on-component.png)
+
 
 ## Submit with PipelineParameter
 ### Submit pipeline with PipelineParameter via Component SDK

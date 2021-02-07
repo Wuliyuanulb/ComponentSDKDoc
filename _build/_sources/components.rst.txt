@@ -6,9 +6,10 @@ Components
    :maxdepth: 2
    :glob:
 
-   components/component-spec-definition.md
-   components/use-component-spec-schema-in-vscode.md
-   components/component-spec-topics.md
    components/command_component.md
+   components/distributed_component.rst
    components/parallel_component.md
    components/hdi_component.md
+   components/component-spec-definition.md
+   components/component-spec-topics.md
+   components/use-component-spec-schema-in-vscode.md

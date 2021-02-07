@@ -1,0 +1,47 @@
+============================================================================
+Distributed Component
+============================================================================
+
+Overview
+============================================================================
+
+DistributedComponent is a kind of component to support distributed training scenarios.
+
+Launcher
+============================================================================
+
+We assume readers already understand the basic concept of distributed training such as _data parallelism, distributed data parallelism, and model parallelism_. 
+This section aims at helping readers understand the launcher concept and running existing distributed training code on AzureML. 
+
+In `distributed training <https://docs.microsoft.com/en-us/azure/machine-learning/concept-distributed-training>`_ the workload to train a model is split up and shared among multiple processors. These processors work in parallel to speed up model training. 
+
+Users rarely launch all distributed processes manually and often rely on a utility launcher.
+
+.. toctree::
+   :maxdepth: 2
+   :glob:
+   
+   distributed_component/launcher.md
+
+
+Supported Launchers
+============================================================================
+
+Based on how distributed traning job is launched in different frameworks like PyTorch and Tensorflow, we defined different launcher type. 
+When submit distributed Component run, AzureML will help to allocate the nodes, and set neccesarry environment variable, and call the right command for you according to the launcher type.
+Below is a list of launcher types we target to support in Component SDK:
+
+* `MPI <distributed_component/mpi.html>`_: support the MPI distributed traning model which can be used in most frameworks.
+   * Horovod: horovod works well with mpi launcher, so we don't have independent horovod launcher type. Reference `here <distributed_component/horovod.html>`_ for details.
+* Pytorch.distributed：support native distributed pytorch.
+* Tensorflow.distributed: support native distributed tensorflow.
+* Deepspeed: deepspeed is lightweight wrapper on pytorch.
+
+See detail doc on each launch type:
+
+.. toctree::
+   :maxdepth: 2
+   :glob:
+
+   distributed_component/mpi.md
+   distributed_component/horovod.md

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Parallel Component &mdash; Component SDK beta documentation</title>
+  <title>Parallel Component &mdash; Component SDK  documentation</title>
   
 
   
@@ -29,7 +29,7 @@
       <script type="text/javascript">
           var DOCUMENTATION_OPTIONS = {
               URL_ROOT:'../',
-              VERSION:'beta',
+              VERSION:'',
               LANGUAGE:'None',
               COLLAPSE_INDEX:false,
               FILE_SUFFIX:'.html',
@@ -49,7 +49,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="HDInsight Component" href="hdi_component.html" />
-    <link rel="prev" title="Command Component" href="command_component.html" /> 
+    <link rel="prev" title="Horovod" href="distributed_component/horovod.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -100,14 +100,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../getting_started.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../concepts.html">Concepts</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../components.html">Components</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="component-spec-definition.html">Definition of component spec</a></li>
-<li class="toctree-l2"><a class="reference internal" href="use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
-<li class="toctree-l2"><a class="reference internal" href="component-spec-topics.html">Component spec advanced topics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="command_component.html">Command Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="distributed_component.html">Distributed Component</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Parallel Component</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#overivew">Overivew</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#scenarios">scenarios</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#limitation">limitation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#scenarios">Scenarios</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitation">Limitation</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#how-to-write-parallelcomponent-yaml-spec">How to write ParallelComponent yaml spec</a></li>
@@ -116,6 +114,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="hdi_component.html">HDInsight Component</a></li>
+<li class="toctree-l2"><a class="reference internal" href="component-spec-definition.html">Definition of component spec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="component-spec-topics.html">Component spec advanced topics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="use-component-spec-schema-in-vscode.html">How to use component spec schema in vscode</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Change Log</a></li>
@@ -191,16 +192,22 @@
             
   <div class="section" id="parallel-component">
 <h1>Parallel Component<a class="headerlink" href="#parallel-component" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="overivew">
-<h2>Overivew<a class="headerlink" href="#overivew" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>ParallelComponent is a kind of component to run <a class="reference external" href="https://docs.microsoft.com/en-us/python/api/azureml-pipeline-steps/azureml.pipeline.steps.parallelrunstep?view=azure-ml-py#constructor">ParallelRunStep</a></p>
 <div class="section" id="scenarios">
-<h3>scenarios<a class="headerlink" href="#scenarios" title="Permalink to this headline">¶</a></h3>
-<p>TODO: Describe what&#8216;s the target scenarios for this Component.</p>
+<h3>Scenarios<a class="headerlink" href="#scenarios" title="Permalink to this headline">¶</a></h3>
+<p>Similar to ParallelRunStep, ParallelComponent is suitable for the scenarios that the input includes a large amount of data.
+The typical scenarios include the following:</p>
+<ul class="simple">
+<li>Image processing, text processing, and other tasks to process a large number of files;</li>
+<li>Use a trained model to do batch inference on a large amount of input data;</li>
+</ul>
 </div>
 <div class="section" id="limitation">
-<h3>limitation<a class="headerlink" href="#limitation" title="Permalink to this headline">¶</a></h3>
-<p>TODO: Describe what&#8216;s the limitation.</p>
+<h3>Limitation<a class="headerlink" href="#limitation" title="Permalink to this headline">¶</a></h3>
+<p>Compared to ParallelRunStep, currently ParallelComponent can only process FileDataset, TabularDataset is not supported.</p>
+<p>Other behaviors and the limitations are the same as <a class="reference external" href="https://github.com/Azure/MachineLearningNotebooks/tree/master/how-to-use-azureml/machine-learning-pipelines/parallel-run">ParallelRunStep in AzureML</a></p>
 </div>
 </div>
 <div class="section" id="how-to-write-parallelcomponent-yaml-spec">
@@ -266,7 +273,7 @@
 </div>
 <div class="section" id="appendix">
 <h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h2>
-<p>In legacy module concept, this maps to <code class="docutils literal"><span class="pre">basic</span></code> jobType Module.</p>
+<p>In legacy module concept, this maps to <code class="docutils literal"><span class="pre">parallel</span></code> jobType Module.</p>
 <ul class="simple">
 <li>legacy <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/azureml-pipeline-wrapper/azureml-modules/docs/module-spec-definition.md#parallel">module sepc doc</a></li>
 <li>legacy <a class="reference external" href="https://github.com/Azure/DesignerPrivatePreviewFeatures/blob/azureml-pipeline-wrapper/azureml-modules/samples/modules/parallel-score-mnist/module_spec.yaml">example module yaml</a></li>
@@ -285,7 +292,7 @@
         <a href="hdi_component.html" class="btn btn-neutral float-right" title="HDInsight Component" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="command_component.html" class="btn btn-neutral float-left" title="Command Component" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="distributed_component/horovod.html" class="btn btn-neutral float-left" title="Horovod" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -295,7 +302,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, microsoft
+        &copy; Copyright 2021, Microsoft
 
     </p>
   </div>

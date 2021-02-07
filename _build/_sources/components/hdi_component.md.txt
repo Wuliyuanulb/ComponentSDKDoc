@@ -3,13 +3,13 @@
 ## Overivew
 A HDInsightComponent is a Component that executes a spark job in a HDInsight cluster.
 
-### scenarios
+### Scenarios
 Use Apache Spark to train your model or analysis your data, multiple popular frameworks are supported:
 - PySpark
 - .NET for Spark
 - JAVA
 
-### limitation
+### Limitation
 Currently only works on compliant HDI cluster created by Office team.
 
 ## How to write HDInsightComponent yaml spec

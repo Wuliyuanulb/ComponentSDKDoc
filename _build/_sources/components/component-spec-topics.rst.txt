@@ -8,7 +8,6 @@ Component spec advanced topics
 
    component-spec-topics/inputs-and-outputs.md
    component-spec-topics/running-environment.md
-   component-spec-topics/additional-includes.md
    component-spec-topics/code-snapshot.md
-   component-spec-topics/component-build.md
    component-spec-topics/ignore-files.md
+   component-spec-topics/component-build.md
